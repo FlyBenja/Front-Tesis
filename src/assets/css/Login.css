@@ -1,0 +1,94 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.login-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    left: 15%;
+    top: 10%;
+    width: 70%;
+    height: 600px;
+    transition: all 0.3s;
+    background-color: #002e5b;
+}
+
+.login-image, .card {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    height: 40px; /* Ajuste de altura para que coincida con el input */
+}
+
+.input-group-text {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    font-size: 20px; /* Ajusta el tamaño del icono */
+    height: 100%; /* Asegura que el ícono tenga la misma altura que el input */
+    border-radius: 0  4px 4px 0!important;
+}
+
+.form-control {
+    height: 40px; 
+    border-radius: 0;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.custom-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url('path/to/your/chevron-down.png') no-repeat right;
+    background-size: 20px;
+    padding-right: 30px;
+}
+
+.login-logo a {
+    font-weight: 500; 
+}
+
+/* Media query para dispositivos con un ancho máximo de 768px (tablets y teléfonos) */
+@media (max-width: 768px) {
+    .login-box {
+        margin: 0;
+        left: 0;
+        top: 0;
+        width: 100%; /* Ocupa todo el ancho de la pantalla */
+        height: 100%; /* Ocupa toda la altura de la pantalla */
+        flex-direction: column; /* Alinea los elementos verticalmente */
+        justify-content: center;
+    }
+
+    .login-image {
+        display: none; /* Oculta la imagen en dispositivos móviles */
+    }
+
+    .card {
+        width: 100%; /* El formulario ocupa todo el ancho disponible */
+    }
+}

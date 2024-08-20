@@ -1,0 +1,43 @@
+.navbar {
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1002;
+}
+
+.hamburger {
+  margin-left: 280px;
+  background-color: #f8f9fa; 
+  border: 1px solid #e0e0e0; 
+  border-radius: 5px; 
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: auto; 
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.hamburger.active {
+  margin-left: 20px; 
+  transform: scale(0.95);
+}
+
+.btn-outline-primary {
+  border: 2px solid #007bff;
+  color: #007bff;
+  margin-left: 10px;
+  border-radius: 50%;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: white;
+}
