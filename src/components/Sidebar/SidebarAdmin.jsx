@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "./Sidebar.css";
+import "./SidebarAdmin.css";
 import { PiStudentBold } from "react-icons/pi";
 import { FaHome } from "react-icons/fa";
 import { FaChalkboardTeacher } from "react-icons/fa";
