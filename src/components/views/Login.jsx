@@ -1,5 +1,5 @@
 import "admin-lte/dist/css/adminlte.min.css";
-import "../../assets/css/login.css";
+import "../layout/Admin/Login.css";
 import loginLogo from "../../assets/imgs/login.svg";
 import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock } from "react-icons/fa";
