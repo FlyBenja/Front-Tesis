@@ -1,0 +1,98 @@
+/* Diseño general para AsignacionesAdmin */
+.AsignacionesAdmin .admin-content {
+    margin-left: 250px;
+    margin-top: 100px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+    background-color: #f4f6f9; /* Fondo claro */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Contenedor para el área de asignaciones */
+.AsignacionesAdmin .asignaciones-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Filtros alineados horizontalmente */
+.AsignacionesAdmin .filters-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste de tamaño para los selectores */
+.AsignacionesAdmin .form-select {
+    width: 250px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.AsignacionesAdmin .form-select:hover,
+.AsignacionesAdmin .form-select:focus {
+    border-color: #007bff;
+}
+
+/* Estilo para el área de subir archivos */
+.AsignacionesAdmin .upload-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 200px;
+    background-color: #f8f9fa;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.AsignacionesAdmin .upload-area:hover {
+    background-color: #e9ecef;
+    border-color: #007bff;
+}
+
+/* Estilo del botón de Confirmar */
+.AsignacionesAdmin .confirm-button {
+    margin-top: 20px;
+    margin-left: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    width: 250px; /* Tamaño consistente */
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.AsignacionesAdmin .confirm-button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo del mensaje de archivo seleccionado */
+.AsignacionesAdmin .file-info {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+}
