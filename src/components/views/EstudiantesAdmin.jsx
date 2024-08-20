@@ -30,7 +30,17 @@ const EstudiantesAdmin = () => {
 
   // Simulación de una lista vacía de estudiantes para mostrar el mensaje "No hay estudiantes"
   const estudiantes = [
-
+    { id: 1, nombre: 'Josue Benjamin Aldana Ramos' },
+    { id: 2, nombre: 'Oscar David Alvarez Martinez' },
+    { id: 3, nombre: 'Bryan Yeremy Arrazola Cisneros' },
+    { id: 4, nombre: 'Cristian Paul Borja Martinez' },
+    { id: 5, nombre: 'Carolay Estephania Cante De Leon' },
+    { id: 6, nombre: 'Dulce María Carías Bran' },
+    { id: 7, nombre: 'Kevin Leonel Carranza Marroquin' },
+    { id: 8, nombre: 'Mynor Estuardo Junnior Ceron Gaitan' },
+    { id: 9, nombre: 'Elisa Noemí Dardón Salguero' },
+    { id: 10, nombre: 'Carmen Mireya De La Cruz Barrientos' },
+    { id: 11, nombre: 'Huver Roberto Donis Cordova' }
   ]; // Cambia a un array vacío para simular la falta de estudiantes
 
   const timelineEvents = [
