@@ -148,3 +148,52 @@ button.subir-estudiantes {
     text-align: center;
   }
   
+/* Estilo para pantallas medianas o pequeñas (tablets y móviles) */
+@media (max-width: 991px) {
+    .content-area {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+  
+    .student-list-container {
+      flex-basis: 60%; /* Aumentar el ancho */
+      padding-right: 0;
+      margin-bottom: 20px;
+      overflow-y: auto; /* Mantener scroll vertical */
+      max-height: 300px; /* Ajustar la altura */
+    }
+  
+    .timeline-container {
+      flex-basis: 100%;
+      margin-bottom: 20px;
+      overflow-y: auto; /* Mantener scroll vertical */
+      overflow-x: hidden; /* Eliminar cualquier scroll horizontal */
+      max-height: 500px; /* Ajustar la altura */
+      padding-right: 0; /* Eliminar padding innecesario */
+      box-sizing: border-box; /* Asegura que los bordes y padding se manejen correctamente */
+    }
+  
+    /* Eliminar el scroll visible del contenedor principal */
+    .content-wrapper {
+      overflow: hidden;
+    }
+  
+    /* Alinear y centrar la búsqueda y los filtros */
+    .filters-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centramos ambos elementos */
+      gap: 10px; /* Espacio entre la búsqueda y los filtros */
+    }
+  
+    .filters-container input.form-control {
+      width: 80%; /* Hacer la búsqueda del mismo ancho que el contenedor de estudiantes */
+    }
+  
+    .filters-container .form-select {
+      width: 60%; /* Hacer los filtros del mismo ancho que el contenedor de estudiantes */
+    }
+  }
+  

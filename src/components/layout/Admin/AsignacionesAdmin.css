@@ -16,10 +16,6 @@
     overflow: hidden; /* Elimina la barra de desplazamiento */
 }
 
-.sidebar-collapsed .content-wrapper {
-    margin-left: 50px; /* Margen ajustado cuando el sidebar está colapsado */
-}
-
 /* Estilos adicionales para otros elementos, basados en tu CSS anterior */
 /* Diseño general para AsignacionesAdmin */
 .AsignacionesAdmin .admin-content {

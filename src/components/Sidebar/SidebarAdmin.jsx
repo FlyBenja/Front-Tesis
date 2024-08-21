@@ -1,15 +1,14 @@
 import PropTypes from "prop-types";
 import "./SidebarAdmin.css";
 import { PiStudentBold } from "react-icons/pi";
-import { FaHome } from "react-icons/fa";
-import { FaChalkboardTeacher } from "react-icons/fa";
+import { FaHome, FaChalkboardTeacher } from "react-icons/fa";
 import { BsListTask } from "react-icons/bs";
-import logo from "../../assets/imgs/logo3.png";
-import { IoMdSchool } from "react-icons/io";
-import { IoPersonAddSharp } from "react-icons/io5";
+import {  IoPersonAddSharp } from "react-icons/io5";
+import { IoIosSchool } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
+import logo from "../../assets/imgs/logo3.png";
 
 const Sidebar = ({ showSidebar }) => {
   return (
@@ -50,10 +49,10 @@ const Sidebar = ({ showSidebar }) => {
         </Link>
         <Link className="link-sidebar" to="/admin/sedes">
           <li>
-            <IoMdSchool size={30} />
+            <IoIosSchool size={30} />
             <p>Sedes</p>
           </li>
-        </Link>
+        </Link> 
         <Link className="link-sidebar" to="/admin/profile">
           <li>
             <CgProfile size={30} />
@@ -62,7 +61,7 @@ const Sidebar = ({ showSidebar }) => {
         </Link>
       </ul>
       <Link className="link-sidebar" to="/">
-        <button className="logout-btn ">
+        <button className="logout-btn">
           <BiLogOut size={30} />
           <p className="mb-0 p-2">Cerrar Sesión</p>
         </button>
