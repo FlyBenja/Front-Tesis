@@ -1,0 +1,154 @@
+/* Aseguramos que el contenedor principal ocupe todo el espacio disponible */
+.perfil-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    /* Evitar cualquier tipo de scroll no deseado */
+}
+
+.perfil-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    margin-top: 100px;
+}
+
+.perfil-image-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.perfil-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.edit-icon i {
+    font-size: 14px;
+    color: white;
+}
+
+.perfil-info p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.perfil-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.perfil-role {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: default;
+}
+
+.perfil-change-password {
+    background-color: #004085;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.perfil-change-password:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para posicionar los modales sobre el contenedor .perfil-card */
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 400px;
+    /* Mantiene el mismo ancho que .perfil-card */
+}
+
+.modal .modal-dialog {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.modal .modal-content {
+    margin-top: 100px;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo específico para que el modal mantenga una relación cercana a .perfil-card */
+.modal.d-block {
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 0 auto;
+    margin-top: 20px;
+    /* Ajusta la distancia vertical desde el contenedor */
+}
+
+.modal-dialog {
+    max-width: 100%;
+}
+
+/* Estilo para pantallas medianas o pequeñas (tablets y móviles) */
+@media (max-width: 991px) {
+    .perfil-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+        margin-top: 160px;
+    }
+
+    .modal .modal-content {
+        margin-right: 15px;
+        margin-top: 250px;
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+}

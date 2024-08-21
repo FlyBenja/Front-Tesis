@@ -5,6 +5,7 @@ import Sidebar from '../Sidebar/SidebarAdmin';
 import AsignacionesAdmin from '../views/AsignacionesAdmin';
 import BitacoraAdmin from '../views/BitacoraAdmin';
 import EstudiantesAdmin from '../views/EstudiantesAdmin';
+import Perfil from '../views/Perfil';
 import '../../index.css';
 const Admin = () => {
   const [showSidebar, setShowSidebar] = useState(true);
@@ -23,6 +24,7 @@ const Admin = () => {
             <Route path="/asignaciones" element={<AsignacionesAdmin />} />
             <Route path="/" element={<BitacoraAdmin />} />
             <Route path="/estudiantes" element={<EstudiantesAdmin />} />
+            <Route path="/profile" element={<Perfil />} />
             {/* Añade más rutas según sea necesario */}
           </Routes>
         </div>
