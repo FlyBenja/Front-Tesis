@@ -1,120 +1,199 @@
-/* Ajustes para el wrapper general */
+/* Ajuste para el wrapper general */
 .wrapper {
     height: 100vh;
+    padding: 20px;
     display: flex;
+    flex-direction: column;
     overflow: hidden;
 }
 
 /* Ajuste para el content-wrapper */
-.AsignacionesAdmin .content-wrapper {
+.content-wrapper {
     display: flex;
     flex-direction: column;
     height: 100vh; /* Asegura que ocupe todo el viewport */
     padding: 20px;
-    transition: margin-left 0.3s ease-in-out; /* Transición suave */
-    margin-left: 250px; /* Margen cuando el sidebar está visible */
     overflow: hidden; /* Elimina la barra de desplazamiento */
+    box-sizing: border-box; /* Asegura que el padding no aumente el tamaño total */
 }
 
-/* Estilos adicionales para otros elementos, basados en tu CSS anterior */
-/* Diseño general para AsignacionesAdmin */
-.AsignacionesAdmin .admin-content {
-    margin-left: 0; /* Ya no se ajusta el margin-left aquí */
-    padding: 20px;
-    background-color: #f4f6f9; /* Fondo claro */
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    min-height: calc(100vh - 60px); /* Altura mínima para ocupar toda la ventana */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; /* Centrado horizontal y vertical */
+/* Ajustes para evitar el scroll dentro de content-wrapper */
+.admin-content {
+    flex: 1;  /* Asegura que ocupe todo el espacio disponible */
+    overflow-y: auto; /* Permite el scroll solo dentro del contenido si es necesario */
+    padding-bottom: 50px; /* Espacio suficiente para el botón de subir estudiantes */
 }
 
-/* Contenedor para el área de asignaciones */
-.AsignacionesAdmin .asignaciones-container {
+/* Contenedor para los filtros y la barra de búsqueda */
+.filters-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    margin-top: 20px;
+    margin-bottom: 1rem;
 }
 
-/* Filtros alineados horizontalmente */
-.AsignacionesAdmin .filters-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 15px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+/* Ajuste de tamaño para la barra de búsqueda */
+.filters-container input.form-control {
+    width: 500px;
 }
 
-/* Ajuste de tamaño para los selectores */
-.AsignacionesAdmin .form-select {
-    width: 250px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    font-size: 16px;
-    color: #333;
-    transition: border-color 0.3s ease;
+/* Contenedor para los filtros */
+.filters-container .form-select {
+    margin-left: 8px;
+    max-width: 120px;
 }
 
-.AsignacionesAdmin .form-select:hover,
-.AsignacionesAdmin .form-select:focus {
-    border-color: #007bff;
+/* Contenedor para la lista de estudiantes */
+.student-list-container {
+    flex-basis: 50%;
+    padding-right: 20px;
+    overflow-y: auto;
+    height: calc(100vh - 240px); /* Altura ajustada */
+    margin-right: 20px;
 }
 
-/* Estilo para el área de subir archivos */
-.AsignacionesAdmin .upload-area {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 300px;
-    height: 200px;
+/* Estilo para la lista de estudiantes */
+.student-list {
     background-color: #f8f9fa;
-    border: 2px dashed #ccc;
+    padding: 10px;
     border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-    margin-top: 20px;
+    max-height: 100%;
 }
 
-.AsignacionesAdmin .upload-area:hover {
-    background-color: #e9ecef;
-    border-color: #007bff;
-}
-
-/* Estilo del botón de Confirmar */
-.AsignacionesAdmin .confirm-button {
-    margin-top: 20px;
-    margin-left: 27px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
+/* Estilo individual para cada estudiante */
+.student-item {
+    padding: 15px;
     cursor: pointer;
+    border-bottom: 1px solid #ddd;
     text-align: center;
-    width: 250px; /* Tamaño consistente */
-    font-size: 16px;
-    font-weight: bold;
     transition: background-color 0.3s ease;
 }
 
-.AsignacionesAdmin .confirm-button:hover {
-    background-color: #0056b3;
+.student-item:hover {
+    background-color: #e9ecef;
 }
 
-/* Estilo del mensaje de archivo seleccionado */
-.AsignacionesAdmin .file-info {
-    margin-top: 10px;
+.student-item.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Contenedor para el Time Line */
+.timeline-container {
+    flex-basis: 50%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    height: calc(100vh - 240px); /* Altura ajustada */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Eventos del timeline */
+.timeline-events {
+    max-height: calc(100% - 60px); /* Espacio para el botón */
+    overflow-y: auto;
+    padding-right: 15px; /* Evita el solapamiento con el botón */
+}
+
+/* Diseño para cada entrada del Time Line */
+.timeline-event {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease;
+}
+
+.timeline-event:hover {
+    background-color: #e9ecef;
+}
+
+.timeline-event h4 {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.timeline-event p {
+    margin: 0;
     font-size: 14px;
     color: #555;
-    text-align: center;
 }
+
+/* Botón fijo en la esquina inferior derecha */
+.timeline-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+/* Estilo para el botón de Subir Estudiantes */
+button.subir-estudiantes {
+    width: 1100px;
+    height: 50px;
+    margin-top: 20px;
+}
+
+/* Contenedor para la lista de estudiantes */
+.no-students-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+/* Estilo para pantallas medianas o pequeñas (tablets y móviles) */
+@media (max-width: 991px) {
+    .content-area {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+  
+    .student-list-container {
+      flex-basis: 60%; /* Aumentar el ancho */
+      padding-right: 0;
+      margin-bottom: 20px;
+      overflow-y: auto; /* Mantener scroll vertical */
+      max-height: 300px; /* Ajustar la altura */
+    }
+  
+    .timeline-container {
+      flex-basis: 100%;
+      margin-bottom: 20px;
+      overflow-y: auto; /* Mantener scroll vertical */
+      overflow-x: hidden; /* Eliminar cualquier scroll horizontal */
+      max-height: 500px; /* Ajustar la altura */
+      padding-right: 0; /* Eliminar padding innecesario */
+      box-sizing: border-box; /* Asegura que los bordes y padding se manejen correctamente */
+    }
+  
+    /* Eliminar el scroll visible del contenedor principal */
+    .content-wrapper {
+      overflow: hidden;
+    }
+  
+    /* Alinear y centrar la búsqueda y los filtros */
+    .filters-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centramos ambos elementos */
+      gap: 10px; /* Espacio entre la búsqueda y los filtros */
+    }
+  
+    .filters-container input.form-control {
+      width: 80%; /* Hacer la búsqueda del mismo ancho que el contenedor de estudiantes */
+    }
+  
+    .filters-container .form-select {
+      width: 60%; /* Hacer los filtros del mismo ancho que el contenedor de estudiantes */
+    }
+  }
+  
