@@ -38,6 +38,7 @@ const EstudiantesAdmin = () => {
     { id: 14, nombre: 'Andrea Michelle García Herrera' },
     { id: 15, nombre: 'Julio César Hernández Álvarez' },
   ];
+
   const timelineEvents = [
     { date: '2024-08-20', title: 'Inscripción completada', description: 'El estudiante se inscribió en el curso de matemáticas.' },
     { date: '2024-09-10', title: 'Examen parcial', description: 'El estudiante realizó el examen parcial de historia.' },
@@ -52,7 +53,6 @@ const EstudiantesAdmin = () => {
     { date: '2024-09-15', title: 'Proyecto final', description: 'El estudiante entregó el proyecto final de ciencias.' },
     { date: '2024-10-05', title: 'Evaluación final', description: 'El estudiante asistió a la evaluación final.' }
   ];
-
 
   const filteredEstudiantes = estudiantes.filter((estudiante) =>
     estudiante.nombre.toLowerCase().includes(searchTerm.toLowerCase())
@@ -93,7 +93,7 @@ const EstudiantesAdmin = () => {
               </select>
             </div>
       </div>
-      <div className="d-flex flex-grow-1 content-area">
+      <div className="content-wrapper">
         {filteredEstudiantes.length === 0 ? (
           <div className="no-students-container">
             <h4>No hay estudiantes subidos</h4>
@@ -111,7 +111,7 @@ const EstudiantesAdmin = () => {
                 {filteredEstudiantes.map((estudiante) => (
                   <div
                     key={estudiante.id}
-                    className="student-item"
+                    className={`student-item ${selectedStudent?.id === estudiante.id ? 'active' : ''}`}
                     onClick={() => handleSelectStudent(estudiante)}
                   >
                     <p>{estudiante.nombre}</p>
@@ -121,25 +121,25 @@ const EstudiantesAdmin = () => {
             </div>
 
             {selectedStudent && (
-                  <div className="timeline-container">
-                    <div className="timeline-header d-flex justify-content-between align-items-center">
-                      <h3>Time Line</h3>
-                      <FaTimes className="close-icon" onClick={handleCloseTimeLine} />
+              <div className="timeline-container">
+                <div className="timeline-header d-flex justify-content-between align-items-center">
+                  <h3>Time Line</h3>
+                  <FaTimes className="close-icon" onClick={handleCloseTimeLine} />
+                </div>
+                <div className="timeline-content">
+                  {selectedStudent.nombre}
+                </div>
+                <div className="timeline-events">
+                  {timelineEvents.map((event, index) => (
+                    <div key={index} className="timeline-event">
+                      <h4>{event.date}: {event.title}</h4>
+                      <p>{event.description}</p>
                     </div>
-                    <div className="timeline-content">
-                      {selectedStudent.nombre}
-                    </div>
-                    <div className="timeline-events">
-                      {timelineEvents.map((event, index) => (
-                        <div key={index} className="timeline-event">
-                          <h4>{event.date}: {event.title}</h4>
-                          <p>{event.description}</p>
-                        </div>
-                      ))}
-                    </div>
-                    <button className="btn btn-primary timeline-btn">Visualizar Tareas</button>
-                  </div>
-                )}
+                  ))}
+                </div>
+                <button className="btn btn-primary timeline-btn">Visualizar Tareas</button>
+              </div>
+            )}
           </>
         )}
       </div>

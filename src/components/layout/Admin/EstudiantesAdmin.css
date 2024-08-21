@@ -10,7 +10,7 @@
 /* Ajuste para el content-wrapper */
 .content-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: 100vh; /* Asegura que ocupe todo el viewport */
     padding: 20px;
     overflow: hidden; /* Elimina la barra de desplazamiento */
@@ -34,7 +34,8 @@
 
 /* Ajuste de tamaño para la barra de búsqueda */
 .filters-container input.form-control {
-    width: 500px;
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 500px; /* Ancho máximo para pantallas grandes */
 }
 
 /* Contenedor para los filtros */
@@ -133,7 +134,7 @@
 
 /* Estilo para el botón de Subir Estudiantes */
 button.subir-estudiantes {
-    width: 1100px;
+    width: 100%;
     height: 50px;
     margin-top: 20px;
 }
@@ -146,5 +147,73 @@ button.subir-estudiantes {
     align-items: center;
     flex-grow: 1;
     text-align: center;
-  }
-  
+}
+
+.gap-2 {
+    margin-right: 15px;
+}
+
+/* Ajustes para pantallas pequeñas (menor o igual a 954px) */
+@media (max-width: 954px) {
+    /* Cambiar la disposición para pantallas pequeñas */
+    .content-wrapper {
+        display: block;
+        overflow-y: auto;
+        height: auto;
+    }
+
+    /* Mover los filtros a la parte superior debajo de la barra de búsqueda */
+    .filters-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+
+    .filters-container select {
+        margin-top: 0.5rem;
+        width: 100%;
+    }
+
+    /* Hacer que la lista de estudiantes ocupe toda la pantalla */
+    .student-list-container {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        height: auto;
+    }
+
+    .student-list {
+        max-height: auto;
+        padding: 0;
+    }
+
+    /* Mover el timeline debajo de la lista de estudiantes */
+    .timeline-container {
+        width: 100%;
+        margin-top: 1rem;
+        height: auto;
+        padding: 10px;
+    }
+
+    /* Ajustar la altura del contenido del timeline */
+    .timeline-events {
+        max-height: none;
+        overflow-y: visible;
+    }
+}
+/* Ajuste para pantallas medianas (entre 600px y 954px) */
+@media (max-width: 954px) {
+    .filters-container input.form-control {
+        width: 80%; /* Ocupa el 80% del ancho disponible */
+    }
+}
+
+/* Ajuste para pantallas pequeñas (menor o igual a 600px) */
+@media (max-width: 600px) {
+    .filters-container input.form-control {
+        width: 100%; /* Ocupa el 100% del ancho disponible en pantallas pequeñas */
+    }
+}
