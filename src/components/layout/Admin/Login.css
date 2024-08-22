@@ -1,94 +1,117 @@
 body {
     font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hold-transition.login-page {
+    background-color: #002e5b;
+    height: 100vh;
+    width: 100vw; /* Abarca toda la pantalla horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../assets/imgs/sistemas1_11zon.webp'); /* Imagen de fondo */
+    background-size: cover;
+    background-position: center;
 }
 
 .login-box {
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    position: absolute;
-    left: 15%;
-    top: 10%;
-    width: 70%;
+    width: 90%;
+    max-width: 1200px;
     height: 600px;
-    transition: all 0.3s;
-    background-color: #002e5b;
+    background-color: rgba(0, 0, 0, 0.3); /* Fondo semitransparente */
+    border-radius: 10px;
+    overflow: hidden;
+    justify-content: space-between;
 }
 
-.login-image, .card {
+.login-image {
     width: 50%;
-    height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.login-card-body {
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    background-color: #002E5B; /* Fondo azul */
+    position: relative;
+    opacity: 0.82; /* Ajusta la opacidad aquí */
+}
+
+.login-logo-image {
+    width: 80%;
+    height: auto;
+    position: absolute;
+    top: 12%;
+    left: 10%;
+}
+
+.card {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo del formulario */
+}
+
+.card-body {
     padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.umg-logo {
+    width: 150px;
+    margin: 20px 0;
+}
+
+.login-logo h2, .login-logo h3 {
+    margin: 0;
+    text-align: center;
 }
 
 .input-group {
-    display: flex;
-    align-items: center;
-    height: 40px; /* Ajuste de altura para que coincida con el input */
+    margin-bottom: 15px;
 }
 
 .input-group-text {
     background-color: transparent;
     border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 0 15px;
-    font-size: 20px; /* Ajusta el tamaño del icono */
-    height: 100%; /* Asegura que el ícono tenga la misma altura que el input */
-    border-radius: 0  4px 4px 0!important;
+    font-size: 20px;
 }
 
 .form-control {
     height: 40px; 
-    border-radius: 0;
-    border: 1px solid #ccc;
     padding-left: 10px;
-    padding-right: 10px;
 }
 
-.custom-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: url('path/to/your/chevron-down.png') no-repeat right;
-    background-size: 20px;
-    padding-right: 30px;
-}
-
-.login-logo a {
-    font-weight: 500; 
-}
-
-/* Media query para dispositivos con un ancho máximo de 768px (tablets y teléfonos) */
+/* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
-    .login-box {
-        margin: 0;
-        left: 0;
-        top: 0;
-        width: 100%; /* Ocupa todo el ancho de la pantalla */
-        height: 100%; /* Ocupa toda la altura de la pantalla */
-        flex-direction: column; /* Alinea los elementos verticalmente */
-        justify-content: center;
+    /* Oculta el login-logo en pantallas pequeñas */
+    .login-image {
+        display: none;
     }
 
-    .login-image {
-        display: none; /* Oculta la imagen en dispositivos móviles */
+    /* Centra la tarjeta del formulario */
+    .login-box {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        justify-content: center;
+        align-items: center;
     }
 
     .card {
-        width: 100%; /* El formulario ocupa todo el ancho disponible */
+        width: 90%; /* Asegura que el formulario ocupe un buen ancho en pantallas pequeñas */
+        margin-top: 10px;
     }
 }
