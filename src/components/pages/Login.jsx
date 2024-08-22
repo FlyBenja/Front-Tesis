@@ -16,57 +16,54 @@ const Login = () => {
 
   return (
     <div 
-      className="hold-transition login-page" 
+      className="login-page-container hold-transition login-page" 
       style={{ backgroundImage: `url(${ofiLogo})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh' }}
     >
       <div className="login-box">
-        <div className="login-image" style={{ backgroundColor: '#002E5B', opacity: 0.82, position: 'relative' }}>
+        <div className="login-image">
           <img
             src={loginLogo}
             alt="Login Logo"
-            style={{ width: "80%", height: "auto", position: "absolute", top: "20%", left: "10%" }} // Ajuste para la imagen del muñeco
           />
         </div>
-        <div className="card">
-          <div className="card-body login-card-body">
-            <div className="login-logo">
-              <h2>Gestor de tesis</h2> {/* Texto superior */}
-              <img src={umgLogo} alt="UMG Logo" style={{ width: '150px', margin: '20px 0' }} /> {/* Logo UMG */}
-              <h3>Inicio de Sesión</h3> {/* Texto inferior */}
-            </div>
-            <form onSubmit={handleSubmit}>
-              <div className="input-group mb-3">
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder="Correo"
-                />
-                <div className="input-group-append">
-                  <div className="input-group-text">
-                    <FaEnvelope />
-                  </div>
-                </div>
-              </div>
-              <div className="input-group mb-3">
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Contraseña"
-                />
-                <div className="input-group-append">
-                  <div className="input-group-text">
-                    <FaLock />
-                  </div>
-                </div>
-              </div>
-              <button
-                type="submit"
-                className="btn btn-primary btn-block w-100"
-              >
-                Ingresar
-              </button>
-            </form>
+        <div className="login-card-body">
+          <div className="login-logo">
+            <h2>Gestor de tesis</h2> {/* Texto superior */}
+            <img src={umgLogo} alt="UMG Logo" style={{ width: '150px', margin: '20px 0' }} /> {/* Logo UMG */}
+            <h3>Inicio de Sesión</h3> {/* Texto inferior */}
           </div>
+          <form onSubmit={handleSubmit}>
+            <div className="input-group mb-3">
+              <input
+                type="email"
+                className="form-control"
+                placeholder="Correo"
+              />
+              <div className="input-group-append">
+                <div className="input-group-text">
+                  <FaEnvelope />
+                </div>
+              </div>
+            </div>
+            <div className="input-group mb-3">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Contraseña"
+              />
+              <div className="input-group-append">
+                <div className="input-group-text">
+                  <FaLock />
+                </div>
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary btn-block w-100"
+            >
+              Ingresar
+            </button>
+          </form>
         </div>
       </div>
     </div>
