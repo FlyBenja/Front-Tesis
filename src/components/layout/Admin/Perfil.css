@@ -138,17 +138,28 @@
         text-align: center;
         max-width: 400px;
         width: 100%;
-        margin-top: 160px;
+        margin-top: 150px;
     }
 
     .modal .modal-content {
         margin-right: 15px;
-        margin-top: 250px;
+        margin-top: 200px;
         width: 100%;
         max-width: 400px;
         padding: 20px;
         border-radius: 10px;
         background-color: #fff;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .perfil-actions {
+        flex-direction: column;
+        gap: 10px; /* Espacio entre los botones */
+    }
+
+    .perfil-role, 
+    .perfil-change-password {
+        padding: 8px 16px; /* Reducir el tamaño del botón */
+        font-size: 12px; /* Reducir el tamaño del texto */
+        width: 100%; /* Hacer que los botones ocupen todo el ancho */
     }
 }
