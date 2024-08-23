@@ -5,6 +5,7 @@ import Sidebar from '../Sidebar/SidebarAdmin';
 import AsignacionesAdmin from '../views/Admin/AsignacionesAdmin';
 import BitacoraAdmin from '../views/Admin/BitacoraAdmin';
 import CatedraticosAdmin from '../views/Admin/CatedraticosAdmin';
+import CreaSedes from '../views/Admin/CreaSedes';
 import EstudiantesAdmin from '../views/Admin/EstudiantesAdmin';
 import SubirExcel from '../pages/SubirExcel'; 
 import Perfil from '../views/Admin/Perfil';
@@ -27,6 +28,7 @@ const Admin = () => {
             <Route path="/asignaciones" element={<AsignacionesAdmin />} />
             <Route path="/" element={<BitacoraAdmin />} />
             <Route path="/catedraticos" element={<CatedraticosAdmin />} />
+            <Route path="/sedes" element={<CreaSedes />} />
             <Route path="/estudiantes" element={<EstudiantesAdmin />} />
             <Route path="/SubirExcel" element={<SubirExcel />} /> 
             <Route path="/profile" element={<Perfil />} />

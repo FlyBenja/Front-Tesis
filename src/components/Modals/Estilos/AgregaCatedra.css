@@ -1,0 +1,50 @@
+.agrega-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro translúcido */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Asegura que esté por encima de otros elementos */
+  }
+  
+  .agrega-modal-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .modal-body {
+    margin-bottom: 20px;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .modal-buttons .btn {
+    padding: 10px 30px;
+    font-size: 1rem;
+  }
+  
+  /* Estilos adicionales para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .agrega-modal-container {
+      padding: 15px;
+      max-width: 90%;
+    }
+  
+    .modal-buttons .btn {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  

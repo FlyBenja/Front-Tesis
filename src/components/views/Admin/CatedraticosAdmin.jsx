@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import '../../layout/Admin/CatedraticosAdmin.css';
 import ModalConfirmacion from '../../Modals/Fuentes/ModalConfirmacion';
+import AgregaCatedra from '../../Modals/Fuentes/AgregaCatedra';  // Importamos el modal
 
 const CatedraticosAdmin = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,6 +24,7 @@ const CatedraticosAdmin = () => {
   ]);
 
   const [showModal, setShowModal] = useState(false);
+  const [showAgregaModal, setShowAgregaModal] = useState(false);  // Estado para mostrar el modal de agregar catedrático
   const [selectedCatedratico, setSelectedCatedratico] = useState(null);
 
   const handleSearch = (event) => {
@@ -50,6 +52,11 @@ const CatedraticosAdmin = () => {
     );
     setCatedraticos(updatedCatedraticos);
     setShowModal(false); // Cerrar el modal después de eliminar
+  };
+
+  const handleAgregarCatedratico = (nuevoCatedratico) => {
+    setCatedraticos([...catedraticos, { id: catedraticos.length + 1, ...nuevoCatedratico }]);
+    setShowAgregaModal(false);  // Cerrar el modal de agregar catedrático después de guardar
   };
 
   const filteredCatedraticos = catedraticos.filter((catedratico) =>
@@ -92,11 +99,13 @@ const CatedraticosAdmin = () => {
         </div>
       </div>
       <div className="btn-agregar-catedratico">
-        <button className="btn btn-primary agregar-btn">Agregar Catedrático</button>
+        <button className="btn btn-primary agregar-btn" onClick={() => setShowAgregaModal(true)}>
+          Agregar Catedrático
+        </button>
       </div>
 
-          {/* Modal de confirmación */}
-          {selectedCatedratico && (
+      {/* Modal de confirmación */}
+      {selectedCatedratico && (
         <ModalConfirmacion
           isOpen={showModal}
           onConfirm={eliminarCatedratico}
@@ -105,6 +114,13 @@ const CatedraticosAdmin = () => {
           pagina="Administración de Catedráticos"  // Página donde estás
         />
       )}
+
+      {/* Modal para agregar catedrático */}
+      <AgregaCatedra
+        isOpen={showAgregaModal}
+        onSave={handleAgregarCatedratico}
+        onCancel={() => setShowAgregaModal(false)}
+      />
     </div>
   );
 };
