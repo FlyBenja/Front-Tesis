@@ -99,7 +99,7 @@ const EstudiantesAdmin = () => {
             <h4>No hay estudiantes subidos</h4>
             <button
               className="btn btn-primary mt-3"
-              onClick={() => navigate('/admin/asignaciones')}
+              onClick={() => navigate('/admin/SubirExcel')}
             >
               Subir Estudiantes
             </button>

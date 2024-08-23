@@ -6,6 +6,7 @@ import AsignacionesAdmin from '../views/Admin/AsignacionesAdmin';
 import BitacoraAdmin from '../views/Admin/BitacoraAdmin';
 import CatedraticosAdmin from '../views/Admin/CatedraticosAdmin';
 import EstudiantesAdmin from '../views/Admin/EstudiantesAdmin';
+import SubirExcel from '../pages/SubirExcel'; 
 import Perfil from '../views/Admin/Perfil';
 import '../../index.css';
 const Admin = () => {
@@ -26,6 +27,7 @@ const Admin = () => {
             <Route path="/" element={<BitacoraAdmin />} />
             <Route path="/catedraticos" element={<CatedraticosAdmin />} />
             <Route path="/estudiantes" element={<EstudiantesAdmin />} />
+            <Route path="/SubirExcel" element={<SubirExcel />} /> 
             <Route path="/profile" element={<Perfil />} />
             {/* Añade más rutas según sea necesario */}
           </Routes>
