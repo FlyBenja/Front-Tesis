@@ -9,6 +9,7 @@ import EstudiantesAdmin from '../views/Admin/EstudiantesAdmin';
 import SubirExcel from '../pages/SubirExcel'; 
 import Perfil from '../views/Admin/Perfil';
 import '../../index.css';
+
 const Admin = () => {
   const [showSidebar, setShowSidebar] = useState(true);
 
@@ -18,7 +19,7 @@ const Admin = () => {
 
   return (
     <div className={`wrapper ${showSidebar ? '' : 'sidebar-collapsed'}`}>
-      <Sidebar showSidebar={showSidebar} />
+      <Sidebar showSidebar={showSidebar} toggleSidebar={toggleSidebar} />
       <div className={`content-wrapper ${showSidebar ? '' : 'content-active'}`}>
         <Navbar toggleSidebar={toggleSidebar} showSidebar={showSidebar} />
         <div className={`admin-content ${showSidebar ? '' : 'active'}`}>
