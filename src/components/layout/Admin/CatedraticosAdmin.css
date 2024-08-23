@@ -1,0 +1,98 @@
+.admin-content {
+  height: auto;
+  min-height: 100vh; /* Asegura que el contenido ocupe toda la altura de la pantalla */
+  overflow: visible;
+}
+
+.catedraticos-list-container {
+  max-height: 400px; /* Ajusta esta altura según tus necesidades */
+  overflow-y: auto; /* Habilita el scroll vertical */
+  padding-right: 10px; /* Añade un poco de espacio para evitar que el contenido se solape con el scroll */
+  border: 1px solid #ddd; /* Añade un borde para delimitar la lista */
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.catedraticos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.catedratico-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.catedratico-item .actions {
+  display: flex;
+  gap: 10px;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.toggle-btn {
+  padding: 5px 15px;
+  border: none;
+  border-radius: 20px;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-btn.on {
+  background-color: #28a745;
+  color: white;
+}
+
+.toggle-btn.off {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-btn {
+  padding: 5px 15px;
+  border: none;
+  border-radius: 20px;
+  background-color: #dc3545;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* Botón para agregar catedrático */
+.agregar-btn {
+  display: block;
+  margin: 0 auto; /* Centra el botón */
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.agregar-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Contenedor del botón agregar catedrático */
+.btn-agregar-catedratico {
+  text-align: center; /* Asegura que todo el contenido dentro esté centrado */
+  padding: 20px 0; /* Añade un poco de espacio superior e inferior */
+}

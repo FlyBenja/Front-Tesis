@@ -195,5 +195,8 @@ button.subir-estudiantes {
     .filters-container .form-select {
       width: 60%; /* Hacer los filtros del mismo ancho que el contenedor de estudiantes */
     }
+    .estudiantes-admin {
+      margin-top: 30px;
+    }	
   }
   

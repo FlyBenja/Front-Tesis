@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import Sidebar from '../Sidebar/SidebarAdmin';
-import AsignacionesAdmin from '../views/AsignacionesAdmin';
-import BitacoraAdmin from '../views/BitacoraAdmin';
-import EstudiantesAdmin from '../views/EstudiantesAdmin';
-import Perfil from '../views/Perfil';
+import AsignacionesAdmin from '../views/Admin/AsignacionesAdmin';
+import BitacoraAdmin from '../views/Admin/BitacoraAdmin';
+import CatedraticosAdmin from '../views/Admin/CatedraticosAdmin';
+import EstudiantesAdmin from '../views/Admin/EstudiantesAdmin';
+import Perfil from '../views/Admin/Perfil';
 import '../../index.css';
 const Admin = () => {
   const [showSidebar, setShowSidebar] = useState(true);
@@ -23,6 +24,7 @@ const Admin = () => {
           <Routes>
             <Route path="/asignaciones" element={<AsignacionesAdmin />} />
             <Route path="/" element={<BitacoraAdmin />} />
+            <Route path="/catedraticos" element={<CatedraticosAdmin />} />
             <Route path="/estudiantes" element={<EstudiantesAdmin />} />
             <Route path="/profile" element={<Perfil />} />
             {/* Añade más rutas según sea necesario */}

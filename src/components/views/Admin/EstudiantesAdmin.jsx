@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FaTimes } from 'react-icons/fa'; 
 import { useNavigate } from 'react-router-dom'; 
-import '../layout/Admin/EstudiantesAdmin.css';
+import '../../layout/Admin/EstudiantesAdmin.css';
 
 const EstudiantesAdmin = () => {
   const [selectedStudent, setSelectedStudent] = useState(null);

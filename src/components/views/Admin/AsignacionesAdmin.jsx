@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../layout/Admin/AsignacionesAdmin.css';
+import '../../layout/Admin/AsignacionesAdmin.css';
 
 const AsignacionesAdmin = () => {
   const [selectedFile, setSelectedFile] = useState(null);

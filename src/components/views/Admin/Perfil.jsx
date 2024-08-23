@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../layout/Admin/Perfil.css';
+import '../../layout/Admin/Perfil.css';
 
 const Perfil = () => {
   const [showImageModal, setShowImageModal] = useState(false);

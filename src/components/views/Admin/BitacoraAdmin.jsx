@@ -1,4 +1,4 @@
-import '../layout/Admin/BitacoraAdmin.css'; 
+import '../../layout/Admin/BitacoraAdmin.css'; 
 
 const BitacoraAdmin = () => {
   const logs = [
