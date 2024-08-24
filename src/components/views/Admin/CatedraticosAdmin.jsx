@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import '../../layout/Admin/CatedraticosAdmin.css';
 import ModalConfirmacion from '../../Modals/Fuentes/ModalConfirmacion';
-import AgregaCatedra from '../../Modals/Fuentes/AgregaCatedra';  // Importamos el modal
+import AgregaCatedra from '/src/components/Modals/Fuentes/AgregaCatedra';
+
 
 const CatedraticosAdmin = () => {
   const [searchTerm, setSearchTerm] = useState('');
