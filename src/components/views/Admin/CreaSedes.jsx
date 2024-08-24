@@ -9,6 +9,7 @@ const CreaSedes = () => {
     { id: 1, nombre: 'Guastatoya' },
     { id: 2, nombre: 'Sanarate' }
   ]);
+  const [searchTerm, setSearchTerm] = useState(''); // Nuevo estado para manejar el valor de búsqueda
 
   const [showModal, setShowModal] = useState(false);
   const [modalAction, setModalAction] = useState(1);
@@ -38,19 +39,27 @@ const CreaSedes = () => {
     setShowConfirmModal(false); // Cerrar el modal después de eliminar
   };
 
+  // Filtrar las sedes según el término de búsqueda
+  const filteredSedes = sedes.filter((sede) =>
+    sede.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="crea-sedes-container">
-      <h2>Sedes</h2>
+      <div className="header">
+        <h2>Sedes</h2>
+        <button onClick={handleCrearSede} className="crea-sedes-btn">Crear</button>
+      </div>
       <div className="crea-sedes-input-container">
         <label htmlFor="sede">Sede:</label>
         <input
           type="text"
           id="sede"
-          value={sede}
-          onChange={(e) => setSede(e.target.value)}
+          value={searchTerm} // Cambiado para usar searchTerm
+          onChange={(e) => setSearchTerm(e.target.value)} // Actualiza el valor de búsqueda
           className="crea-sedes-input"
+          placeholder="Buscar sede..." // Añadir un placeholder
         />
-        <button onClick={handleCrearSede} className="crea-sedes-btn">Crear</button>
       </div>
 
       <table className="crea-sedes-table">
@@ -62,7 +71,7 @@ const CreaSedes = () => {
           </tr>
         </thead>
         <tbody>
-          {sedes.map((sede) => (
+          {filteredSedes.map((sede) => ( // Usar las sedes filtradas
             <tr key={sede.id}>
               <td>{sede.id}</td>
               <td>{sede.nombre}</td>

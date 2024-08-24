@@ -1,123 +1,134 @@
 .crea-sedes-container {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .crea-sedes-container h2 {
-    text-align: left;
-    margin-bottom: 20px;
-  }
-  
-  .crea-sedes-input-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .crea-sedes-input-container label {
-    margin-right: 10px;
-    font-weight: bold;
-  }
-  
-  .crea-sedes-input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    margin-right: 10px;
-  }
-  
-  .crea-sedes-btn {
-    background-color: #003366;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .crea-sedes-btn:hover {
-    background-color: #002244;
-  }
-  
-  .crea-sedes-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .crea-sedes-table th, .crea-sedes-table td {
-    border: 1px solid #ced4da;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  .crea-sedes-table th {
-    background-color: #f8f9fa;
-  }
-  
-  .crea-sedes-table td {
-    text-align: center;
-  }
-  
-  .crea-sedes-table .btn {
-    margin-right: 5px;
-    padding: 5px 10px;
-    font-size: 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .crea-sedes-table .btn-success {
-    background-color: #28a745;
-    color: white;
-    border: none;
-  }
-  
-  .crea-sedes-table .btn-success:hover {
-    background-color: #218838;
-  }
-  
-  .crea-sedes-table .btn-danger {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-  }
-  
-  .crea-sedes-table .btn-danger:hover {
-    background-color: #c82333;
-  }
-  
-  /* Estilos para pantallas pequeñas */
-  @media (max-width: 768px) {
-    .crea-sedes-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between; /* Alinea el texto a la izquierda y el botón a la derecha */
+  align-items: center; /* Centra verticalmente los elementos */
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  margin: 0; /* Elimina el margen para asegurar el alineamiento correcto */
+}
+
+.crea-sedes-btn {
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.crea-sedes-btn:hover {
+  background-color: #002244;
+}
+
+.crea-sedes-input-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.crea-sedes-input-container label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.crea-sedes-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.crea-sedes-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.crea-sedes-table th, .crea-sedes-table td {
+  border: 1px solid #ced4da;
+  padding: 10px;
+  text-align: left;
+}
+
+.crea-sedes-table th {
+  background-color: #f8f9fa;
+}
+
+.crea-sedes-table td {
+  text-align: center;
+}
+
+.crea-sedes-table .btn {
+  margin-right: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.crea-sedes-table .btn-success {
+  background-color: #28a745;
+  color: white;
+  border: none;
+}
+
+.crea-sedes-table .btn-success:hover {
+  background-color: #218838;
+}
+
+.crea-sedes-table .btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.crea-sedes-table .btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+  .crea-sedes-container {
       padding: 10px;
-    }
-  
-    .crea-sedes-input-container {
+  }
+
+  .header {
       flex-direction: column;
       align-items: flex-start;
-    }
-  
-    .crea-sedes-input {
+  }
+
+  .crea-sedes-btn {
+      width: 100%;
+      margin-top: 10px;
+  }
+
+  .crea-sedes-input-container {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .crea-sedes-input {
       width: 100%;
       margin-bottom: 10px;
-    }
-  
-    .crea-sedes-btn {
-      width: 100%;
-    }
-  
-    .crea-sedes-table th, .crea-sedes-table td {
+  }
+
+  .crea-sedes-table th, .crea-sedes-table td {
       padding: 5px;
       font-size: 12px;
-    }
-  
-    .crea-sedes-table .btn {
+  }
+
+  .crea-sedes-table .btn {
       width: 100%;
       margin: 5px 0;
-    }
   }
-  
+}
