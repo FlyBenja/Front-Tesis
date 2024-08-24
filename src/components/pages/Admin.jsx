@@ -5,7 +5,7 @@ import Sidebar from '../Sidebar/SidebarAdmin';
 import AsignacionesAdmin from '../views/Admin/AsignacionesAdmin';
 import BitacoraAdmin from '../views/Admin/BitacoraAdmin';
 import CatedraticosAdmin from '../views/Admin/CatedraticosAdmin';
-import CreaSedes from '../views/Admin/EstudiantesAdmin';
+import CreaSedes from '../views/Admin/CreaSedes';
 import EstudiantesAdmin from '../views/Admin/EstudiantesAdmin';
 import SubirExcel from '../pages/SubirExcel'; 
 import Perfil from '../views/Admin/Perfil';

@@ -2,7 +2,7 @@ import "admin-lte/dist/css/adminlte.min.css";
 import "../layout/Admin/Login.css";
 import loginLogo from "../../assets/imgs/login.svg"; // Imagen del muñeco
 import umgLogo from "../../assets/imgs/logo3.png"; // Logo de la UMG
-import ofiLogo from "../../assets/imgs/sistemas1_11zon.webp"; // Imagen de fondo que ocupa toda la pantalla
+import ofiLogo from "/src/assets/imgs/sistemas1_11zon.webp"; // Ruta absoluta desde la carpeta src
 import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 
