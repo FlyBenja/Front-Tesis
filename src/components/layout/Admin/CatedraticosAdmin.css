@@ -1,16 +1,20 @@
 .admin-content {
   height: auto;
-  min-height: 100vh; /* Asegura que el contenido ocupe toda la altura de la pantalla */
+  min-height: 100vh;
   overflow: visible;
+  background-color: #f8f9fc; /* Color de fondo suave para que combine con el sidebar */
+  padding: 20px; /* Espaciado interno para que el contenido no esté pegado a los bordes */
 }
 
 .catedraticos-list-container {
-  max-height: 400px; /* Ajusta esta altura según tus necesidades */
-  overflow-y: auto; /* Habilita el scroll vertical */
-  padding-right: 10px; /* Añade un poco de espacio para evitar que el contenido se solape con el scroll */
-  border: 1px solid #ddd; /* Añade un borde para delimitar la lista */
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+  border: 1px solid #dee2e6;
   border-radius: 8px;
-  background-color: #f8f9fa;
+  background-color: #ffffff; /* Fondo blanco para hacer que destaque */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera para dar profundidad */
+  margin-bottom: 20px; /* Espacio inferior para separación del botón */
 }
 
 .catedraticos-list {
@@ -23,10 +27,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #fff;
-  padding: 10px;
+  background-color: #f8f9fc; /* Fondo suave para los items */
+  padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e3e6f0; /* Borde para delinear mejor cada item */
+  transition: background-color 0.3s ease;
+}
+
+.catedratico-item:hover {
+  background-color: #e2e6ea; /* Cambio de color al pasar el mouse por encima */
 }
 
 .catedratico-item .actions {
@@ -39,25 +48,25 @@
   width: 50px;
   height: 50px;
   margin-right: 10px;
+  border: 2px solid #007bff; /* Añade un borde de color que combine con el tema */
 }
 
 .toggle-btn {
   padding: 5px 15px;
   border: none;
   border-radius: 20px;
-  background-color: #ccc;
+  background-color: #6c757d;
+  color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .toggle-btn.on {
   background-color: #28a745;
-  color: white;
 }
 
 .toggle-btn.off {
   background-color: #dc3545;
-  color: white;
 }
 
 .delete-btn {
@@ -74,10 +83,26 @@
   background-color: #c82333;
 }
 
-/* Botón para agregar catedrático */
 .agregar-btn {
   display: block;
-  margin: 0 auto; /* Centra el botón */
+  margin: 20px auto;
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.agregar-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Botón para agregar catedrático */
+.agregar-btn {
+  display: inline-block; /* Cambiado de block a inline-block */
+  margin: 20px auto; /* Centra el botón */
   padding: 10px 20px;
   border-radius: 20px;
   background-color: #007bff;
@@ -101,5 +126,5 @@
   .admin-content.active {
     margin-top: 30px;
     margin-left: 0;
-}
   }
+}

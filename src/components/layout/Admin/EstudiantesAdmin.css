@@ -35,12 +35,17 @@
 /* Ajuste de tamaño para la barra de búsqueda */
 .filters-container input.form-control {
     width: 500px;
+    border-radius: 20px;
+    border: 1px solid #007bff;
+    padding: 10px;
 }
 
 /* Contenedor para los filtros */
 .filters-container .form-select {
     margin-left: 8px;
     max-width: 120px;
+    border-radius: 20px;
+    border: 1px solid #007bff;
 }
 
 /* Contenedor para la lista de estudiantes */
@@ -58,6 +63,7 @@
     padding: 10px;
     border-radius: 8px;
     max-height: 100%;
+    border: 1px solid #007bff;
 }
 
 /* Estilo individual para cada estudiante */
@@ -65,24 +71,35 @@
     padding: 15px;
     cursor: pointer;
     border-bottom: 1px solid #ddd;
-    text-align: center;
+    text-align: left;
+    display: flex;
+    align-items: center;
     transition: background-color 0.3s ease;
 }
 
 .student-item:hover {
-    background-color: #e9ecef;
+    background-color: #007bff;
+    color: white;
 }
 
 .student-item.active {
-    background-color: #007bff;
+    background-color: #0056b3;
     color: white;
+}
+
+/* Añadir un estilo para las imágenes de los estudiantes */
+.student-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
 /* Contenedor para el Time Line */
 .timeline-container {
     flex-basis: 50%;
     padding: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid #007bff;
     border-radius: 8px;
     background-color: #fff;
     height: calc(100vh - 240px); /* Altura ajustada */
@@ -102,14 +119,14 @@
 .timeline-event {
     padding: 10px;
     margin-bottom: 10px;
-    background-color: #f1f1f1;
+    background-color: #e9ecef;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: background-color 0.3s ease;
 }
 
 .timeline-event:hover {
-    background-color: #e9ecef;
+    background-color: #007bff;
+    color: white;
 }
 
 .timeline-event h4 {
@@ -129,6 +146,17 @@
     bottom: 20px;
     right: 20px;
     z-index: 10;
+    background-color: #007bff;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.timeline-btn:hover {
+    background-color: #0056b3;
 }
 
 /* Estilo para el botón de Subir Estudiantes */
@@ -199,4 +227,3 @@ button.subir-estudiantes {
       margin-top: 30px;
     }	
   }
-  
