@@ -1,27 +1,14 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import '../../layout/Admin/CatedraticosAdmin.css';
 import ModalConfirmacion from '../../Modals/Fuentes/ModalConfirmacion';
-
-
+import AgregaCatedra from '../../Modals/Fuentes/Agregacatedra';  // Importamos el modal
 
 const CatedraticosAdmin = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [catedraticos, setCatedraticos] = useState([
     { id: 1, nombre: 'Josue Benjamin Aldana Ramos', img: 'https://via.placeholder.com/50', habilitado: false },
     { id: 2, nombre: 'Oscar David Alvarez Martinez', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 3, nombre: 'Bryan Yeremy Arrazola Cisneros', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 4, nombre: 'Cristian Paul Borja Martinez', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 5, nombre: 'Carolay Estephania Cante De Leon', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 6, nombre: 'Dulce María Carías Bran', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 7, nombre: 'Kevin Leonel Carranza Marroquin', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 8, nombre: 'Mynor Estuardo Junnior Ceron Gaitan', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 9, nombre: 'Elisa Noemí Dardón Salguero', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 10, nombre: 'Carmen Mireya De La Cruz Barrientos', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 11, nombre: 'Huver Roberto Donis Cordova', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 12, nombre: 'Maria Isabel Estrada López', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 13, nombre: 'Luis Fernando Fuentes Orellana', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 14, nombre: 'Andrea Michelle García Herrera', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 15, nombre: 'Julio César Hernández Álvarez', img: 'https://via.placeholder.com/50', habilitado: false },
+    // Más catedráticos...
   ]);
 
   const [showModal, setShowModal] = useState(false);
@@ -32,19 +19,10 @@ const CatedraticosAdmin = () => {
     setSearchTerm(event.target.value);
   };
 
-  const toggleCatedratico = (id) => {
-    const updatedCatedraticos = catedraticos.map((catedratico) =>
-      catedratico.id === id
-        ? { ...catedratico, habilitado: !catedratico.habilitado }
-        : catedratico
-    );
-    setCatedraticos(updatedCatedraticos);
-  };
-
   const confirmEliminarCatedratico = (id) => {
     const catedratico = catedraticos.find((cat) => cat.id === id);
-    setSelectedCatedratico(catedratico); // Guardar el catedrático seleccionado
-    setShowModal(true); // Mostrar modal de confirmación
+    setSelectedCatedratico(catedratico); 
+    setShowModal(true); 
   };
 
   const eliminarCatedratico = () => {
@@ -52,12 +30,12 @@ const CatedraticosAdmin = () => {
       (catedratico) => catedratico.id !== selectedCatedratico.id
     );
     setCatedraticos(updatedCatedraticos);
-    setShowModal(false); // Cerrar el modal después de eliminar
+    setShowModal(false); 
   };
 
   const handleAgregarCatedratico = (nuevoCatedratico) => {
     setCatedraticos([...catedraticos, { id: catedraticos.length + 1, ...nuevoCatedratico }]);
-    setShowAgregaModal(false);  // Cerrar el modal de agregar catedrático después de guardar
+    setShowAgregaModal(false);  
   };
 
   const filteredCatedraticos = catedraticos.filter((catedratico) =>
@@ -83,13 +61,7 @@ const CatedraticosAdmin = () => {
               <p>{catedratico.nombre}</p>
               <div className="actions">
                 <button
-                  className={`toggle-btn ${catedratico.habilitado ? 'on' : 'off'}`}
-                  onClick={() => toggleCatedratico(catedratico.id)}
-                >
-                  {catedratico.habilitado ? 'ON' : 'OFF'}
-                </button>
-                <button
-                  className="delete-btn"
+                  className="toggle-btn"
                   onClick={() => confirmEliminarCatedratico(catedratico.id)}
                 >
                   Eliminar
@@ -111,13 +83,17 @@ const CatedraticosAdmin = () => {
           isOpen={showModal}
           onConfirm={eliminarCatedratico}
           onCancel={() => setShowModal(false)}
-          nombre={selectedCatedratico.nombre}  // Nombre del catedrático seleccionado
-          pagina="Administración de Catedráticos"  // Página donde estás
+          nombre={selectedCatedratico.nombre}  
+          pagina="Catedráticos"  
         />
       )}
 
       {/* Modal para agregar catedrático */}
-
+      <AgregaCatedra
+        isOpen={showAgregaModal}
+        onSave={handleAgregarCatedratico}
+        onCancel={() => setShowAgregaModal(false)}
+      />
     </div>
   );
 };

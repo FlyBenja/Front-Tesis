@@ -14,8 +14,8 @@ const AgregaCatedra = ({ isOpen, onSave, onCancel }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="agrega-modal-overlay">
-      <div className="agrega-modal-container">
+    <div className="agrega-catedra-modal-overlay">
+      <div className="agrega-catedra-modal-container">
         <h2>Agregar Catedrático</h2>
         <div className="modal-body">
           <input
