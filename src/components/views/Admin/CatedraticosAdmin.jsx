@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../../layout/Admin/CatedraticosAdmin.css';
 import ModalConfirmacion from '../../Modals/Fuentes/ModalConfirmacion';
-import AgregaCatedra from '/src/components/Modals/Fuentes/AgregaCatedra';
+
 
 
 const CatedraticosAdmin = () => {
@@ -117,11 +117,7 @@ const CatedraticosAdmin = () => {
       )}
 
       {/* Modal para agregar catedrático */}
-      <AgregaCatedra
-        isOpen={showAgregaModal}
-        onSave={handleAgregarCatedratico}
-        onCancel={() => setShowAgregaModal(false)}
-      />
+
     </div>
   );
 };
