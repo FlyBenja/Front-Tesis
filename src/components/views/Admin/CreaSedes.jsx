@@ -1,99 +1,150 @@
-import React, { useState } from 'react';
-import '../../layout/Admin/CreaSedes.css';
-import AgregaSede from '../../Modals/Fuentes/AgregaSede';
-import ModalConfirmacion from '../../Modals/Fuentes/ModalConfirmacion';
+import { useState } from 'react';
+import { FaTimes } from 'react-icons/fa'; 
+import { useNavigate } from 'react-router-dom'; 
+import '../../layout/Admin/EstudiantesAdmin.css';
 
-const CreaSedes = () => {
-  const [sede, setSede] = useState('');
-  const [sedes, setSedes] = useState([
-    { id: 1, nombre: 'Guastatoya' },
-    { id: 2, nombre: 'Sanarate' }
-  ]);
+const EstudiantesAdmin = () => {
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const [showModal, setShowModal] = useState(false);
-  const [modalAction, setModalAction] = useState(1);
-  const [selectedSede, setSelectedSede] = useState(null);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const navigate = useNavigate(); 
 
-  const handleCrearSede = () => {
-    setModalAction(1); // Acción 1 para crear sede
-    setShowModal(true); // Mostrar el modal
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
   };
 
-  const handleEditarSede = (sede) => {
-    setSelectedSede(sede);
-    setModalAction(2); // Acción 2 para editar sede
-    setShowModal(true); // Mostrar el modal
+  const handleSelectStudent = (student) => {
+    setSelectedStudent(student);
   };
 
-  const handleEliminarSede = (id) => {
-    const sede = sedes.find((s) => s.id === id);
-    setSelectedSede(sede);
-    setShowConfirmModal(true); // Mostrar el modal de confirmación
+  const handleCloseTimeLine = () => {
+    setSelectedStudent(null);
   };
 
-  const eliminarSede = () => {
-    const nuevasSedes = sedes.filter(sede => sede.id !== selectedSede.id);
-    setSedes(nuevasSedes);
-    setShowConfirmModal(false); // Cerrar el modal después de eliminar
-  };
+  const estudiantes = [
+    { id: 1, nombre: 'Josue Benjamin Aldana Ramos' },
+    { id: 2, nombre: 'Oscar David Alvarez Martinez' },
+    { id: 3, nombre: 'Bryan Yeremy Arrazola Cisneros' },
+    { id: 4, nombre: 'Cristian Paul Borja Martinez' },
+    { id: 5, nombre: 'Carolay Estephania Cante De Leon' },
+    { id: 6, nombre: 'Dulce María Carías Bran' },
+    { id: 7, nombre: 'Kevin Leonel Carranza Marroquin' },
+    { id: 8, nombre: 'Mynor Estuardo Junnior Ceron Gaitan' },
+    { id: 9, nombre: 'Elisa Noemí Dardón Salguero' },
+    { id: 10, nombre: 'Carmen Mireya De La Cruz Barrientos' },
+    { id: 11, nombre: 'Huver Roberto Donis Cordova' },
+    { id: 12, nombre: 'Maria Isabel Estrada López' },
+    { id: 13, nombre: 'Luis Fernando Fuentes Orellana' },
+    { id: 14, nombre: 'Andrea Michelle García Herrera' },
+    { id: 15, nombre: 'Julio César Hernández Álvarez' },
+  ];
+  const timelineEvents = [
+    { date: '2024-08-20', title: 'Inscripción completada', description: 'El estudiante se inscribió en el curso de matemáticas.' },
+    { date: '2024-09-10', title: 'Examen parcial', description: 'El estudiante realizó el examen parcial de historia.' },
+    { date: '2024-09-15', title: 'Proyecto final', description: 'El estudiante entregó el proyecto final de ciencias.' },
+    { date: '2024-10-05', title: 'Evaluación final', description: 'El estudiante asistió a la evaluación final.' },
+    { date: '2024-08-20', title: 'Inscripción completada', description: 'El estudiante se inscribió en el curso de matemáticas.' },
+    { date: '2024-09-10', title: 'Examen parcial', description: 'El estudiante realizó el examen parcial de historia.' },
+    { date: '2024-09-15', title: 'Proyecto final', description: 'El estudiante entregó el proyecto final de ciencias.' },
+    { date: '2024-10-05', title: 'Evaluación final', description: 'El estudiante asistió a la evaluación final.' },
+    { date: '2024-08-20', title: 'Inscripción completada', description: 'El estudiante se inscribió en el curso de matemáticas.' },
+    { date: '2024-09-10', title: 'Examen parcial', description: 'El estudiante realizó el examen parcial de historia.' },
+    { date: '2024-09-15', title: 'Proyecto final', description: 'El estudiante entregó el proyecto final de ciencias.' },
+    { date: '2024-10-05', title: 'Evaluación final', description: 'El estudiante asistió a la evaluación final.' }
+  ];
+
+
+  const filteredEstudiantes = estudiantes.filter((estudiante) =>
+    estudiante.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div className="crea-sedes-container">
-      <h2>Sedes</h2>
-      <div className="crea-sedes-input-container">
-        <label htmlFor="sede">Sede:</label>
+    <div className="estudiantes-admin">
+      <h2>Administración de Estudiantes</h2>
+      <div className="filters-container d-flex align-items-center mb-4">
         <input
           type="text"
-          id="sede"
-          value={sede}
-          onChange={(e) => setSede(e.target.value)}
-          className="crea-sedes-input"
+          className="form-control me-2"
+          placeholder="Buscar"
+          value={searchTerm}
+          onChange={handleSearch}
         />
-        <button onClick={handleCrearSede} className="crea-sedes-btn">Crear</button>
+        {/* Selectores */}
+        <div className="d-flex gap-2">
+              <select className="form-select">
+                <option>Año</option>
+                <option>2021</option>
+                <option>2022</option>
+                <option>2023</option>
+                <option>2024</option>
+                <option>2025</option>
+              </select>
+              <select className="form-select">
+                <option>Sede</option>
+                <option>Guastatoya</option>
+                <option>Sanarate</option>
+                <option>Sede 3</option>
+              </select>
+              <select className="form-select">
+                <option>Curso</option>
+                <option>Curso 1</option>
+                <option>Curso 2</option>
+                <option>Curso 3</option>
+              </select>
+            </div>
       </div>
+      <div className="d-flex flex-grow-1 content-area">
+        {filteredEstudiantes.length === 0 ? (
+          <div className="no-students-container">
+            <h4>No hay estudiantes subidos</h4>
+            <button
+              className="btn btn-primary mt-3"
+              onClick={() => navigate('/admin/SubirExcel')}
+            >
+              Subir Estudiantes
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="student-list-container">
+              <div className="student-list">
+                {filteredEstudiantes.map((estudiante) => (
+                  <div
+                    key={estudiante.id}
+                    className="student-item"
+                    onClick={() => handleSelectStudent(estudiante)}
+                  >
+                    <p>{estudiante.nombre}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-      <table className="crea-sedes-table">
-        <thead>
-          <tr>
-            <th>No.</th>
-            <th>Nombre</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sedes.map((sede) => (
-            <tr key={sede.id}>
-              <td>{sede.id}</td>
-              <td>{sede.nombre}</td>
-              <td>
-                <button className="btn btn-success" onClick={() => handleEditarSede(sede)}>Editar</button>
-                <button className="btn btn-danger" onClick={() => handleEliminarSede(sede.id)}>Eliminar</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Modal para agregar o editar sede */}
-      <AgregaSede
-        isOpen={showModal}
-        onCancel={() => setShowModal(false)}
-        accion={modalAction}
-      />
-
-      {/* Modal de confirmación para eliminar */}
-      {selectedSede && (
-        <ModalConfirmacion
-          isOpen={showConfirmModal}
-          onConfirm={eliminarSede}
-          onCancel={() => setShowConfirmModal(false)}
-          nombre={selectedSede.nombre}
-          pagina="Sede"
-        />
-      )}
+            {selectedStudent && (
+                  <div className="timeline-container">
+                    <div className="timeline-header d-flex justify-content-between align-items-center">
+                      <h3>Time Line</h3>
+                      <FaTimes className="close-icon" onClick={handleCloseTimeLine} />
+                    </div>
+                    <div className="timeline-content">
+                      {selectedStudent.nombre}
+                    </div>
+                    <div className="timeline-events">
+                      {timelineEvents.map((event, index) => (
+                        <div key={index} className="timeline-event">
+                          <h4>{event.date}: {event.title}</h4>
+                          <p>{event.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <button className="btn btn-primary timeline-btn">Visualizar Tareas</button>
+                  </div>
+                )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
 
-export default CreaSedes;
+export default EstudiantesAdmin;
