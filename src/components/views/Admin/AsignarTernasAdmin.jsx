@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../layout/Admin/AsignacionesAdmin.css';
+import '../../layout/Admin/AsignarTernasAdmin.css';
 
-const AsignarAlumnos = () => {
+const AsignarTernasAdmin = () => {
   const [alumnos, setAlumnos] = useState([
     { id: 1, nombre: 'Josue Benjamin Aldana Ramos' },
     { id: 2, nombre: 'Oscar David Alvarez Martinez' },
@@ -32,9 +32,9 @@ const AsignarAlumnos = () => {
   ]);
 
   const [catedraticos, setCatedraticos] = useState([
-    { id: 1, nombre: 'Catedrático 1', alumnos: [] },
-    { id: 2, nombre: 'Catedrático 2', alumnos: [] },
-    { id: 3, nombre: 'Catedrático 3', alumnos: [] },
+    { id: 1, nombre: 'Ternas 1', alumnos: [] },
+    { id: 2, nombre: 'Ternas 2', alumnos: [] },
+    { id: 3, nombre: 'Ternas 3', alumnos: [] },
   ]);
 
   const onDragStart = (e, alumno) => {
@@ -48,7 +48,7 @@ const AsignarAlumnos = () => {
     if (alumno) {
       setCatedraticos(prevState =>
         prevState.map(cat => {
-          if (cat.id === catedraticoId) {
+          if (cat.id === catedraticoId && cat.alumnos.length < 3) { // Limitar a 3 alumnos
             const updatedAlumnos = [...cat.alumnos];
             updatedAlumnos.splice(dropIndex, 0, alumno);
             return { ...cat, alumnos: updatedAlumnos };
@@ -78,14 +78,22 @@ const AsignarAlumnos = () => {
     }
   };
 
+  const getDropText = (catedratico) => {
+    const count = catedratico.alumnos.length;
+    if (count === 0) return "Arrastre Profesor";
+    if (count === 1) return "Arrastre Admin";
+    if (count === 2) return "Arrastre num3";
+    return "";
+  };
+
   return (
     <div className="container-fluid asignar-alumnos-container">
       <div className="row">
         {/* Alumnos list */}
         <div className="col-md-4">
           <div className="card shadow mb-4">
-            <div className="card-header bg-primary text-white">
-              <h3>Alumnos</h3>
+            <div className="card-header bg-primary text-white" style={{ textAlign: "center" }}>
+              <h3>Catedraticos Activos</h3>
             </div>
             <ul className="list-group list-group-flush alumnos-list">
               {alumnos.map(alumno => (
@@ -127,7 +135,7 @@ const AsignarAlumnos = () => {
                         </div>
                       ))
                     )}
-                    <p className="text-center text-muted">Arrastra alumnos aquí</p>
+                    <p className="text-center text-muted">{getDropText(catedratico)}</p>
                   </div>
                 </div>
               </div>
@@ -139,4 +147,4 @@ const AsignarAlumnos = () => {
   );
 };
 
-export default AsignarAlumnos;
+export default AsignarTernasAdmin;

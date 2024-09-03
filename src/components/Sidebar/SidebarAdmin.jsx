@@ -48,10 +48,16 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
             <p>Tareas</p>
           </li>
         </Link>
-        <Link className="link-sidebar" to="/admin/asignaciones" onClick={handleLinkClick}>
+        <Link className="link-sidebar" to="/admin/asignarternas" onClick={handleLinkClick}>
           <li>
             <IoPersonAddSharp size={30} />
-            <p>Asignaciones</p>
+            <p>Asignar Ternas</p>
+          </li>
+        </Link>
+        <Link className="link-sidebar" to="/admin/asignaralumos" onClick={handleLinkClick}>
+          <li>
+            <IoPersonAddSharp size={30} />
+            <p>Asignar Alumnos</p>
           </li>
         </Link>
         <Link className="link-sidebar" to="/admin/sedes" onClick={handleLinkClick}>

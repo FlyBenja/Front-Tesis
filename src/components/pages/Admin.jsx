@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import Sidebar from '../Sidebar/SidebarAdmin';
-import AsignacionesAdmin from '../views/Admin/AsignacionesAdmin';
+import AsignarTernasAdmin from '../views/Admin/AsignarTernasAdmin';
 import BitacoraAdmin from '../views/Admin/BitacoraAdmin';
 import CatedraticosAdmin from '../views/Admin/CatedraticosAdmin';
 import CreaSedes from '../views/Admin/CreaSedes';
@@ -25,7 +25,7 @@ const Admin = () => {
         <Navbar toggleSidebar={toggleSidebar} showSidebar={showSidebar} />
         <div className={`admin-content ${showSidebar ? '' : 'active'}`}>
           <Routes>
-            <Route path="/asignaciones" element={<AsignacionesAdmin />} />
+            <Route path="/asignarternas" element={<AsignarTernasAdmin />} />
             <Route path="/" element={<BitacoraAdmin />} />
             <Route path="/catedraticos" element={<CatedraticosAdmin />} />
             <Route path="/sedes" element={<CreaSedes />} />
