@@ -1,9 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';  // Asegúrate de importar useNavigate
 import '../../layout/Admin/CatedraticosAdmin.css';
 import ModalConfirmacion from '../../Modals/Fuentes/ModalConfirmacion';
 import AgregaCatedra from '../../Modals/Fuentes/Agregacatedra';
-
-
 
 const CatedraticosAdmin = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,6 +27,8 @@ const CatedraticosAdmin = () => {
   const [showModal, setShowModal] = useState(false);
   const [showAgregaModal, setShowAgregaModal] = useState(false);  // Estado para mostrar el modal de agregar catedrático
   const [selectedCatedratico, setSelectedCatedratico] = useState(null);
+  
+  const navigate = useNavigate();  // Usamos useNavigate para redirigir
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -76,35 +77,49 @@ const CatedraticosAdmin = () => {
         onChange={handleSearch}
       />
 
-      <div className="catedraticos-list-container">
-        <div className="catedraticos-list">
-          {filteredCatedraticos.map((catedratico) => (
-            <div key={catedratico.id} className="catedratico-item">
-              <img src={catedratico.img} alt="Avatar" className="avatar" />
-              <p>{catedratico.nombre}</p>
-              <div className="actions">
-                <button
-                  className={`toggle-btn ${catedratico.habilitado ? 'on' : 'off'}`}
-                  onClick={() => toggleCatedratico(catedratico.id)}
-                >
-                  {catedratico.habilitado ? 'ON' : 'OFF'}
-                </button>
-                <button
-                  className="delete-btn"
-                  onClick={() => confirmEliminarCatedratico(catedratico.id)}
-                >
-                  Eliminar
-                </button>
-              </div>
-            </div>
-          ))}
+      {catedraticos.length === 0 ? (
+        <div className="no-catedraticos-container">
+          <h4>No existen catedráticos subidos</h4>
+          <button
+              className="btn btn-primary mt-3"
+              onClick={() => navigate('/admin/SubirExcel')} // Aquí utilizamos navigate
+            >
+              Subir Catedráticos
+          </button>
         </div>
-      </div>
-      <div className="btn-agregar-catedratico">
-        <button className="btn btn-primary agregar-btn" onClick={() => setShowAgregaModal(true)}>
-          Agregar Catedrático
-        </button>
-      </div>
+      ) : (
+        <>
+          <div className="catedraticos-list-container">
+            <div className="catedraticos-list">
+              {filteredCatedraticos.map((catedratico) => (
+                <div key={catedratico.id} className="catedratico-item">
+                  <img src={catedratico.img} alt="Avatar" className="avatar" />
+                  <p>{catedratico.nombre}</p>
+                  <div className="actions">
+                    <button
+                      className={`toggle-btn ${catedratico.habilitado ? 'on' : 'off'}`}
+                      onClick={() => toggleCatedratico(catedratico.id)}
+                    >
+                      {catedratico.habilitado ? 'ON' : 'OFF'}
+                    </button>
+                    <button
+                      className="delete-btn"
+                      onClick={() => confirmEliminarCatedratico(catedratico.id)}
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="btn-agregar-catedratico">
+            <button className="btn btn-primary agregar-btn" onClick={() => setShowAgregaModal(true)}>
+              Agregar Catedrático
+            </button>
+          </div>
+        </>
+      )}
 
       {/* Modal de confirmación */}
       {selectedCatedratico && (

@@ -122,6 +122,10 @@
   padding: 20px 0; /* Añade un poco de espacio superior e inferior */
 }
 
+.no-catedraticos-container {
+  text-align: center;
+}
+
 @media (max-width: 991px) {
   .admin-content.active {
     margin-top: 30px;
