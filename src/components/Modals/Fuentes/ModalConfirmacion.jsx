@@ -1,22 +1,50 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Swal from 'sweetalert2';
 import '../Estilos/ModalConfirmacion.css';
 
 const ModalConfirmacion = ({ isOpen, onConfirm, onCancel, nombre, pagina }) => {
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (isOpen) {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+      });
 
-  return (
-    <div className="modal-overlay">
-      <div className="modal-container">
-        <h2>¿Estás seguro?</h2>
-        <p>¿Estás seguro de eliminar la {pagina.toLowerCase()} <strong>{nombre}</strong>?</p>
-        <div className="modal-buttons">
-          <button className="btn btn-success" onClick={onConfirm}>Confirmar</button>
-          <button className="btn btn-danger" onClick={onCancel}>Cancelar</button>
-        </div>
-      </div>
-    </div>
-  );
+      swalWithBootstrapButtons.fire({
+        title: "¿Estás seguro?",
+        text: `¿Estás seguro de eliminar la ${pagina.toLowerCase()} "${nombre}"?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, Confirmar!",
+        cancelButtonText: "No, Cancelar!",
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          onConfirm();
+          swalWithBootstrapButtons.fire({
+            title: "Eliminado",
+            text: `La ${pagina.toLowerCase()} "${nombre}" ha sido eliminada.`,
+            icon: "success",
+            confirmButtonText: "De Acuerdo"
+          });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          onCancel();
+          swalWithBootstrapButtons.fire({
+            title: "Cancelado",
+            text: `La ${pagina.toLowerCase()} "${nombre}" está a salvo.`,
+            icon: "error",
+            confirmButtonText: "De Acuerdo"
+          });
+        }
+      });
+    }
+  }, [isOpen, onConfirm, onCancel, nombre, pagina]);
+
+  return null;
 };
 
 ModalConfirmacion.propTypes = {

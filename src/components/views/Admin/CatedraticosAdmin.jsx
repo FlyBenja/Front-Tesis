@@ -113,7 +113,7 @@ const CatedraticosAdmin = () => {
           onConfirm={eliminarCatedratico}
           onCancel={() => setShowModal(false)}
           nombre={selectedCatedratico.nombre}  // Nombre del catedrático seleccionado
-          pagina="Administración de Catedráticos"  // Página donde estás
+          pagina="Catedrátic@"  // Página donde estás
         />
       )}
 
