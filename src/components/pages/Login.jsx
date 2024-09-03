@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import "admin-lte/dist/css/adminlte.min.css";
 import "../layout/Admin/Login.css";
 import loginLogo from "../../assets/imgs/login.svg"; // Imagen del muñeco
@@ -8,10 +9,21 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 
 const Login = () => {
   const navigate = useNavigate();
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/admin");
+    const email = e.target.elements[0].value;
+
+    if (email === "Benjamin@gmail.com" || email === "Axel@gmail.com") {
+      navigate("/admin");
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Error de Datos",
+        confirmButtonText: "De acuerdo",
+      });
+    }
   };
 
   return (
