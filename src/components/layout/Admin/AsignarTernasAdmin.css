@@ -1,41 +1,64 @@
 .asignar-alumnos-container {
-    padding-top: 20px;
+  padding-top: 20px;
+}
+
+.alumnos-list {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.dropzone {
+  min-height: 150px;
+  border: 2px dashed #ccc;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.alumno-cuadro {
+  background-color: #e9ecef;
+}
+
+.alumnos-list li:hover {
+  background-color: #f1f1f1;
+}
+
+.card-header {
+  font-size: 1.25rem;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+.dropzone p {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.btn-sm {
+  font-size: 0.8rem;
+}
+
+/* Estilos adicionales para el botón "Guardar Ternas" */
+.btn-guardar-ternas {
+  margin-top: 50px;
+  margin-left: 170px;
+}
+
+/* Ajustes para pantallas grandes y medianas */
+@media (min-width: 768px) {
+  .btn-guardar-ternas {
+    margin-top: 50px;
+    margin-left: 170px;
   }
-  
-  .alumnos-list {
-    max-height: 70vh;
-    overflow-y: auto;
+}
+
+/* Ajustes para pantallas pequeñas (modo teléfono) */
+@media (max-width: 767px) {
+  .btn-guardar-ternas {
+    margin-top: 20px;
+    margin-left: 0;
+    width: 100%; /* Hacer que el botón ocupe todo el ancho */
+    text-align: center;
   }
-  
-  .dropzone {
-    min-height: 150px;
-    border: 2px dashed #ccc;
-    background-color: #f8f9fa;
-    border-radius: 5px;
-  }
-  
-  .alumno-cuadro {
-    background-color: #e9ecef;
-  }
-  
-  .alumnos-list li:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .card-header {
-    font-size: 1.25rem;
-  }
-  
-  .card {
-    border-radius: 10px;
-  }
-  
-  .dropzone p {
-    font-size: 0.9rem;
-    color: #6c757d;
-  }
-  
-  .btn-sm {
-    font-size: 0.8rem;
-  }
-  
+}

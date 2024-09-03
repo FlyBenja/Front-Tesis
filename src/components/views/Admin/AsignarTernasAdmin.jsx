@@ -86,6 +86,11 @@ const AsignarTernasAdmin = () => {
     return "";
   };
 
+  const guardarTernas = () => {
+    // Aquí puedes manejar la lógica para guardar las ternas
+    alert('Ternas guardadas con éxito');
+  };
+
   return (
     <div className="container-fluid asignar-alumnos-container">
       <div className="row">
@@ -141,6 +146,7 @@ const AsignarTernasAdmin = () => {
               </div>
             ))}
           </div>
+          <button className="btn btn-primary btn-guardar-ternas" onClick={guardarTernas}>Guardar Ternas</button>
         </div>
       </div>
     </div>
