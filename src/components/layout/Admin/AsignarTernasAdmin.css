@@ -38,27 +38,3 @@
 .btn-sm {
   font-size: 0.8rem;
 }
-
-/* Estilos adicionales para el botón "Guardar Ternas" */
-.btn-guardar-ternas {
-  margin-top: 50px;
-  margin-left: 170px;
-}
-
-/* Ajustes para pantallas grandes y medianas */
-@media (min-width: 768px) {
-  .btn-guardar-ternas {
-    margin-top: 50px;
-    margin-left: 170px;
-  }
-}
-
-/* Ajustes para pantallas pequeñas (modo teléfono) */
-@media (max-width: 767px) {
-  .btn-guardar-ternas {
-    margin-top: 20px;
-    margin-left: 0;
-    width: 100%; /* Hacer que el botón ocupe todo el ancho */
-    text-align: center;
-  }
-}

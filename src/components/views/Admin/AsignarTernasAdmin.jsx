@@ -32,9 +32,9 @@ const AsignarTernasAdmin = () => {
   ]);
 
   const [catedraticos, setCatedraticos] = useState([
-    { id: 1, nombre: 'Ternas 1', alumnos: [] },
-    { id: 2, nombre: 'Ternas 2', alumnos: [] },
-    { id: 3, nombre: 'Ternas 3', alumnos: [] },
+    { id: 1, nombre: 'Terna 1', alumnos: [] },
+    { id: 2, nombre: 'Terna 2', alumnos: [] },
+    { id: 3, nombre: 'Terna 3', alumnos: [] },
   ]);
 
   const onDragStart = (e, alumno) => {
@@ -86,15 +86,9 @@ const AsignarTernasAdmin = () => {
     return "";
   };
 
-  const guardarTernas = () => {
-    // Aquí puedes manejar la lógica para guardar las ternas
-    alert('Ternas guardadas con éxito');
-  };
-
   return (
     <div className="container-fluid asignar-alumnos-container">
       <div className="row">
-        {/* Alumnos list */}
         <div className="col-md-4">
           <div className="card shadow mb-4">
             <div className="card-header bg-primary text-white" style={{ textAlign: "center" }}>
@@ -116,7 +110,6 @@ const AsignarTernasAdmin = () => {
           </div>
         </div>
 
-        {/* Catedraticos columns */}
         <div className="col-md-8">
           <div className="row">
             {catedraticos.map(catedratico => (
@@ -146,7 +139,6 @@ const AsignarTernasAdmin = () => {
               </div>
             ))}
           </div>
-          <button className="btn btn-primary btn-guardar-ternas" onClick={guardarTernas}>Guardar Ternas</button>
         </div>
       </div>
     </div>
