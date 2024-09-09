@@ -3,106 +3,91 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../layout/Admin/AsignarTernasAdmin.css';
 
 const AsignarTernasAdmin = () => {
-  const [alumnos, setAlumnos] = useState([
-    { id: 1, nombre: 'Josue Benjamin Aldana Ramos' },
-    { id: 2, nombre: 'Oscar David Alvarez Martinez' },
-    { id: 3, nombre: 'Bryan Yeremy Arrazola Cisneros' },
-    { id: 4, nombre: 'Cristian Paul Borja Martinez' },
-    { id: 5, nombre: 'Carolay Estephania Cante De Leon' },
-    { id: 6, nombre: 'Dulce María Carías Bran' },
-    { id: 7, nombre: 'Kevin Leonel Carranza Marroquin' },
-    { id: 8, nombre: 'Mynor Estuardo Junior Ceron Gaitan' },
-    { id: 9, nombre: 'Elisa Noemí Dardón Salguero' },
-    { id: 10, nombre: 'Carmen Mireya De La Cruz Barrientos' },
-    { id: 11, nombre: 'Huver Roberto Donis Cordova' },
-    { id: 12, nombre: 'Maria Isabel Estrada López' },
-    { id: 13, nombre: 'Luis Fernando Fuentes Orellana' },
-    { id: 14, nombre: 'Andrea Michelle García Herrera' },
-    { id: 15, nombre: 'Julio César Hernández Álvarez' },
-    { id: 16, nombre: 'Lucas Alejandro González' },
-    { id: 17, nombre: 'Sofía Valentina Morales' },
-    { id: 18, nombre: 'Samuel Mateo Pérez' },
-    { id: 19, nombre: 'Valeria Camila Mendoza' },
-    { id: 20, nombre: 'Gabriel Sebastián Ortiz' },
-    { id: 21, nombre: 'Isabella Victoria Gómez' },
-    { id: 22, nombre: 'Daniela Luna Martínez' },
-    { id: 23, nombre: 'Emiliano Javier Torres' },
-    { id: 24, nombre: 'Renata Lucía Herrera' },
-    { id: 25, nombre: 'Martín Damián Castro' }
-  ]);
-
   const [catedraticos, setCatedraticos] = useState([
-    { id: 1, nombre: 'Terna 1', alumnos: [] },
-    { id: 2, nombre: 'Terna 2', alumnos: [] },
-    { id: 3, nombre: 'Terna 3', alumnos: [] },
+    { id: 1, nombre: 'Carlos Pérez' },
+    { id: 2, nombre: 'María García' },
+    { id: 3, nombre: 'Jorge Martínez' },
+    { id: 4, nombre: 'Ana Fernández' },
+    { id: 5, nombre: 'Luis Rodríguez' },
+    { id: 6, nombre: 'Sofía Gómez' },
+    { id: 7, nombre: 'Pablo Hernández' },
+    { id: 8, nombre: 'Claudia López' },
+    { id: 9, nombre: 'Miguel Jiménez' },
+    { id: 10, nombre: 'Patricia Torres' }
   ]);
 
-  const onDragStart = (e, alumno) => {
-    e.dataTransfer.setData("alumnoId", alumno.id);
+  const [ternas, setTernas] = useState([
+    { id: 1, nombre: 'Terna 1', catedraticos: [] },
+    { id: 2, nombre: 'Terna 2', catedraticos: [] },
+    { id: 3, nombre: 'Terna 3', catedraticos: [] },
+  ]);
+
+  const onDragStart = (e, catedratico) => {
+    e.dataTransfer.setData("catedraticoId", catedratico.id);
   };
 
-  const onDrop = (e, catedraticoId, dropIndex) => {
-    const alumnoId = e.dataTransfer.getData("alumnoId");
-    const alumno = alumnos.find((al) => al.id === parseInt(alumnoId));
+  const onDrop = (e, ternaId, dropIndex) => {
+    const catedraticoId = e.dataTransfer.getData("catedraticoId");
+    const catedratico = catedraticos.find((cat) => cat.id === parseInt(catedraticoId));
 
-    if (alumno) {
-      setCatedraticos(prevState =>
-        prevState.map(cat => {
-          if (cat.id === catedraticoId && cat.alumnos.length < 3) { // Limitar a 3 alumnos
-            const updatedAlumnos = [...cat.alumnos];
-            updatedAlumnos.splice(dropIndex, 0, alumno);
-            return { ...cat, alumnos: updatedAlumnos };
+    if (catedratico) {
+      setTernas(prevState =>
+        prevState.map(terna => {
+          if (terna.id === ternaId && terna.catedraticos.length < 3) {
+            const updatedCatedraticos = [...terna.catedraticos];
+            updatedCatedraticos.splice(dropIndex, 0, catedratico);
+            return { ...terna, catedraticos: updatedCatedraticos };
           }
-          return cat;
+          return terna;
         })
       );
 
-      setAlumnos(prevState => prevState.filter(al => al.id !== parseInt(alumnoId)));
+      setCatedraticos(prevState => prevState.filter(cat => cat.id !== parseInt(catedraticoId)));
     }
   };
 
-  const quitarAlumno = (catedraticoId, alumnoId) => {
-    const alumno = catedraticos.find(cat => cat.id === catedraticoId).alumnos.find(al => al.id === alumnoId);
+  const quitarCatedratico = (ternaId, catedraticoId) => {
+    const catedratico = ternas.find(terna => terna.id === ternaId).catedraticos.find(cat => cat.id === catedraticoId);
 
-    if (alumno) {
-      setCatedraticos(prevState =>
-        prevState.map(cat => {
-          if (cat.id === catedraticoId) {
-            return { ...cat, alumnos: cat.alumnos.filter(al => al.id !== alumnoId) };
+    if (catedratico) {
+      setTernas(prevState =>
+        prevState.map(terna => {
+          if (terna.id === ternaId) {
+            return { ...terna, catedraticos: terna.catedraticos.filter(cat => cat.id !== catedraticoId) };
           }
-          return cat;
+          return terna;
         })
       );
 
-      setAlumnos(prevState => [...prevState, alumno]);
+      setCatedraticos(prevState => [...prevState, catedratico]);
     }
   };
 
-  const getDropText = (catedratico) => {
-    const count = catedratico.alumnos.length;
-    if (count === 0) return "Arrastre Profesor";
+  const getDropText = (terna) => {
+    const count = terna.catedraticos.length;
+    if (count === 0) return "Arrastre Catedrático";
     if (count === 1) return "Arrastre Admin";
     if (count === 2) return "Arrastre num3";
     return "";
   };
 
   return (
-    <div className="container-fluid asignar-alumnos-container">
+    <div id="asignarTernasAdminComponent" className="container-fluid asignar-ternas-container">
       <div className="row">
         <div className="col-md-4">
           <div className="card shadow mb-4">
             <div className="card-header bg-primary text-white" style={{ textAlign: "center" }}>
-              <h3>Catedraticos Activos</h3>
+              <h3>Catedráticos Disponibles</h3>
             </div>
-            <ul className="list-group list-group-flush alumnos-list">
-              {alumnos.map(alumno => (
+            <ul className="list-group list-group-flush catedraticos-list">
+              {catedraticos.map(catedratico => (
                 <li
-                  key={alumno.id}
+                  key={catedratico.id}
                   draggable
-                  onDragStart={(e) => onDragStart(e, alumno)}
+                  onDragStart={(e) => onDragStart(e, catedratico)}
                   className="list-group-item d-flex justify-content-between align-items-center"
                 >
-                  {alumno.nombre}
+                  {catedratico.nombre}
                   <span className="badge bg-secondary">Arrastrar</span>
                 </li>
               ))}
@@ -112,28 +97,28 @@ const AsignarTernasAdmin = () => {
 
         <div className="col-md-8">
           <div className="row">
-            {catedraticos.map(catedratico => (
-              <div key={catedratico.id} className="col-md-4">
+            {ternas.map(terna => (
+              <div key={terna.id} className="col-md-4">
                 <div className="card shadow mb-4">
                   <div className="card-header bg-success text-white text-center">
-                    <h4>{catedratico.nombre}</h4>
+                    <h4>{terna.nombre}</h4>
                   </div>
                   <div
                     className="card-body dropzone"
                     onDragOver={(e) => e.preventDefault()}
-                    onDrop={(e) => onDrop(e, catedratico.id, catedratico.alumnos.length)}
+                    onDrop={(e) => onDrop(e, terna.id, terna.catedraticos.length)}
                   >
-                    {catedratico.alumnos.length === 0 ? (
+                    {terna.catedraticos.length === 0 ? (
                       <p className="text-center text-muted"></p>
                     ) : (
-                      catedratico.alumnos.map((alumno, index) => (
-                        <div key={alumno.id} className="alumno-cuadro d-flex justify-content-between align-items-center mb-2 p-2 bg-light border rounded">
-                          <span>{alumno.nombre}</span>
-                          <button className="btn btn-danger btn-sm" onClick={() => quitarAlumno(catedratico.id, alumno.id)}>Quitar</button>
+                      terna.catedraticos.map((catedratico, index) => (
+                        <div key={catedratico.id} className="catedratico-cuadro d-flex justify-content-between align-items-center mb-2 p-2 bg-light border rounded">
+                          <span>{catedratico.nombre}</span>
+                          <button className="btn btn-danger btn-sm" onClick={() => quitarCatedratico(terna.id, catedratico.id)}>Quitar</button>
                         </div>
                       ))
                     )}
-                    <p className="text-center text-muted">{getDropText(catedratico)}</p>
+                    <p className="text-center text-muted">{getDropText(terna)}</p>
                   </div>
                 </div>
               </div>

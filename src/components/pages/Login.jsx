@@ -1,11 +1,11 @@
-import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { FaEnvelope, FaLock } from "react-icons/fa";
 import "admin-lte/dist/css/adminlte.min.css";
 import "../layout/Admin/Login.css";
 import loginLogo from "../../assets/imgs/login.svg"; // Imagen del muñeco
 import umgLogo from "../../assets/imgs/logo3.png"; // Logo de la UMG
 import ofiLogo from "../../assets/imgs/sistemas1_11zon.webp"; // Imagen de fondo que ocupa toda la pantalla
-import { useNavigate } from "react-router-dom";
-import { FaEnvelope, FaLock } from "react-icons/fa";
+import AlertError from '../Modals/Fuentes/AlertError'; // Importar el componente AlertError
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,12 +17,8 @@ const Login = () => {
     if (email === "Benjamin@gmail.com" || email === "Axel@gmail.com") {
       navigate("/admin");
     } else {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Error de Datos",
-        confirmButtonText: "De acuerdo",
-      });
+      // Llama al componente AlertError con un mensaje específico
+      AlertError({ message: "Error de Datos" });
     }
   };
 
@@ -40,9 +36,9 @@ const Login = () => {
         </div>
         <div className="login-card-body">
           <div className="login-logo">
-            <h2>Gestor de tesis</h2> {/* Texto superior */}
-            <img src={umgLogo} alt="UMG Logo" style={{ width: '150px', margin: '20px 0' }} /> {/* Logo UMG */}
-            <h3>Inicio de Sesión</h3> {/* Texto inferior */}
+            <h2>Gestor de tesis</h2>
+            <img src={umgLogo} alt="UMG Logo" style={{ width: '150px', margin: '20px 0' }} />
+            <h3>Inicio de Sesión</h3>
           </div>
           <form onSubmit={handleSubmit}>
             <div className="input-group mb-3">

@@ -1,68 +1,44 @@
 import { useState } from 'react';
-import Swal from 'sweetalert2';  // Importa SweetAlert2
+import AlertSuccess from '../Modals/Fuentes/AlertSuccess';
+import AlertError from '../Modals/Fuentes/AlertError';
 import '../layout/Admin/SubirExcel.css';
 
 const SubirExcel = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
-  const [area, setArea] = useState(''); // Estado para el seleccionador de área
+  const [area, setArea] = useState('');
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       if (file.type === 'application/vnd.ms-excel' || file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-        setPreviewUrl(null);  // No mostrar vista previa para archivos Excel
+        setPreviewUrl(null);
         setSelectedFile(file);
       } else {
-        // Mostrar alerta de error si no es un archivo Excel
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Por favor, selecciona un archivo en formato Excel (.xls, .xlsx)!",
-          confirmButtonText: "De acuerdo", // Cambia el texto del botón
-          footer: '', // Elimina el pie de página
-        });
+        AlertError({ message: "Por favor, selecciona un archivo en formato Excel (.xls, .xlsx)!" });
         setSelectedFile(null);
         setPreviewUrl(null);
       }
-    } else {
-      //alert('Por favor, selecciona un archivo válido.');
     }
   };
 
   const handleFileUpload = () => {
     if (!selectedFile) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "No has seleccionado ningún archivo!",
-        confirmButtonText: "De acuerdo", // Cambia el texto del botón
-        footer: '', // Elimina el pie de página
-      });
+      AlertError({ message: "No has seleccionado ningún archivo!" });
       return;
     }
 
-    // Aquí iría la lógica de subir el archivo
-    // Suponiendo que todo sale bien:
-    Swal.fire({
-      position: "center", // Cambia la posición a "center"
-      icon: "success",
-      title: "El archivo ha sido subido exitosamente",
-      showConfirmButton: false,
-      timer: 1500
-    });
+    AlertSuccess();
 
-    // Limpiar la selección de archivo después de la subida
     setSelectedFile(null);
     setPreviewUrl(null);
   };
 
   return (
-    <div className="subir-excel-page">
+    <div id="subirExcelComponent" className="subir-excel-page">
       <div className="asignaciones-admin">
         <h2 className="title">Seleccione Excel a Subir</h2>
         <div className="filters-container">
-          {/* Condicional para mostrar el seleccionador de cursos a la izquierda solo si el área seleccionada es "Estudiantes" */}
           {area === 'estudiantes' && (
             <select className="form-select form-select-curso">
               <option>Cursos</option>
@@ -70,13 +46,11 @@ const SubirExcel = () => {
               <option>Curso 2</option>
             </select>
           )}
-
-          {/* Manejamos la selección del área, colocándolo a la derecha */}
           <select 
             className="form-select form-select-estudiante" 
             value={area} 
             onChange={(e) => setArea(e.target.value)}
-            style={{ marginLeft: 'auto' }} // Empuja el selector de área hacia la derecha
+            style={{ marginLeft: 'auto' }}
           >
             <option value="">Área</option>
             <option value="estudiantes">Estudiantes</option>
@@ -87,7 +61,7 @@ const SubirExcel = () => {
           <input
             type="file"
             id="file-upload-input"
-            accept=".xlsx, .xls"  // Solo acepta archivos Excel
+            accept=".xlsx, .xls"
             style={{ display: 'none' }}
             onChange={handleFileChange}
           />

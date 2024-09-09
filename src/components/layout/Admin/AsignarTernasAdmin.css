@@ -1,40 +1,40 @@
-.asignar-alumnos-container {
+#asignarTernasAdminComponent .asignar-ternas-container {
   padding-top: 20px;
 }
 
-.alumnos-list {
+#asignarTernasAdminComponent .catedraticos-list {
   max-height: 70vh;
   overflow-y: auto;
 }
 
-.dropzone {
+#asignarTernasAdminComponent .dropzone {
   min-height: 150px;
   border: 2px dashed #ccc;
   background-color: #f8f9fa;
   border-radius: 5px;
 }
 
-.alumno-cuadro {
+#asignarTernasAdminComponent .catedratico-cuadro {
   background-color: #e9ecef;
 }
 
-.alumnos-list li:hover {
+#asignarTernasAdminComponent .catedraticos-list li:hover {
   background-color: #f1f1f1;
 }
 
-.card-header {
+#asignarTernasAdminComponent .card-header {
   font-size: 1.25rem;
 }
 
-.card {
+#asignarTernasAdminComponent .card {
   border-radius: 10px;
 }
 
-.dropzone p {
+#asignarTernasAdminComponent .dropzone p {
   font-size: 0.9rem;
   color: #6c757d;
 }
 
-.btn-sm {
+#asignarTernasAdminComponent .btn-sm {
   font-size: 0.8rem;
 }
