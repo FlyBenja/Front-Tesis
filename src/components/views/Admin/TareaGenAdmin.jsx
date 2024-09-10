@@ -4,7 +4,7 @@ import '../../layout/Admin/TareaGenAdmin.css';
 
 const TareaGenAdmin = () => {
     const [tasks, setTasks] = useState([
-        { id: 1, title: 'Propuestas de tesis', description: 'Entrega de las propuestas de tesis', points: 35, startDate: '11/08/2024', endDate: '11/09/2024' }
+        { id: 1, title: 'Propuestas de tesis', description: 'Entrega de las propuestas de tesis', points: 35, startDate: '2024-08-11', endDate: '2024-09-11' }
     ]);
     const [currentTask, setCurrentTask] = useState({});
     const [modalOpen, setModalOpen] = useState(false);
@@ -18,6 +18,12 @@ const TareaGenAdmin = () => {
         const updatedTasks = task.id ? tasks.map(t => t.id === task.id ? task : t) : [...tasks, { ...task, id: tasks.length + 1 }];
         setTasks(updatedTasks);
         setModalOpen(false);
+    };
+
+    // Función para formatear las fechas en DD/MM/YYYY
+    const formatDate = (dateString) => {
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        return new Date(dateString).toLocaleDateString('es-ES', options); // Formato día-mes-año
     };
 
     return (
@@ -40,7 +46,9 @@ const TareaGenAdmin = () => {
                                     <small className="text-muted">{task.description}</small>
                                 </div>
                                 <div className="d-flex align-items-center">
-                                    <small className="text-muted mr-3">{task.startDate} - {task.endDate}</small>
+                                    <small className="text-muted mr-3">
+                                        {formatDate(task.startDate)} - {formatDate(task.endDate)}
+                                    </small>
                                     <span className="badge badge-success mr-3">{task.points} Pts</span>
                                     <button className="btn btn-icon" onClick={() => openModal(task)}>
                                         <i className="fas fa-pencil-alt"></i>

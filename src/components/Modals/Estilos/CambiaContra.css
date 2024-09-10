@@ -1,0 +1,21 @@
+.modal-dialog {
+    overflow-y: initial !important; /* Permite scroll interno si es necesario */
+}
+
+.modal-body {
+    height: auto;
+    max-height: calc(100vh - 210px); /* Evita que el modal sea más alto que la pantalla */
+    overflow-y: auto; /* Habilita scroll solo si es necesario */
+}
+
+.modal .modal-content {
+    margin-top: 0px;
+    padding: 0px;
+}
+
+/* Opcional: Para ajustar la anchura del modal a dispositivos más pequeños */
+@media (max-width: 576px) {
+    .modal-dialog {
+        max-width: 95%; /* Reduce un poco la anchura en dispositivos pequeños */
+    }
+}

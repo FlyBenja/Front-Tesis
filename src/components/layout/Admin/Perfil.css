@@ -1,4 +1,3 @@
-/* Aseguramos que el contenedor principal ocupe todo el espacio disponible */
 .perfil-container {
     display: flex;
     justify-content: center;
@@ -6,7 +5,6 @@
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
-    /* Evitar cualquier tipo de scroll no deseado */
 }
 
 .perfil-card {
@@ -17,7 +15,7 @@
     text-align: center;
     max-width: 400px;
     width: 100%;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 .perfil-image-container {
@@ -83,83 +81,4 @@
 
 .perfil-change-password:hover {
     background-color: #0056b3;
-}
-
-/* Estilo para posicionar los modales sobre el contenedor .perfil-card */
-.modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    max-width: 400px;
-    /* Mantiene el mismo ancho que .perfil-card */
-}
-
-.modal .modal-dialog {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.modal .modal-content {
-    margin-top: 100px;
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilo específico para que el modal mantenga una relación cercana a .perfil-card */
-.modal.d-block {
-    top: auto;
-    left: auto;
-    transform: none;
-    margin: 0 auto;
-    margin-top: 20px;
-    /* Ajusta la distancia vertical desde el contenedor */
-}
-
-.modal-dialog {
-    max-width: 100%;
-}
-
-/* Estilo para pantallas medianas o pequeñas (tablets y móviles) */
-@media (max-width: 991px) {
-    .perfil-card {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        text-align: center;
-        max-width: 400px;
-        width: 100%;
-        margin-top: 30px;
-    }
-
-    .modal .modal-content {
-        margin-right: 15px;
-        margin-top: 200px;
-        width: 100%;
-        max-width: 400px;
-        padding: 20px;
-        border-radius: 10px;
-        background-color: #fff;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    .perfil-actions {
-        flex-direction: column;
-        gap: 10px; /* Espacio entre los botones */
-    }
-
-    .perfil-role, 
-    .perfil-change-password {
-        padding: 8px 16px; /* Reducir el tamaño del botón */
-        font-size: 12px; /* Reducir el tamaño del texto */
-        width: 100%; /* Hacer que los botones ocupen todo el ancho */
-    }
 }
