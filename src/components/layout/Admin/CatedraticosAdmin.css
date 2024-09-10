@@ -132,3 +132,55 @@
     margin-left: 0;
   }
 }
+
+@media (max-width: 576px) {  
+  .catedraticos-admin-container {
+      padding: 10px; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;  /* Asegura que los contenedores hijos se centren horizontalmente */
+  }
+
+  .catedraticos-list-container {
+      max-height: 380px; 
+      overflow-y: auto;  /* Cambiado de 'scroll' a 'auto' para mostrar la barra de desplazamiento solo cuando sea necesario */
+      width: 260px;  /* Anchura fija para mantener la consistencia */
+      margin: 0 auto;  /* Centrado automático en el eje horizontal */
+  }
+
+  .catedratico-item {
+      flex-direction: column; 
+      margin: 0 auto;  /* Centrado automático */
+      margin-left: 5px;
+      padding: 10px;
+      width: 100%;  /* Utiliza el ancho completo disponible */
+  }
+
+  .catedratico-item .actions {
+      width: 100%; 
+      justify-content: space-evenly;  /* Espaciado uniforme entre los botones */
+  }
+
+  .toggle-btn, .delete-btn {
+      width: 45%;  /* Anchura ajustada para cada botón dentro de las acciones */
+  }
+
+  .btn-agregar-catedratico {
+      padding: 10px 0; 
+      width: 100%;  /* Utiliza el ancho completo disponible */
+      display: flex;
+      justify-content: center;  /* Centra el botón de agregar catedrático */
+  }
+
+  .agregar-btn {
+      width: 90%;  /* Anchura del botón ajustada */
+      margin: 0 auto;  /* Centrado automático */
+  }
+
+  .admin-content {
+      padding: 0; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;  /* Centra todos los contenidos dentro de .admin-content */
+  }
+}

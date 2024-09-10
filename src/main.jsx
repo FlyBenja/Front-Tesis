@@ -9,6 +9,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'admin-lte/dist/css/adminlte.min.css';
 
 // Importar scripts de terceros
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; 

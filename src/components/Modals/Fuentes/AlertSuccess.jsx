@@ -1,13 +1,13 @@
 import Swal from 'sweetalert2';
 import '../Estilos/AlertSuccess.css';
 
-const AlertSuccess = () => {
+const AlertSuccess = ({ message }) => {
   Swal.fire({
     position: "center",
     icon: "success",
-    title: "El archivo ha sido subido exitosamente",
+    title: message,  // Usa el parámetro de mensaje aquí
     showConfirmButton: false,
-    timer: 1500,
+    timer: 20000,
   });
 };
 

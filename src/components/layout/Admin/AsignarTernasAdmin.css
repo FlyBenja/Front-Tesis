@@ -38,3 +38,25 @@
 #asignarTernasAdminComponent .btn-sm {
   font-size: 0.8rem;
 }
+
+#asignarTernasAdminComponent .btn-upload {
+  width: 100%;
+  background-color: #007bff; /* Azul Bootstrap */
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.4); /* Sombra */
+  transition: background-color 0.3s, box-shadow 0.3s;
+  margin-top: -6px;
+}
+
+#asignarTernasAdminComponent .btn-upload:hover {
+  background-color: #0056b3; /* Azul más oscuro en hover */
+  box-shadow: 0 6px 8px rgba(0, 123, 255, 0.6); /* Sombra más intensa */
+}
+
+#asignarTernasAdminComponent .btn-upload:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

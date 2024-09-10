@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'admin-lte/dist/css/adminlte.min.css';
 import '../../layout/Admin/AsignarAlumAdmin.css';
+import AlertSuccess from '../../Modals/Fuentes/AlertSuccess';  // Importamos AlertSuccess
+import AlertError from '../../Modals/Fuentes/AlertError';      // Importamos AlertError
 
 const AsignarAlumAdmin = () => {
   const [alumnos, setAlumnos] = useState([
@@ -17,17 +19,57 @@ const AsignarAlumAdmin = () => {
     { id: 10, nombre: 'Carmen Mireya De La Cruz Barrientos' }
   ]);
 
-  const [ternas, setTernas] = useState(['Terna1', 'Terna2', 'Terna3', 'Terna4', 'Terna5']);
+  const [ternas, setTernas] = useState([
+    { nombre: 'Terna1', color: 'red' },
+    { nombre: 'Terna2', color: 'green' },
+    { nombre: 'Terna3', color: 'blue' },
+    { nombre: 'Terna4', color: 'purple' },
+    { nombre: 'Terna5', color: 'orange' }
+  ]);
+
   const [ruletaIndex, setRuletaIndex] = useState(0);
   const [alumnoAsignado, setAlumnoAsignado] = useState(null);
+  const [mustSpin, setMustSpin] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [prevIndex, setPrevIndex] = useState(null); // Estado para almacenar el índice anterior
 
   const spinRuleta = () => {
-    const interval = setInterval(() => {
-      setRuletaIndex((prevIndex) => (prevIndex + 1) % ternas.length);
-    }, 100);
+    if (!alumnoAsignado) {
+      AlertError({
+        message: "Seleccione un Alumno para girar la Ruleta"
+      });
+      return;
+    }
+
+    setIsButtonDisabled(true);
+
+    let randomIndex = Math.floor(Math.random() * ternas.length);
+
+    // Validar que no sea el mismo índice que el anterior
+    while (randomIndex === prevIndex) {
+      randomIndex = Math.floor(Math.random() * ternas.length);
+    }
+
+    setMustSpin(true);
+    setPrevIndex(randomIndex); // Guardar el nuevo índice como el anterior para la próxima validación
+
     setTimeout(() => {
-      clearInterval(interval);
-    }, 3000); // Gira por 3 segundos
+      setMustSpin(false);
+      setRuletaIndex(randomIndex);
+
+      if (alumnoAsignado) {
+        AlertSuccess({
+          message: `${alumnoAsignado.nombre}, felicidades el Terna asignado es: ${ternas[randomIndex].nombre}`
+        });
+
+        setAlumnos(prevAlumnos => prevAlumnos.filter(al => al.id !== alumnoAsignado.id));
+        setAlumnoAsignado(null);
+      }
+
+      setTimeout(() => {
+        setIsButtonDisabled(false);
+      }, 1500); 
+    }, 3000); 
   };
 
   const onDragStart = (e, alumno) => {
@@ -83,12 +125,19 @@ const AsignarAlumAdmin = () => {
                   <h4>Ruleta de Ternas</h4>
                 </div>
                 <div className="card-body text-center">
-                  <div className="ruleta-container">
-                    <div className="ruleta-display bg-light p-4 rounded-circle">
-                      <h3>{ternas[ruletaIndex]}</h3>
+                  <div className={`ruleta-container ${mustSpin ? 'spin-animation' : ''}`}>
+                    <div
+                      className="ruleta-display bg-light p-4 rounded-circle"
+                      style={{ backgroundColor: ternas[ruletaIndex].color }}
+                    >
+                      <h3>{ternas[ruletaIndex].nombre}</h3>
                     </div>
                   </div>
-                  <button className="btn btn-primary mt-4" onClick={spinRuleta}>
+                  <button 
+                    className="btn btn-primary mt-4" 
+                    onClick={spinRuleta} 
+                    disabled={isButtonDisabled} 
+                  >
                     Girar Ruleta
                   </button>
                 </div>

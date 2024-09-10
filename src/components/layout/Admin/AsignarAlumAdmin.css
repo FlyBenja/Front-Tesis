@@ -1,3 +1,17 @@
+/* Añadir animación de giro */
+.spin-animation {
+  animation: spin 3s ease-in-out;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(1080deg); /* 3 giros completos */
+  }
+}
+
 #asignarAlumAdminComponent .asignar-alum-admin-container {
   padding-top: 20px;
 }
@@ -39,3 +53,17 @@
 #asignarAlumAdminComponent .text-muted {
   font-size: 1rem;
 }
+
+@media (max-width: 576px) {  
+  .asignar-ternas-container {
+    position: relative; /* Establece la referencia para la posición absoluta del botón */
+    padding-bottom: 60px; /* Añade espacio en la parte inferior para el botón */
+  }
+
+  .btn-upload { /* Asumiendo que .btn-upload es tu botón de 'Subir Ternas' */
+    bottom: 3px; /* Ajusta esta propiedad para bajar el botón unos 7px */
+    border-radius: 50%; /* Cambia esto para hacer el botón completamente circular */
+    padding: 10px; /* Ajusta el padding para mantener el contenido centrado en un botón circular */
+  }
+}
+
