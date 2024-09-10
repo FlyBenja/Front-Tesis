@@ -1,45 +1,45 @@
-#asignarTernasAdminComponent .asignar-ternas-container {
+.asignar-ternas-admin .asignar-ternas-container {
   padding-top: 20px;
 }
 
-#asignarTernasAdminComponent .catedraticos-list {
+.asignar-ternas-admin .catedraticos-list {
   max-height: 70vh;
   overflow-y: auto;
 }
 
-#asignarTernasAdminComponent .dropzone {
+.asignar-ternas-admin .dropzone {
   min-height: 150px;
   border: 2px dashed #ccc;
   background-color: #f8f9fa;
   border-radius: 5px;
 }
 
-#asignarTernasAdminComponent .catedratico-cuadro {
+.asignar-ternas-admin .catedratico-cuadro {
   background-color: #e9ecef;
 }
 
-#asignarTernasAdminComponent .catedraticos-list li:hover {
+.asignar-ternas-admin .catedraticos-list li:hover {
   background-color: #f1f1f1;
 }
 
-#asignarTernasAdminComponent .card-header {
+.asignar-ternas-admin .card-header {
   font-size: 1.25rem;
 }
 
-#asignarTernasAdminComponent .card {
+.asignar-ternas-admin .card {
   border-radius: 10px;
 }
 
-#asignarTernasAdminComponent .dropzone p {
+.asignar-ternas-admin .dropzone p {
   font-size: 0.9rem;
   color: #6c757d;
 }
 
-#asignarTernasAdminComponent .btn-sm {
+.asignar-ternas-admin .btn-sm {
   font-size: 0.8rem;
 }
 
-#asignarTernasAdminComponent .btn-upload {
+.asignar-ternas-admin .btn-upload {
   width: 100%;
   background-color: #007bff; /* Azul Bootstrap */
   color: white;
@@ -51,12 +51,12 @@
   margin-top: -6px;
 }
 
-#asignarTernasAdminComponent .btn-upload:hover {
+.asignar-ternas-admin .btn-upload:hover {
   background-color: #0056b3; /* Azul más oscuro en hover */
   box-shadow: 0 6px 8px rgba(0, 123, 255, 0.6); /* Sombra más intensa */
 }
 
-#asignarTernasAdminComponent .btn-upload:disabled {
+.asignar-ternas-admin .btn-upload:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
