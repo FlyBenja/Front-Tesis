@@ -106,9 +106,6 @@ const BitacoraAdmin = () => {
                 <p><strong>Acción: </strong>{log.accion}</p>
                 <p><strong>Detalles: </strong>{log.detalle}</p>
               </div>
-              <div className="bitacora-footer">
-                <a href="" className="btn btn-primary btn-sm">Ver más</a>
-              </div>
             </div>
           </div>
         ))}

@@ -60,12 +60,6 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
             <p>Asignar Alumnos</p>
           </li>
         </Link>
-        <Link className="link-sidebar" to="/admin/sedes" onClick={handleLinkClick}>
-          <li>
-            <IoIosSchool size={30} />
-            <p>Sedes</p>
-          </li>
-        </Link>
         <Link className="link-sidebar" to="/admin/profile" onClick={handleLinkClick}>
           <li>
             <CgProfile size={30} />
