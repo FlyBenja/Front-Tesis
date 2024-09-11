@@ -23,6 +23,7 @@
 
 .tarea-alum-admin .card-body-custom {
     padding: 1.25rem;
+    height: 820px;
 }
 
 .tarea-alum-admin .list-group-custom .list-group-item {
@@ -71,7 +72,6 @@
     padding: 0.5em 0.75em;
     font-size: 0.9em;
     border-radius: 0.25rem;
-    margin-left: auto; /* Asegura que los puntos siempre estén al final */
 }
 
 .tarea-alum-admin .badge-danger {
@@ -81,3 +81,43 @@
 .tarea-alum-admin .badge-success {
     background-color: #28a745; /* Color verde para puntajes mayores o iguales a 61 */
 }
+
+/* Responsiveness para móviles (pantallas menores a 767px) */
+@media (max-width: 767px) {
+
+    .tarea-alum-admin .card-header-custom {
+        flex-direction: column; /* Los elementos se alinean verticalmente */
+        text-align: center; /* Texto centrado */
+    }
+
+    .tarea-alum-admin .list-group-custom .list-group-item {
+        display: flex;
+        flex-direction: column; /* Organiza los contenidos verticalmente */
+        align-items: flex-start; /* Alinea los contenidos al inicio */
+        padding: 1rem;
+        position: relative; /* Establece la posición relativa para contenedores de ítems */
+        width: 100%; /* Asegura que el ítem use todo el ancho disponible */
+    }
+
+    .tarea-alum-admin .list-group-item .action-area {
+        display: flex;
+        flex-direction: row; /* Coloca elementos en una fila */
+        justify-content: flex-end; /* Alinea los elementos al final (derecha) */
+        align-items: center; /* Alinea los elementos verticalmente en el centro */
+        width: 100%; /* Utiliza todo el ancho disponible para el contenedor de acción */
+    }
+
+    .tarea-alum-admin .list-group-item .btn,
+    .tarea-alum-admin .list-group-item .badge {
+        margin-right: 10px; /* Espacio a la derecha de cada elemento */
+        margin-top: 20px;
+    }
+
+    .tarea-alum-admin .list-group-item .badge {
+        position: absolute; /* Posicionamiento absoluto para el badge */
+        right: 10px; /* Ajusta la posición derecha para posicionar correctamente los puntos */
+        top: calc(64% + 10px); /* Baja el badge para alinearlo con el centro del botón */
+        transform: translateY(-50%); /* Ajusta la posición vertical para centrar exactamente con el botón */
+    }
+}
+

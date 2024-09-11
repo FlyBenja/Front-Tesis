@@ -1,0 +1,107 @@
+.propuestas-alum .card-custom {
+    background: #f9fafc;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.propuestas-alum .card-header-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    font-weight: bold;
+}
+
+.task-title {
+    margin-top: 50px;
+    border-bottom: none;
+}	
+
+.propuestas-alum .btn-icon {
+    background: none;
+    border: none;
+    color: black;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.propuestas-alum .card-body-custom {
+    padding: 1.25rem;
+    height: 450px;
+}
+
+.propuestas-alum .list-group-custom .list-group-item {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.propuestas-alum .list-group-item:hover {
+    background-color: #f0f0f0;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra los elementos verticalmente */
+    padding: 10px;
+    background-color: #e2e2e2; /* Fondo gris claro para los detalles */
+    border-radius: 5px;
+    margin-top: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra para dar un efecto elevado */
+}
+
+.propuestas-alum .list-group-item.approved {
+    background-color: #28a745; /* Color para el título aprobado */
+    color: white;
+}
+
+.propuestas-alum .approve-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Cambia el fondo a verde cuando la propuesta está aprobada */
+.approved-details {
+    background-color: rgba(0, 143, 57, 0.60); /* Verde con 60% de opacidad */
+    color: white; /* Texto blanco */
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .propuestas-alum .card-custom {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .propuestas-alum .card-custom {
+        margin-top: -0px;
+        padding: 1.5rem;
+        height: 1480px;
+    }
+
+    .propuestas-alum .btn-icon {
+        font-size: 1.5em; /* Icono más pequeño */
+    }
+
+    .propuestas-alum .card-header-custom {
+        flex-direction: column; 
+        text-align: center;
+        margin-top: -24px;
+    }
+
+    .propuestas-alum .task-title {
+        flex-direction: column; 
+        text-align: center;
+        margin-top: 20px;
+        border-bottom: none;
+    }	
+}

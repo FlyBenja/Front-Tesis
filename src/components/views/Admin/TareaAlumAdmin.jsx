@@ -25,12 +25,23 @@ const TareaAlumAdmin = () => {
   };
 
   const handleNavigate = (taskId) => {
+    // Encuentra la tarea específica basada en el taskId
+    const taskSelected = tasks.find(task => task.id === taskId);
+  
+    // Prepara el estado para enviar
+    const navigationState = {
+      student: student,    // Envía el objeto student completo
+      task: taskSelected   // Envía la tarea seleccionada
+    };
+  
+    // Condición para navegar con el estado adecuado
     if (taskId === 1) {
-      navigate('/admin/propuestatesis');  // Redirige a Propuestas de tesis
+      navigate('/admin/propuestatesis', { state: navigationState }); // Redirige a Propuestas de tesis con estado
     } else {
-      navigate('/admin/tareaindivi');  // Redirige a la ruta para otras tareas
+      navigate('/admin/tareaindivi', { state: navigationState }); // Redirige a la ruta para otras tareas con estado
     }
   };
+  
 
   return (
     <div className="tarea-alum-admin">
