@@ -56,7 +56,6 @@ const EstudiantesAdmin = () => {
           value={searchTerm}
           onChange={handleSearch}
         />
-        {/* Selectores */}
         <div className="d-flex gap-2">
           <select className="form-select">
             <option>Año</option>
@@ -101,7 +100,7 @@ const EstudiantesAdmin = () => {
                     className="student-item"
                     onClick={() => handleSelectStudent(estudiante)}
                   >
-                    <img src={estudiante.img} alt="Avatar" className="avatar" /> {/* Imagen del avatar */}
+                    <img src={estudiante.img} alt="Avatar" className="avatar" />
                     <p className='m-0'>{estudiante.nombre}</p>
                   </div>
                 ))}
@@ -125,7 +124,12 @@ const EstudiantesAdmin = () => {
                     </div>
                   ))}
                 </div>
-                <button className="btn btn-primary timeline-btn">Visualizar Tareas</button>
+                <button
+                  className="btn btn-primary timeline-btn"
+                  onClick={() => navigate('/admin/tarealum', { state: { student: selectedStudent } })}
+                >
+                  Visualizar Tareas
+                </button>
               </div>
             )}
           </>

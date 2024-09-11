@@ -10,6 +10,7 @@ import EstudiantesAdmin from '../views/Admin/EstudiantesAdmin';
 import SubirExcel from '../pages/SubirExcel'; 
 import Perfil from '../views/Admin/Perfil';
 import TareaGenAdmin from '../views/Admin/TareaGenAdmin';
+import TareaAlumAdmin from '../views/Admin/TareaAlumAdmin';
 import '../../index.css';
 
 const Admin = () => {
@@ -34,6 +35,7 @@ const Admin = () => {
             <Route path="/SubirExcel" element={<SubirExcel />} /> 
             <Route path="/profile" element={<Perfil />} />
             <Route path="/tareas" element={<TareaGenAdmin />} />
+            <Route path="/tarealum" element={<TareaAlumAdmin />} />
             {/* Añade más rutas según sea necesario */}
           </Routes>
         </div>
