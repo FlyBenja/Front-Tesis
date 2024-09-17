@@ -65,5 +65,9 @@
     border-radius: 50%; /* Cambia esto para hacer el botón completamente circular */
     padding: 10px; /* Ajusta el padding para mantener el contenido centrado en un botón circular */
   }
+
+  .wrapper {
+    height: 110vh !important; /* Ajusta la altura para que el contenido se ajuste a la pantalla */
+}
 }
 
