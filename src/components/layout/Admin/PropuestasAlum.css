@@ -1,36 +1,34 @@
-.propuestas-alum .card-custom {
+.propuestas-alum-container .card-custom {
     background: #f9fafc;
     border-radius: 0.25rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: height 0.3s ease; /* Añadimos una transición suave */
+    height: 640px; /* Altura por defecto en pantallas grandes */
 }
 
-.propuestas-alum .card-header-custom {
+.propuestas-alum-container .card-header-custom {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem 1.25rem;
+    background-color: #007bff;
+    color: white;
     font-weight: bold;
 }
 
-.task-title {
-    margin-top: 50px;
-    border-bottom: none;
-}	
-
-.propuestas-alum .btn-icon {
+.propuestas-alum-container .btn-icon {
     background: none;
     border: none;
-    color: black;
     font-size: 1.5em;
     cursor: pointer;
 }
 
-.propuestas-alum .card-body-custom {
+.propuestas-alum-container .card-body-custom {
     padding: 1.25rem;
-    height: 450px;
+    overflow-y: auto; /* Para que el contenido interno sea desplazable */
 }
 
-.propuestas-alum .list-group-custom .list-group-item {
+.propuestas-alum-container .list-group-custom .list-group-item {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -40,27 +38,27 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.propuestas-alum .list-group-item:hover {
+.propuestas-alum-container .list-group-item:hover {
     background-color: #f0f0f0;
 }
 
 .details {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centra los elementos verticalmente */
+    justify-content: center;
     padding: 10px;
-    background-color: #e2e2e2; /* Fondo gris claro para los detalles */
+    background-color: #e2e2e2;
     border-radius: 5px;
     margin-top: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra para dar un efecto elevado */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-.propuestas-alum .list-group-item.approved {
-    background-color: #28a745; /* Color para el título aprobado */
+.propuestas-alum-container .list-group-item.approved {
+    background-color: #28a745;
     color: white;
 }
 
-.propuestas-alum .approve-btn {
+.propuestas-alum-container .approve-btn {
     background-color: #007bff;
     color: white;
     border: none;
@@ -69,39 +67,104 @@
     border-radius: 5px;
 }
 
-/* Cambia el fondo a verde cuando la propuesta está aprobada */
 .approved-details {
-    background-color: rgba(0, 143, 57, 0.60); /* Verde con 60% de opacidad */
-    color: white; /* Texto blanco */
+    background-color: rgba(0, 143, 57, 0.60);
+    color: white;
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
-    .propuestas-alum .card-custom {
-        padding: 1.5rem;
+/* Solo se aplica en pantallas pequeñas y medianas (ancho máximo de 991px) */
+@media (max-width: 991px) {
+    .propuestas-alum-container .collapsed {
+        height: 670px; /* Altura cuando el detalle está cerrado en pantallas medianas y pequeñas */
+    }
+
+    .propuestas-alum-container .expanded {
+        height: 980px; /* Altura cuando se muestra el detalle en pantallas medianas y pequeñas */
     }
 }
 
+.propuestas-alum-container .card-header-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.propuestas-alum-container .btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.propuestas-alum-container .card-body-custom {
+    padding: 1.25rem;
+    overflow-y: auto; /* Para que el contenido interno sea desplazable */
+}
+
+.propuestas-alum-container .list-group-custom .list-group-item {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.propuestas-alum-container .list-group-item:hover {
+    background-color: #f0f0f0;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    background-color: #e2e2e2;
+    border-radius: 5px;
+    margin-top: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.propuestas-alum-container .list-group-item.approved {
+    background-color: #28a745;
+    color: white;
+}
+
+.propuestas-alum-container .approve-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.approved-details {
+    background-color: rgba(0, 143, 57, 0.60);
+    color: white;
+}
+
+/* Modo móvil */
 @media (max-width: 767px) {
-    .propuestas-alum .card-custom {
-        margin-top: -0px;
-        padding: 1.5rem;
-        height: 1480px;
+    .propuestas-alum-container .card-header-custom,
+    .propuestas-alum-container .list-group-item {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .propuestas-alum .btn-icon {
-        font-size: 1.5em; /* Icono más pequeño */
+    .propuestas-alum-container .list-group-item .btn,
+    .propuestas-alum-container .list-group-item .badge {
+        margin-right: 0px;
+        margin-top: 10px;
+        width: 100%;
     }
 
-    .propuestas-alum .card-header-custom {
-        flex-direction: column; 
-        text-align: center;
-        margin-top: -24px;
+    .propuestas-alum-container .btn-icon {
+        align-self: flex-start;
     }
-
-    .propuestas-alum .task-title {
-        flex-direction: column; 
-        text-align: center;
-        margin-top: 20px;
-        border-bottom: none;
-    }	
 }

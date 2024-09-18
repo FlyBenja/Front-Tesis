@@ -6,7 +6,7 @@ import '../../layout/Admin/PropuestasAlum.css';
 const PropuestasAlum = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { student, task } = location.state || { student: { nombre: 'Desconocido' }, task: { title: 'Tarea no especificada' } };
+  const { student } = location.state || { student: { nombre: 'Desconocido' }, task: { title: 'Tarea no especificada' } };
 
   const propuestas = [
     {
@@ -34,20 +34,18 @@ const PropuestasAlum = () => {
     setApprovedId(id);
   };
 
+  // Determina la clase de altura en función de si hay un detalle seleccionado
+  const cardHeightClass = selectedId ? 'expanded' : 'collapsed';
+
   return (
-    <div className="propuestas-alum">
-      <div className="card card-custom">
+    <div className="propuestas-alum-container">
+      <div className={`card card-custom ${cardHeightClass}`}>
         <div className="card-header card-header-custom">
           <button className="btn btn-icon" onClick={() => navigate(-1)}>
             <FaArrowLeft /> Regresar
           </button>
-          <span>Listado de {task.title} de {student.nombre}</span>
+          <span>Listado de tareas de {student.nombre}</span>
         </div>
-
-        <div className="card-header card-header-custom task-title">
-          <span>Listado de {task.title}</span>
-        </div>
-
         <div className="card-body card-body-custom">
           <ul className="list-group list-group-custom">
             {propuestas.map((propuesta) => (
