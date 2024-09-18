@@ -1,0 +1,135 @@
+.tarea-alum-indiv-container .card-custom {
+    background: #ffffff;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #e3e6f0;
+}
+
+.tarea-alum-indiv-container .card-header-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.tarea-alum-indiv-container .btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.tarea-alum-indiv-container .card-body-custom {
+    padding: 1.25rem;
+    overflow-y: auto;
+}
+
+.tarea-alum-indiv-container .list-group-custom .list-group-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.tarea-alum-indiv-container .list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.tarea-alum-indiv-container .list-group-item .task-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.tarea-alum-indiv-container .list-group-item .badge {
+    padding: 0.5em 0.75em;
+    font-size: 0.9em;
+    border-radius: 0.25rem;
+}
+
+.tarea-alum-indiv-container .badge-danger {
+    background-color: #dc3545;
+}
+
+.tarea-alum-indiv-container .badge-success {
+    background-color: #28a745;
+}
+
+/* Sección de descarga */
+.download-section {
+    margin-top: 25px;
+}
+
+.download-section a {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Sección de comentarios */
+.comment-section {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.comment-section label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.comment-section textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.comment-section button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.comment-section button:hover {
+    background-color: #218838;
+}
+
+/* Media queries para móviles */
+@media (max-width: 767px) {
+    .tarea-alum-indiv-container .card-header-custom,
+    .tarea-alum-indiv-container .list-group-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tarea-alum-indiv-container .list-group-item .badge {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .tarea-alum-indiv-container .btn-icon {
+        align-self: flex-start;
+    }
+
+    .download-section a,
+    .comment-section button {
+        width: 100%;
+        text-align: center;
+    }
+}

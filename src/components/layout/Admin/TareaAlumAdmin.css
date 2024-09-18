@@ -1,123 +1,93 @@
-.tarea-alum-admin .card-custom {
-    background: #f9fafc;
+.tarea-alum-admin-container .card-custom {
+    background: #ffffff;
     border-radius: 0.25rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Agrega sombra para un efecto elevado */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #e3e6f0;
 }
 
-.tarea-alum-admin .card-header-custom {
+.tarea-alum-admin-container .card-header-custom {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem 1.25rem;
-    background-color: #007bff; /* Color de fondo del encabezado */
+    background-color: #007bff;
+    color: white;
     font-weight: bold;
 }
 
-.tarea-alum-admin .btn-icon {
+.tarea-alum-admin-container .btn-icon {
     background: none;
     border: none;
-    color: black; /* Cambia el color a blanco para que combine con el encabezado */
     font-size: 1.5em;
-    cursor: pointer; /* Hace que el icono sea más interactivo */
+    cursor: pointer;
 }
 
-.tarea-alum-admin .card-body-custom {
+.tarea-alum-admin-container .card-body-custom {
     padding: 1.25rem;
-    height: 820px;
+    overflow-y: auto;
 }
 
-.tarea-alum-admin .list-group-custom .list-group-item {
+.tarea-alum-admin-container .list-group-custom .list-group-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
     background: #fff;
-    border-bottom: 1px solid #e9ecef;
-    transition: background-color 0.2s ease; /* Transición para efecto de hover */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.tarea-alum-admin .list-group-item:last-child {
-    border-bottom: none;
+.tarea-alum-admin-container .list-group-item:hover {
+    background-color: #f8f9fa;
 }
 
-.tarea-alum-admin .list-group-item:hover {
-    background-color: #f0f0f0; /* Efecto hover para los items */
-}
-
-.tarea-alum-admin .list-group-item .task-content {
+.tarea-alum-admin-container .list-group-item .task-content {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.tarea-alum-admin .list-group-item .btn {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: 20px; /* Ajusta la distancia al borde derecho */
-    background-color: #007bff; /* Color del botón que coincide con el encabezado */
+.tarea-alum-admin-container .list-group-item .btn {
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 0.25rem;
-    padding: 0.5em 1em; /* Ajusta el padding para hacer el botón más grande */
+    padding: 0.5em 1em;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    margin-right: 10px; /* Agregamos el margen de 10px aquí */
 }
 
-.tarea-alum-admin .list-group-item .btn:hover {
-    background-color: #0056b3; /* Oscurece el botón al hacer hover */
-}
-
-.tarea-alum-admin .list-group-item .badge {
+.tarea-alum-admin-container .list-group-item .badge {
     padding: 0.5em 0.75em;
     font-size: 0.9em;
     border-radius: 0.25rem;
 }
 
-.tarea-alum-admin .badge-danger {
-    background-color: #dc3545; /* Color rojo para puntajes menores de 61 */
+.tarea-alum-admin-container .badge-danger {
+    background-color: #dc3545;
 }
 
-.tarea-alum-admin .badge-success {
-    background-color: #28a745; /* Color verde para puntajes mayores o iguales a 61 */
+.tarea-alum-admin-container .badge-success {
+    background-color: #28a745;
 }
 
-/* Responsiveness para móviles (pantallas menores a 767px) */
+/* Estilo para pantallas móviles, eliminando el margen */
 @media (max-width: 767px) {
-
-    .tarea-alum-admin .card-header-custom {
-        flex-direction: column; /* Los elementos se alinean verticalmente */
-        text-align: center; /* Texto centrado */
+    .tarea-alum-admin-container .card-header-custom,
+    .tarea-alum-admin-container .list-group-item {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .tarea-alum-admin .list-group-custom .list-group-item {
-        display: flex;
-        flex-direction: column; /* Organiza los contenidos verticalmente */
-        align-items: flex-start; /* Alinea los contenidos al inicio */
-        padding: 1rem;
-        position: relative; /* Establece la posición relativa para contenedores de ítems */
-        width: 100%; /* Asegura que el ítem use todo el ancho disponible */
+    .tarea-alum-admin-container .list-group-item .btn,
+    .tarea-alum-admin-container .list-group-item .badge {
+        margin-right: 0px; /* En móvil eliminamos el margen */
+        margin-top: 10px;
+        width: 100%;
     }
 
-    .tarea-alum-admin .list-group-item .action-area {
-        display: flex;
-        flex-direction: row; /* Coloca elementos en una fila */
-        justify-content: flex-end; /* Alinea los elementos al final (derecha) */
-        align-items: center; /* Alinea los elementos verticalmente en el centro */
-        width: 100%; /* Utiliza todo el ancho disponible para el contenedor de acción */
-    }
-
-    .tarea-alum-admin .list-group-item .btn,
-    .tarea-alum-admin .list-group-item .badge {
-        margin-right: 10px; /* Espacio a la derecha de cada elemento */
-        margin-top: 20px;
-    }
-
-    .tarea-alum-admin .list-group-item .badge {
-        position: absolute; /* Posicionamiento absoluto para el badge */
-        right: 10px; /* Ajusta la posición derecha para posicionar correctamente los puntos */
-        top: calc(64% + 10px); /* Baja el badge para alinearlo con el centro del botón */
-        transform: translateY(-50%); /* Ajusta la posición vertical para centrar exactamente con el botón */
+    .tarea-alum-admin-container .btn-icon {
+        align-self: flex-start;
     }
 }
-

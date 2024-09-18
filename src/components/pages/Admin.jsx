@@ -11,7 +11,9 @@ import SubirExcel from '../pages/SubirExcel';
 import Perfil from '../views/Admin/Perfil';
 import TareaGenAdmin from '../views/Admin/TareaGenAdmin';
 import TareaAlumAdmin from '../views/Admin/TareaAlumAdmin';
+import TareaAlumIndiv from '../views/Admin/TareaAlumIndiv';
 import PropuestasAlum from '../views/Admin/PropuestasAlum';
+import ListTernasAdmin  from '../views/Admin/ListTernasAdmin';
 import '../../index.css';
 
 const Admin = () => {
@@ -38,6 +40,8 @@ const Admin = () => {
             <Route path="/tareas" element={<TareaGenAdmin />} />
             <Route path="/tarealum" element={<TareaAlumAdmin />} />
             <Route path="/propuestatesis" element={<PropuestasAlum />} />
+            <Route path="/tareaindivi" element={<TareaAlumIndiv />} />
+            <Route path="/listadoternas" element={<ListTernasAdmin />} />
             {/* Añade más rutas según sea necesario */}
           </Routes>
         </div>

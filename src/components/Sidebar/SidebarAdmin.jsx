@@ -42,6 +42,12 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
             <p>Catedráticos</p>
           </li>
         </Link>
+        <Link className="link-sidebar" to="/admin/listadoternas" onClick={handleLinkClick}>
+          <li>
+            <BsListTask size={30} />
+            <p>Listado Ternas</p>
+          </li>
+        </Link>
         <Link className="link-sidebar" to="/admin/tareas" onClick={handleLinkClick}>
           <li>
             <BsListTask size={30} />
