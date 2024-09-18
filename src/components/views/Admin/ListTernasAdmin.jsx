@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../layout/Admin/ListTernasAdmin.css';
 
 const ListTernasAdmin = () => {
-    const ternas = [
+    const initialTernas = [
         {
             id: 1,
             presidente: 'Carlos Pérez',
@@ -23,6 +23,13 @@ const ListTernasAdmin = () => {
         }
     ];
 
+    const [ternas, setTernas] = useState(initialTernas);
+
+    const handleDelete = (ternaId) => {
+        const filteredTernas = ternas.filter(terna => terna.id !== ternaId);
+        setTernas(filteredTernas);
+    };
+
     return (
         <div className="list-ternas-admin-container">
             {ternas.map((terna) => (
@@ -42,6 +49,14 @@ const ListTernasAdmin = () => {
                                 <strong>Vocal: </strong> {terna.vocal}
                             </li>
                         </ul>
+                        <div className="text-center mt-3">
+                            <button 
+                                className="btn btn-danger"
+                                onClick={() => handleDelete(terna.id)}
+                            >
+                                Eliminar
+                            </button>
+                        </div>
                     </div>
                 </div>
             ))}
