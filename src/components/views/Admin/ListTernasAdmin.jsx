@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import '../../layout/Admin/ListTernasAdmin.css';
+import ModalConfirmacion from '../../Modals/Fuentes/ModalConfirmacion'; // Asegúrate de importar el modal
+import AlertError from '../../Modals/Fuentes/AlertError'; // Importamos AlertError
+import AlertSuccess from '../../Modals/Fuentes/AlertSuccess'; // Importamos AlertSuccess
 
 const ListTernasAdmin = () => {
     const initialTernas = [
@@ -24,10 +27,32 @@ const ListTernasAdmin = () => {
     ];
 
     const [ternas, setTernas] = useState(initialTernas);
+    const [showModal, setShowModal] = useState(false); // Estado para mostrar el modal
+    const [selectedTerna, setSelectedTerna] = useState(null); // Estado para guardar la terna seleccionada
 
-    const handleDelete = (ternaId) => {
-        const filteredTernas = ternas.filter(terna => terna.id !== ternaId);
-        setTernas(filteredTernas);
+    const handleDelete = async (ternaId) => {
+        try {
+            // Simulamos la eliminación de la terna
+            const filteredTernas = ternas.filter(terna => terna.id !== ternaId);
+            setTernas(filteredTernas);
+            setShowModal(false); // Cerrar el modal después de eliminar
+
+            // Mostramos la alerta de éxito
+            AlertSuccess({
+                message: `La Terna ${ternaId} ha sido eliminada exitosamente.`
+            });
+        } catch (error) {
+            // En caso de error, mostramos la alerta de error
+            AlertError({
+                message: `Ocurrió un error al eliminar la Terna ${ternaId}. Inténtalo de nuevo.`
+            });
+            setShowModal(false); // Cerrar el modal de todas formas
+        }
+    };
+
+    const confirmEliminarTerna = (terna) => {
+        setSelectedTerna(terna); // Guardar la terna seleccionada
+        setShowModal(true); // Mostrar el modal de confirmación
     };
 
     return (
@@ -52,7 +77,7 @@ const ListTernasAdmin = () => {
                         <div className="text-center mt-3">
                             <button 
                                 className="btn btn-danger"
-                                onClick={() => handleDelete(terna.id)}
+                                onClick={() => confirmEliminarTerna(terna)} // Abrir el modal al hacer clic
                             >
                                 Eliminar
                             </button>
@@ -60,6 +85,17 @@ const ListTernasAdmin = () => {
                     </div>
                 </div>
             ))}
+
+            {/* Modal de confirmación */}
+            {selectedTerna && (
+                <ModalConfirmacion
+                    isOpen={showModal}
+                    onConfirm={() => handleDelete(selectedTerna.id)} // Confirmar eliminación
+                    onCancel={() => setShowModal(false)} // Cancelar eliminación
+                    nombre={`Terna ${selectedTerna.id}`}  // Mostrar el ID de la terna en el modal
+                    pagina="Terna"
+                />
+            )}
         </div>
     );
 };

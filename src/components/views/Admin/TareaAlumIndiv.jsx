@@ -4,6 +4,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import '../../layout/Admin/TareaAlumIndiv.css';
 import AlertSuccess from '../../Modals/Fuentes/AlertSuccess';
 import AlertError from '../../Modals/Fuentes/AlertError';
+import CalificacionModal from '../../Modals/Fuentes/CalificacionModal';  // Importa el nuevo modal
 
 const TareaAlumIndiv = () => {
   const location = useLocation();
@@ -22,6 +23,8 @@ const TareaAlumIndiv = () => {
     },
   ]);
 
+  const [showCalificacionModal, setShowCalificacionModal] = useState(false);  // Estado para el modal
+
   const formatDate = (dateString) => {
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
     return new Date(dateString).toLocaleDateString('es-ES', options);
@@ -38,6 +41,14 @@ const TareaAlumIndiv = () => {
     } else {
       AlertError({ message: "Error: El comentario no puede estar vacío." });
     }
+  };
+
+  const handleCalificarClick = () => {
+    setShowCalificacionModal(true);  // Mostrar el modal cuando se hace clic en "Calificar"
+  };
+
+  const handleCloseModal = () => {
+    setShowCalificacionModal(false);  // Cerrar el modal
   };
 
   return (
@@ -60,7 +71,7 @@ const TareaAlumIndiv = () => {
                     {formatDate(task.startDate)} - {formatDate(task.endDate)}
                   </small>
                 </div>
-                <div className="download-section" style={{ marginTop: '25px' }}>
+                <div className="download-section">
                   <a
                     href="https://github.com/FlyBenja/fronted-historico-tesis/archive/refs/heads/main.zip"
                     className="btn btn-primary"
@@ -68,6 +79,9 @@ const TareaAlumIndiv = () => {
                   >
                     <i className="fas fa-download"></i> Descargar
                   </a>
+                  <button className="btn btn-secondary btn-calificar" onClick={handleCalificarClick}>
+                    Calificar
+                  </button>
                 </div>
                 <hr />
                 <div className="comment-section">
@@ -78,7 +92,7 @@ const TareaAlumIndiv = () => {
                     cols="50"
                     placeholder="Escribe un comentario..."
                   ></textarea>
-                  <button className="btn btn-success" style={{ marginTop: '10px' }} onClick={handleCommentSubmit}>
+                  <button className="btn btn-success" onClick={handleCommentSubmit}>
                     Enviar Comentario
                   </button>
                 </div>
@@ -90,6 +104,11 @@ const TareaAlumIndiv = () => {
           </ul>
         </div>
       </div>
+
+      {/* Modal para ingresar la calificación */}
+      {showCalificacionModal && (
+        <CalificacionModal show={showCalificacionModal} handleClose={handleCloseModal} />
+      )}
     </div>
   );
 };
