@@ -37,8 +37,11 @@
 }
 
 .bitacora-container {
-  margin-top: 20px;
+  overflow-y: auto; /* Asegura que el contenido que se sale de la vista se pueda hacer scroll */
+  max-height: calc(100vh - 150px); /* Ajusta la altura máxima para que no se salga de la vista */
+  padding-bottom: 20px; /* Añadir espacio adicional al final */
 }
+
 
 .bitacora-item {
   display: flex;
