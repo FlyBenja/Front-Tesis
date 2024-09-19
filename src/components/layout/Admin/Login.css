@@ -77,17 +77,22 @@
     margin-bottom: 15px;
 }
 
+/* Ajuste para los iconos en los campos de correo y contraseña */
 .login-page-container .input-group-text {
     background-color: transparent;
     border: none;
     padding: 0 15px;
     font-size: 20px;
+    padding-top: 8px; /* Agregar padding-top para bajar un poco los iconos */
+    line-height: 1; /* Ajustar la altura de línea para que los iconos estén alineados */
 }
 
 .login-page-container .form-control {
     height: 40px; 
     padding-left: 10px;
+    padding-top: 8px; /* Opcional: si también quieres ajustar la posición del texto */
 }
+
 
 /* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
