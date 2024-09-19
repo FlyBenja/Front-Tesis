@@ -1,20 +1,20 @@
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar';
-import Sidebar from '../Sidebar/SidebarAdmin';
-import AsignarTernasAdmin from '../views/Admin/AsignarTernasAdmin';
-import AsignarAlumAdmin from '../views/Admin/AsignarAlumAdmin';
-import BitacoraAdmin from '../views/Admin/BitacoraAdmin';
-import CatedraticosAdmin from '../views/Admin/CatedraticosAdmin';
-import EstudiantesAdmin from '../views/Admin/EstudiantesAdmin';
-import SubirExcel from '../pages/SubirExcel'; 
-import Perfil from '../views/Admin/Perfil';
-import TareaGenAdmin from '../views/Admin/TareaGenAdmin';
-import TareaAlumAdmin from '../views/Admin/TareaAlumAdmin';
-import TareaAlumIndiv from '../views/Admin/TareaAlumIndiv';
-import PropuestasAlum from '../views/Admin/PropuestasAlum';
-import ListTernasAdmin  from '../views/Admin/ListTernasAdmin';
-import '../../index.css';
+import Navbar from '../../../Navbar/Navbar';
+import Sidebar from '../../../Sidebar/SidebarAdmin';
+import AsignarTernasAdmin from '../../../views/Admin/AsignarTernasAdmin';
+import AsignarAlumAdmin from '../../../views/Admin/AsignarAlumAdmin';
+import BitacoraAdmin from '../../../views/Admin/BitacoraAdmin';
+import CatedraticosAdmin from '../../../views/Admin/CatedraticosAdmin';
+import EstudiantesAdmin from '../../../views/Admin/EstudiantesAdmin';
+import SubirExcel from '../../Admin/Fuente/SubirExcel'; 
+import Perfil from '../../../views/Admin/Perfil';
+import TareaGenAdmin from '../../../views/Admin/TareaGenAdmin';
+import TareaAlumAdmin from '../../../views/Admin/TareaAlumAdmin';
+import TareaAlumIndiv from '../../../views/Admin/TareaAlumIndiv';
+import PropuestasAlum from '../../../views/Admin/PropuestasAlum';
+import ListTernasAdmin  from '../../../views/Admin/ListTernasAdmin';
+import '../../../../index.css';
 
 const Admin = () => {
   const [showSidebar, setShowSidebar] = useState(true);

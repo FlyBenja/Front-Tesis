@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import AlertSuccess from '../Modals/Fuentes/AlertSuccess';
-import AlertError from '../Modals/Fuentes/AlertError';
-import '../layout/Admin/SubirExcel.css';
+import AlertSuccess from '../../../Modals/Fuentes/AlertSuccess';
+import AlertError from '../../../Modals/Fuentes/AlertError';
+import '../Estilos/subirExcel.css';
 
 const SubirExcel = () => {
   const [selectedFile, setSelectedFile] = useState(null);
