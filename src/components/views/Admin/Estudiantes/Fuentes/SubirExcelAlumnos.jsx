@@ -1,7 +1,7 @@
 import { useState } from "react";
 import AlertSuccess from '../../../../Modals/Fuentes/AlertSuccess';
 import AlertError from '../../../../Modals/Fuentes/AlertError';
-import '../Estilos/subirExcelAlumnos.css';  // Importar el estilo global para alumnos
+import '../Estilos/SubirExcelAlumnos.css';  // Importar el estilo global para alumnos
 
 const SubirExcelAlumnos = () => {
   const [selectedFile, setSelectedFile] = useState(null);
