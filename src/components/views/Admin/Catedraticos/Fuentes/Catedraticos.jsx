@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';  // Asegúrate de importar useNavigate
-import '../../layout/Admin/CatedraticosAdmin.css';
-import ModalConfirmacion from '../../Modals/Fuentes/ModalConfirmacion';
-import AgregaCatedra from '../../Modals/Fuentes/Agregacatedra';
+import '../Estilos/Catedraticos.css';
+import ModalConfirmacion from '../../../../Modals/Fuentes/ModalConfirmacion';
+import AgregaCatedra from '../../../../Modals/Fuentes/Agregacatedra';
 
 const CatedraticosAdmin = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -82,7 +82,7 @@ const CatedraticosAdmin = () => {
           <h4>No existen catedráticos subidos</h4>
           <button
               className="btn btn-primary mt-3"
-              onClick={() => navigate('/admin/SubirExcel')} // Aquí utilizamos navigate
+              onClick={() => navigate('/admin/SubirExcelCatedraticos')} // Aquí utilizamos navigate
             >
               Subir Catedráticos
           </button>

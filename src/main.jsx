@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Admin from './components/pages/Admin/Fuente/Admin';
-import Login from './components/pages/Login';
+import Login from './components/views/General/Fuente/Login';  // Importar Login
 import './index.css';
 
 // Importar estilos de terceros

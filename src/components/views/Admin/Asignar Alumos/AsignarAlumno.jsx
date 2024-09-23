@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'admin-lte/dist/css/adminlte.min.css';
-import '../../layout/Admin/AsignarAlumAdmin.css';
-import AlertSuccess from '../../Modals/Fuentes/AlertSuccess';  // Importamos AlertSuccess
-import AlertError from '../../Modals/Fuentes/AlertError';      // Importamos AlertError
+import './AsignarAlumno.css';
+import AlertSuccess from '../../../Modals/Fuentes/AlertSuccess';  // Importamos AlertSuccess
+import AlertError from '../../../Modals/Fuentes/AlertError';      // Importamos AlertError
 
-const AsignarAlumAdmin = () => {
+const AsignarAlumno = () => {
   const [alumnos, setAlumnos] = useState([
     { id: 1, nombre: 'Josue Benjamin Aldana Ramos' },
     { id: 2, nombre: 'Oscar David Alvarez Martinez' },
@@ -172,4 +172,4 @@ const AsignarAlumAdmin = () => {
   );
 };
 
-export default AsignarAlumAdmin;
+export default AsignarAlumno;

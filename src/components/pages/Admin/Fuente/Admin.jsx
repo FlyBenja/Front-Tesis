@@ -1,19 +1,20 @@
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from '../../../Navbar/Navbar';
-import Sidebar from '../../../Sidebar/SidebarAdmin';
-import AsignarTernasAdmin from '../../../views/Admin/AsignarTernasAdmin';
-import AsignarAlumAdmin from '../../../views/Admin/AsignarAlumAdmin';
-import BitacoraAdmin from '../../../views/Admin/BitacoraAdmin';
-import CatedraticosAdmin from '../../../views/Admin/CatedraticosAdmin';
-import EstudiantesAdmin from '../../../views/Admin/EstudiantesAdmin';
-import SubirExcel from '../../Admin/Fuente/SubirExcel'; 
-import Perfil from '../../../views/Admin/Perfil';
-import TareaGenAdmin from '../../../views/Admin/TareaGenAdmin';
-import TareaAlumAdmin from '../../../views/Admin/TareaAlumAdmin';
-import TareaAlumIndiv from '../../../views/Admin/TareaAlumIndiv';
-import PropuestasAlum from '../../../views/Admin/PropuestasAlum';
-import ListTernasAdmin  from '../../../views/Admin/ListTernasAdmin';
+import Sidebar from '../../../Sidebar/Admin/SidebarAdmin';
+import AsignarTernas from '../../../views/Admin/AsignarTernas/AsignarTernas';
+import AsignarAlumno from '../../../views/Admin/Asignar Alumos/AsignarAlumno';
+import Bitacora from '../../../views/Admin/Inicio/Bitacora';
+import Catedraticos from '../../../views/Admin/Catedraticos/Fuentes/Catedraticos';
+import Estudiantes from '../../../views/Admin/Estudiantes/Fuentes/Estudiantes';
+import SubirExcelAlumnos from '../../../views/Admin/Estudiantes/Fuentes/SubirExcelAlumnos';
+import SubirExcelCatedra from '../../../views/Admin/Catedraticos/Fuentes/SubirExcelCatedra';
+import Perfil from '../../../views/General/Fuente/Perfil';
+import GenerarTareas from '../../../views/Admin/Tareas/GenerarTareas';
+import TareasAlumno from '../../../views/Admin/Estudiantes/Fuentes/TareasAlumno';
+import TareaAlumIndiv from '../../../views/Admin/Estudiantes/Fuentes/TareaAlumnoIndiv';
+import PropuestasAlum from '../../../views/Admin/Estudiantes/Fuentes/Propuestas';
+import ListadoTernas  from '../../../views/Admin/Listado Ternas/ListadoTernas';
 import '../../../../index.css';
 
 const Admin = () => {
@@ -30,18 +31,19 @@ const Admin = () => {
         <Navbar toggleSidebar={toggleSidebar} showSidebar={showSidebar} />
         <div className={`admin-content ${showSidebar ? '' : 'active'}`}>
           <Routes>
-            <Route path="/asignarternas" element={<AsignarTernasAdmin />} />
-            <Route path="/asignaralumos" element={<AsignarAlumAdmin />} />
-            <Route path="/" element={<BitacoraAdmin />} />
-            <Route path="/catedraticos" element={<CatedraticosAdmin />} />
-            <Route path="/estudiantes" element={<EstudiantesAdmin />} />
-            <Route path="/SubirExcel" element={<SubirExcel />} /> 
+            <Route path="/asignarternas" element={<AsignarTernas />} />
+            <Route path="/asignaralumos" element={<AsignarAlumno />} />
+            <Route path="/" element={<Bitacora />} />
+            <Route path="/catedraticos" element={<Catedraticos />} />
+            <Route path="/estudiantes" element={<Estudiantes />} />
+            <Route path="/SubirExcelAlumnos" element={<SubirExcelAlumnos />} /> 
+            <Route path="/SubirExcelCatedraticos" element={<SubirExcelCatedra />} /> 
             <Route path="/profile" element={<Perfil />} />
-            <Route path="/tareas" element={<TareaGenAdmin />} />
-            <Route path="/tarealum" element={<TareaAlumAdmin />} />
+            <Route path="/tareas" element={<GenerarTareas />} />
+            <Route path="/tarealum" element={<TareasAlumno />} />
             <Route path="/propuestatesis" element={<PropuestasAlum />} />
             <Route path="/tareaindivi" element={<TareaAlumIndiv />} />
-            <Route path="/listadoternas" element={<ListTernasAdmin />} />
+            <Route path="/listadoternas" element={<ListadoTernas />} />
             {/* Añade más rutas según sea necesario */}
           </Routes>
         </div>

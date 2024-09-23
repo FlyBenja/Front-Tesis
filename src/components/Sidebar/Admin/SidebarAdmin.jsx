@@ -8,7 +8,7 @@ import { IoIosSchool } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-import logo from "../../assets/imgs/logo3.png";
+import logo from "../../../assets/imgs/logo3.png";
 
 const Sidebar = ({ showSidebar, toggleSidebar }) => {
   // Función para cerrar el sidebar en pantallas pequeñas

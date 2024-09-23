@@ -1,6 +1,6 @@
-import '../../layout/Admin/BitacoraAdmin.css'; 
+import './Bitacora.css'; 
 
-const BitacoraAdmin = () => {
+const Bitacora = () => {
   const logs = [
     {
       id_user: 1,
@@ -114,4 +114,4 @@ const BitacoraAdmin = () => {
   );
 };
 
-export default BitacoraAdmin;
+export default Bitacora;

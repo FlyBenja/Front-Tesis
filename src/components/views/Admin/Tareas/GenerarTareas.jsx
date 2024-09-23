@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import CrearEditarTareaAdmin from '../../Modals/Fuentes/CrearEditarTareaAdmin';
-import '../../layout/Admin/TareaGenAdmin.css';
+import CrearEditarTareaAdmin from '../../../Modals/Fuentes/CrearEditarTareaAdmin';
+import './GenerarTareas.css';
 
-const TareaGenAdmin = () => {
+const GenerarTareas = () => {
     const [tasks, setTasks] = useState([
         { id: 1, title: 'Propuestas de tesis', description: 'Entrega de las propuestas de tesis', points: 35, startDate: '2024-08-11', endDate: '2024-09-11' }
     ]);
@@ -71,4 +71,4 @@ const TareaGenAdmin = () => {
     );
 };
 
-export default TareaGenAdmin;
+export default GenerarTareas;

@@ -1,9 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { FaArrowLeft, FaChevronDown, FaChevronRight } from 'react-icons/fa';
-import '../../layout/Admin/PropuestasAlum.css';
+import '../Estilos/Propuestas.css';
 
-const PropuestasAlum = () => {
+const Propuestas = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { student } = location.state || { student: { nombre: 'Desconocido' }, task: { title: 'Tarea no especificada' } };
@@ -73,4 +73,4 @@ const PropuestasAlum = () => {
   );
 };
 
-export default PropuestasAlum;
+export default Propuestas;

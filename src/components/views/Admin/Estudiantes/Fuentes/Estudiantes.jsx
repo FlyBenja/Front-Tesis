@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import '../../layout/Admin/EstudiantesAdmin.css';
+import '../Estilos/Estudiantes.css';
 
-const EstudiantesAdmin = () => {
+const Estudiantes = () => {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -85,7 +85,7 @@ const EstudiantesAdmin = () => {
             <h4>No hay estudiantes subidos</h4>
             <button
               className="btn btn-primary mt-3"
-              onClick={() => navigate('/admin/SubirExcel')}
+              onClick={() => navigate('/admin/SubirExcelAlumnos')}
             >
               Subir Estudiantes
             </button>
@@ -139,4 +139,4 @@ const EstudiantesAdmin = () => {
   );
 };
 
-export default EstudiantesAdmin;
+export default Estudiantes;

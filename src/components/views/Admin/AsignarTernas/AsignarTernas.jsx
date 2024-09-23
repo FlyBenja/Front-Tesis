@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import '../../layout/Admin/AsignarTernasAdmin.css';
-import AlertSuccess from '../../Modals/Fuentes/AlertSuccess';  // Importamos AlertSuccess
-import AlertError from '../../Modals/Fuentes/AlertError';      // Importamos AlertError
+import './AsignarTernas.css';
+import AlertSuccess from '../../../Modals/Fuentes/AlertSuccess';  // Importamos AlertSuccess
+import AlertError from '../../../Modals/Fuentes/AlertError';      // Importamos AlertError
 
-const AsignarTernasAdmin = () => {
+const AsignarTernas = () => {
     const initialCatedraticos = [
         { id: 1, nombre: 'Carlos Pérez' },
         { id: 2, nombre: 'María García' },
@@ -129,4 +129,4 @@ const AsignarTernasAdmin = () => {
     );
 };
 
-export default AsignarTernasAdmin;
+export default AsignarTernas;

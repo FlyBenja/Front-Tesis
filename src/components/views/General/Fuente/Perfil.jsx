@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import CambiaContra from '../../Modals/Fuentes/CambiaContra';
-import CambiaFotoPerfil from '../../Modals/Fuentes/CambiaFotoPerfil'; // Importa CambiaFotoPerfil
-import '../../layout/Admin/Perfil.css';
+import CambiaContra from '../../../Modals/Fuentes/CambiaContra'; // Importa CambiaContra
+import CambiaFotoPerfil from '../../../Modals/Fuentes/CambiaFotoPerfil'; // Importa CambiaFotoPerfil
+import '../Estilos/Perfil.css'; // Importa el archivo CSS
 
 const Perfil = () => {
   const [showImageModal, setShowImageModal] = useState(false);

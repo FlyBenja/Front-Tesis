@@ -1,12 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
-import '../../layout/Admin/TareaAlumIndiv.css';
-import AlertSuccess from '../../Modals/Fuentes/AlertSuccess';
-import AlertError from '../../Modals/Fuentes/AlertError';
-import CalificacionModal from '../../Modals/Fuentes/CalificacionModal';  // Importa el nuevo modal
+import '../Estilos/TareaAlumnoIndiv.css';
+import AlertSuccess from '../../../../Modals/Fuentes/AlertSuccess';
+import AlertError from '../../../../Modals/Fuentes/AlertError';
+import CalificacionModal from '../../../../Modals/Fuentes/CalificacionModal';  // Importa el nuevo modal
 
-const TareaAlumIndiv = () => {
+const TareaAlumnoIndiv = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { student } = location.state || {};
@@ -113,4 +113,4 @@ const TareaAlumIndiv = () => {
   );
 };
 
-export default TareaAlumIndiv;
+export default TareaAlumnoIndiv;

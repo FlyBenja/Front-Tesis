@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import '../../layout/Admin/ListTernasAdmin.css';
-import ModalConfirmacion from '../../Modals/Fuentes/ModalConfirmacion'; // Asegúrate de importar el modal
-import AlertError from '../../Modals/Fuentes/AlertError'; // Importamos AlertError
-import AlertSuccess from '../../Modals/Fuentes/AlertSuccess'; // Importamos AlertSuccess
+import './ListadoTernas.css';
+import ModalConfirmacion from '../../../Modals/Fuentes/ModalConfirmacion'; // Asegúrate de importar el modal
+import AlertError from '../../../Modals/Fuentes/AlertError'; // Importamos AlertError
+import AlertSuccess from '../../../Modals/Fuentes/AlertSuccess'; // Importamos AlertSuccess
 
-const ListTernasAdmin = () => {
+const ListadoTernas = () => {
     const initialTernas = [
         {
             id: 1,
@@ -100,4 +100,4 @@ const ListTernasAdmin = () => {
     );
 };
 
-export default ListTernasAdmin;
+export default ListadoTernas;

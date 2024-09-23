@@ -1,9 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
-import '../../layout/Admin/TareaAlumAdmin.css'; // Cambié el nombre del archivo CSS
+import '../Estilos/TareasAlumno.css'; // Cambié el nombre del archivo CSS
 
-const TareaAlumAdmin = () => {
+const TareasAlumno = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { student } = location.state || {};
@@ -68,4 +68,4 @@ const TareaAlumAdmin = () => {
   );
 };
 
-export default TareaAlumAdmin;
+export default TareasAlumno;
