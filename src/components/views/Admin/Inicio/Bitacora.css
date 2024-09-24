@@ -24,9 +24,8 @@
 
   .bitacora-label {
     padding: 10px;
-    margin-right: 10px !important; 
+    margin-right: 10px !important;
   }
-
 }
 
 .admin-content {
@@ -37,11 +36,11 @@
 }
 
 .bitacora-container {
-  overflow-y: auto; /* Asegura que el contenido que se sale de la vista se pueda hacer scroll */
-  max-height: calc(100vh - 150px); /* Ajusta la altura máxima para que no se salga de la vista */
-  padding-bottom: 20px; /* Añadir espacio adicional al final */
+  overflow-y: auto;
+  min-height: 300px; /* Ajuste de altura mínima para mantener los botones fijos */
+  max-height: calc(100vh - 200px);
+  padding-bottom: 20px;
 }
-
 
 .bitacora-item {
   display: flex;
@@ -53,8 +52,6 @@
   transition: transform 0.3s ease-in-out;
   position: relative;
 }
-
-
 
 .bitacora-item:hover {
   transform: translateY(-5px);
@@ -73,6 +70,7 @@
   margin-right: 20px;
   text-align: center;
 }
+
 @media (max-width: 700px) {
   .bitacora-label {
     position: absolute;
@@ -87,9 +85,7 @@
     top: -12px;
     right: -5px;
   }
-
 }
-
 
 .bg-green {
   background-color: #093A68;
@@ -126,20 +122,94 @@
   margin: 5px 0;
 }
 
-.bitacora-footer {
-  margin-top: 10px;
+/* Estilos para la paginación */
+.pagination-container {
+  height: 50px; /* Espacio fijo para la paginación */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.btn-primary {
+.pagination {
+  list-style: none;
+  padding: 0;
+  gap: 8px;
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.page-item {
+  display: block;
+}
+
+.page-link {
   background-color: #007bff;
-  border: none;
-  padding: 8px 15px;
-  color: #fff;
-  border-radius: 4px;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
   text-decoration: none;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s;
 }
 
-.btn-primary:hover {
+.page-item.active .page-link,
+.page-link:hover {
   background-color: #0056b3;
+}
+
+.page-item.disabled .page-link {
+  background-color: #cccccc;
+  pointer-events: none;
+}
+
+/* Ajustes adicionales para pantallas pequeñas */
+@media (max-width: 768px) {
+  .bitacora-label {
+    flex: 0 0 80px;
+  }
+
+  .bitacora-item {
+    padding: 10px;
+  }
+
+  .bitacora-title {
+    font-size: 1rem;
+  }
+
+  .bitacora-time {
+    font-size: 0.8rem;
+  }
+
+  .pagination {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 400px) {
+  .bitacora-label {
+    flex: 0 0 60px;
+    padding: 8px;
+  }
+
+  .bitacora-title {
+    font-size: 0.9rem;
+  }
+
+  .bitacora-time {
+    font-size: 0.75rem;
+  }
+
+  .pagination {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .page-link {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
 }

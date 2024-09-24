@@ -1,65 +1,101 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // Asegúrate de importar useNavigate
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../Estilos/Catedraticos.css';
 import ModalConfirmacion from '../../../../Modals/Fuentes/ModalConfirmacion';
 import AgregaCatedra from '../../../../Modals/Fuentes/Agregacatedra';
+import { getProfile } from '../../../../Service/Apis-Admin/PerfilUsuario';
+import { TodosCatedraticos } from '../../../../Service/Apis-Admin/TodosCatedraticos';
+import { toggleCatedraticoStatus } from '../../../../Service/Apis-Admin/StatusCatedratico';
+import { eliminarCatedratico } from '../../../../Service/Apis-Admin/EliminarCatedratico';
+import AlertError from '../../../../Modals/Fuentes/AlertError';
 
 const CatedraticosAdmin = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [catedraticos, setCatedraticos] = useState([
-    { id: 1, nombre: 'Josue Benjamin Aldana Ramos', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 2, nombre: 'Oscar David Alvarez Martinez', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 3, nombre: 'Bryan Yeremy Arrazola Cisneros', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 4, nombre: 'Cristian Paul Borja Martinez', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 5, nombre: 'Carolay Estephania Cante De Leon', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 6, nombre: 'Dulce María Carías Bran', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 7, nombre: 'Kevin Leonel Carranza Marroquin', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 8, nombre: 'Mynor Estuardo Junnior Ceron Gaitan', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 9, nombre: 'Elisa Noemí Dardón Salguero', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 10, nombre: 'Carmen Mireya De La Cruz Barrientos', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 11, nombre: 'Huver Roberto Donis Cordova', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 12, nombre: 'Maria Isabel Estrada López', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 13, nombre: 'Luis Fernando Fuentes Orellana', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 14, nombre: 'Andrea Michelle García Herrera', img: 'https://via.placeholder.com/50', habilitado: false },
-    { id: 15, nombre: 'Julio César Hernández Álvarez', img: 'https://via.placeholder.com/50', habilitado: false },
-  ]);
-
+  const [catedraticos, setCatedraticos] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [showAgregaModal, setShowAgregaModal] = useState(false);  // Estado para mostrar el modal de agregar catedrático
+  const [showAgregaModal, setShowAgregaModal] = useState(false);
   const [selectedCatedratico, setSelectedCatedratico] = useState(null);
-  
-  const navigate = useNavigate();  // Usamos useNavigate para redirigir
+  const [sedeId, setSedeId] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    const fetchUserProfile = async () => {
+      try {
+        const userProfile = await getProfile(token);
+        setSedeId(userProfile.sede);
+        fetchCatedraticos(userProfile.sede);
+      } catch (error) {
+        AlertError({ message: 'Error al obtener el perfil del usuario' });
+        console.error('Error al obtener el perfil del usuario:', error);
+      }
+    };
+
+    const fetchCatedraticos = async (sede_id) => {
+      try {
+        const catedraticosData = await TodosCatedraticos(sede_id);
+        setCatedraticos(
+          catedraticosData.map((catedratico) => ({
+            id: catedratico.user_id,
+            nombre: catedratico.userName,
+            img: catedratico.profilePhoto || null,
+            habilitado: catedratico.activoTerna,
+          }))
+        );
+      } catch (error) {
+        AlertError({ message: 'Error al obtener los catedráticos' });
+        console.error('Error al obtener los catedráticos:', error);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const toggleCatedratico = (id) => {
-    const updatedCatedraticos = catedraticos.map((catedratico) =>
-      catedratico.id === id
-        ? { ...catedratico, habilitado: !catedratico.habilitado }
-        : catedratico
-    );
-    setCatedraticos(updatedCatedraticos);
+  const toggleCatedratico = async (id, habilitadoActual) => {
+    try {
+      const data = await toggleCatedraticoStatus(id, habilitadoActual);
+      const updatedCatedraticos = catedraticos.map((catedratico) =>
+        catedratico.id === id ? { ...catedratico, habilitado: data.data.activoTerna } : catedratico
+      );
+      setCatedraticos(updatedCatedraticos);
+    } catch (error) {
+      AlertError({ message: 'Error al cambiar el estado del catedrático' });
+      console.error('Error al cambiar el estado del catedrático:', error);
+    }
   };
 
   const confirmEliminarCatedratico = (id) => {
     const catedratico = catedraticos.find((cat) => cat.id === id);
-    setSelectedCatedratico(catedratico); // Guardar el catedrático seleccionado
-    setShowModal(true); // Mostrar modal de confirmación
+    setSelectedCatedratico(catedratico);
+    setShowModal(true);
   };
 
-  const eliminarCatedratico = () => {
-    const updatedCatedraticos = catedraticos.filter(
-      (catedratico) => catedratico.id !== selectedCatedratico.id
-    );
-    setCatedraticos(updatedCatedraticos);
-    setShowModal(false); // Cerrar el modal después de eliminar
+  const handleEliminarCatedratico = async () => {
+    try {
+      await eliminarCatedratico(selectedCatedratico.id);
+      const updatedCatedraticos = catedraticos.filter(
+        (catedratico) => catedratico.id !== selectedCatedratico.id
+      );
+      setCatedraticos(updatedCatedraticos);
+      setShowModal(false);
+    } catch (error) {
+      AlertError({ message: 'Error al eliminar el catedrático' });
+      console.error('Error al eliminar el catedrático:', error);
+    }
   };
 
   const handleAgregarCatedratico = (nuevoCatedratico) => {
     setCatedraticos([...catedraticos, { id: catedraticos.length + 1, ...nuevoCatedratico }]);
-    setShowAgregaModal(false);  // Cerrar el modal de agregar catedrático después de guardar
+    setShowAgregaModal(false);
+  };
+
+  const getInitial = (nombre) => {
+    return nombre ? nombre.charAt(0).toUpperCase() : ""; // Retorna la primera letra del nombre en mayúscula
   };
 
   const filteredCatedraticos = catedraticos.filter((catedratico) =>
@@ -81,10 +117,10 @@ const CatedraticosAdmin = () => {
         <div className="no-catedraticos-container">
           <h4>No existen catedráticos subidos</h4>
           <button
-              className="btn btn-primary mt-3"
-              onClick={() => navigate('/admin/SubirExcelCatedraticos')} // Aquí utilizamos navigate
-            >
-              Subir Catedráticos
+            className="btn btn-primary mt-3"
+            onClick={() => navigate('/admin/SubirExcelCatedratico')}
+          >
+            Subir Catedráticos
           </button>
         </div>
       ) : (
@@ -93,12 +129,18 @@ const CatedraticosAdmin = () => {
             <div className="catedraticos-list">
               {filteredCatedraticos.map((catedratico) => (
                 <div key={catedratico.id} className="catedratico-item">
-                  <img src={catedratico.img} alt="Avatar" className="avatar" />
+                  {catedratico.img ? (
+                    <img src={catedratico.img} alt="Avatar" className="avatar" />
+                  ) : (
+                    <div className="avatar-placeholder">
+                      {getInitial(catedratico.nombre)}
+                    </div>
+                  )}
                   <p>{catedratico.nombre}</p>
                   <div className="actions">
                     <button
                       className={`toggle-btn ${catedratico.habilitado ? 'on' : 'off'}`}
-                      onClick={() => toggleCatedratico(catedratico.id)}
+                      onClick={() => toggleCatedratico(catedratico.id, catedratico.habilitado)}
                     >
                       {catedratico.habilitado ? 'ON' : 'OFF'}
                     </button>
@@ -113,9 +155,18 @@ const CatedraticosAdmin = () => {
               ))}
             </div>
           </div>
-          <div className="btn-agregar-catedratico">
-            <button className="btn btn-primary agregar-btn" onClick={() => setShowAgregaModal(true)}>
+          <div className="btn-agregar-catedratico d-flex m-0 justify-content-around">
+            <button
+              className="btn btn-primary agregar-btn m-0"
+              onClick={() => setShowAgregaModal(true)}
+            >
               Agregar Catedrático
+            </button>
+            <button
+              className="btn btn-primary agregar-btn m-0"
+              onClick={() => navigate('/admin/SubirExcelCatedratico')}
+            >
+              Subir Catedrático
             </button>
           </div>
         </>
@@ -125,10 +176,10 @@ const CatedraticosAdmin = () => {
       {selectedCatedratico && (
         <ModalConfirmacion
           isOpen={showModal}
-          onConfirm={eliminarCatedratico}
+          onConfirm={handleEliminarCatedratico}
           onCancel={() => setShowModal(false)}
-          nombre={selectedCatedratico.nombre}  // Nombre del catedrático seleccionado
-          pagina="Catedrátic@"  // Página donde estás
+          nombre={selectedCatedratico.nombre}
+          pagina="Catedrátic@"
         />
       )}
 

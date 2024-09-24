@@ -2,8 +2,8 @@
   height: auto;
   min-height: 100vh;
   overflow: visible;
-  background-color: #f8f9fc; /* Color de fondo suave para que combine con el sidebar */
-  padding: 20px; /* Espaciado interno para que el contenido no esté pegado a los bordes */
+  background-color: #f8f9fc;
+  padding: 20px;
 }
 
 .catedraticos-list-container {
@@ -12,9 +12,9 @@
   padding-right: 10px;
   border: 1px solid #dee2e6;
   border-radius: 8px;
-  background-color: #ffffff; /* Fondo blanco para hacer que destaque */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera para dar profundidad */
-  margin-bottom: 20px; /* Espacio inferior para separación del botón */
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .catedraticos-list {
@@ -27,15 +27,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #f8f9fc; /* Fondo suave para los items */
+  background-color: #f8f9fc;
   padding: 15px;
   border-radius: 8px;
-  border: 1px solid #e3e6f0; /* Borde para delinear mejor cada item */
+  border: 1px solid #e3e6f0;
   transition: background-color 0.3s ease;
 }
 
 .catedratico-item:hover {
-  background-color: #e2e6ea; /* Cambio de color al pasar el mouse por encima */
+  background-color: #e2e6ea;
 }
 
 .catedratico-item .actions {
@@ -44,11 +44,26 @@
 }
 
 .avatar {
-  border-radius: 50%;
+  border-radius: 50%; /* Hace la imagen circular */
   width: 50px;
   height: 50px;
   margin-right: 10px;
-  border: 2px solid #007bff; /* Añade un borde de color que combine con el tema */
+  border: 2px solid #007bff; /* Añade un borde de color azul */
+  object-fit: cover; /* Asegura que la imagen cubra todo el círculo */
+}
+
+.avatar-placeholder {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Hace el contenedor circular */
+  background-color: #007bff; /* Fondo azul para el placeholder */
+  color: white; /* Texto en blanco */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px; /* Tamaño de la inicial */
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 .toggle-btn {
@@ -83,7 +98,7 @@
   background-color: #c82333;
 }
 
-.agregar-btn {
+.agregar-btn, .subir-btn {
   display: block;
   margin: 20px auto;
   padding: 10px 20px;
@@ -95,92 +110,59 @@
   transition: background-color 0.3s ease;
 }
 
-.agregar-btn:hover {
+.agregar-btn:hover, .subir-btn:hover {
   background-color: #0056b3;
 }
 
-/* Botón para agregar catedrático */
-.agregar-btn {
-  display: inline-block; /* Cambiado de block a inline-block */
-  margin: 20px auto; /* Centra el botón */
-  padding: 10px 20px;
-  border-radius: 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.agregar-btn:hover {
-  background-color: #0056b3;
-}
-
-/* Contenedor del botón agregar catedrático */
 .btn-agregar-catedratico {
-  text-align: center; /* Asegura que todo el contenido dentro esté centrado */
-  padding: 20px 0; /* Añade un poco de espacio superior e inferior */
+  text-align: center;
+  padding: 20px 0;
 }
 
 .no-catedraticos-container {
   text-align: center;
 }
 
-@media (max-width: 991px) {
-  .admin-content.active {
-    margin-top: 30px;
-    margin-left: 0;
-  }
-}
-
-@media (max-width: 576px) {  
+@media (max-width: 576px) {
   .catedraticos-admin-container {
-      padding: 10px; 
-      display: flex;
-      flex-direction: column;
-      align-items: center;  /* Asegura que los contenedores hijos se centren horizontalmente */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .catedraticos-list-container {
-      max-height: 380px; 
-      overflow-y: auto;  /* Cambiado de 'scroll' a 'auto' para mostrar la barra de desplazamiento solo cuando sea necesario */
-      width: 260px;  /* Anchura fija para mantener la consistencia */
-      margin: 0 auto;  /* Centrado automático en el eje horizontal */
+    max-height: 380px;
+    overflow-y: auto;
+    width: 260px;
+    margin: 0 auto;
   }
 
   .catedratico-item {
-      flex-direction: column; 
-      margin: 0 auto;  /* Centrado automático */
-      margin-left: 5px;
-      padding: 10px;
-      width: 100%;  /* Utiliza el ancho completo disponible */
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
   }
 
   .catedratico-item .actions {
-      width: 100%; 
-      justify-content: space-evenly;  /* Espaciado uniforme entre los botones */
+    width: 100%;
+    justify-content: space-evenly;
   }
 
   .toggle-btn, .delete-btn {
-      width: 45%;  /* Anchura ajustada para cada botón dentro de las acciones */
+    width: 45%;
   }
 
   .btn-agregar-catedratico {
-      padding: 10px 0; 
-      width: 100%;  /* Utiliza el ancho completo disponible */
-      display: flex;
-      justify-content: center;  /* Centra el botón de agregar catedrático */
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    width: 100%;
   }
 
-  .agregar-btn {
-      width: 90%;  /* Anchura del botón ajustada */
-      margin: 0 auto;  /* Centrado automático */
-  }
-
-  .admin-content {
-      padding: 0; 
-      display: flex;
-      flex-direction: column;
-      align-items: center;  /* Centra todos los contenidos dentro de .admin-content */
+  .agregar-btn, .subir-btn {
+    width: 90%;
+    margin: 0 auto;
+    padding: 8px 12px;
   }
 }
