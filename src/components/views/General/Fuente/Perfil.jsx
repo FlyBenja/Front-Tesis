@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CambiaContra from '../../../Modals/Fuentes/CambiaContra'; // Importa CambiaContra
 import CambiaFotoPerfil from '../../../Modals/Fuentes/CambiaFotoPerfil'; // Importa CambiaFotoPerfil
-import '../Estilos/Perfil.css'; // Importa el archivo CSS
+import '../Estilos/Perfil.css';
 
 const Perfil = () => {
   const [showImageModal, setShowImageModal] = useState(false);
@@ -16,23 +16,30 @@ const Perfil = () => {
   };
 
   return (
-    <div className="perfil-container">
-      <div className="perfil-card">
-        <div className="perfil-image-container">
-          <img src={profileImage} alt="Perfil" className="perfil-image" />
-          <div className="edit-icon" onClick={handleImageModal}>
-            <i className="fas fa-pencil-alt"></i> {/* Icono de edición */}
+    <div className="Perfil">
+      <div className="container">
+        <h2 className="text-start">Mi Perfil</h2> {/* Agrega el título aquí */}
+      </div>
+      <div className="d-flex justify-content-center align-items-center py-4">
+        <div className="card shadow-sm text-center" style={{ maxWidth: '400px', width: '100%' }}>
+          <div className="card-body">
+            <div className="position-relative mx-auto mb-3 imageContainer">
+              <img src={profileImage} alt="Perfil" className="rounded-circle img-fluid" />
+              <div className="position-absolute bottom-0 end-0 bg-dark text-white rounded-circle p-2 editIcon" onClick={handleImageModal}>
+                <i className="fas fa-pencil-alt"></i>
+              </div>
+            </div>
+            <div className="mb-3">
+              <p className="mb-1">Guastatoya</p>
+              <p className="mb-1">1890-23-2109</p>
+              <p className="mb-1">diego.santos@gmail.com</p>
+              <p className="mb-1">Diego Santos</p>
+            </div>
+            <div className="d-flex flex-column flex-md-row justify-content-around mt-3 gx-5">
+              <button className="btn btn-secondary mb-2 mb-md-0 w-100 w-md-auto" disabled>Administrador</button>
+              <button className="btn btn-primary w-100 w-md-auto" onClick={handlePasswordModal}>Cambiar contraseña</button>
+            </div>
           </div>
-        </div>
-        <div className="perfil-info">
-          <p>Guastatoya</p>
-          <p>1890-23-2109</p>
-          <p>diego.santos@gmail.com</p>
-          <p>Diego Santos</p>
-        </div>
-        <div className="perfil-actions">
-          <button className="perfil-role">Administrador</button>
-          <button className="perfil-change-password" onClick={handlePasswordModal}>Cambiar contraseña</button>
         </div>
       </div>
 

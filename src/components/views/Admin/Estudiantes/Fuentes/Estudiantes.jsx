@@ -66,12 +66,6 @@ const Estudiantes = () => {
             <option>2025</option>
           </select>
           <select className="form-select">
-            <option>Sede</option>
-            <option>Guastatoya</option>
-            <option>Sanarate</option>
-            <option>Sede 3</option>
-          </select>
-          <select className="form-select">
             <option>Curso</option>
             <option>Curso 1</option>
             <option>Curso 2</option>

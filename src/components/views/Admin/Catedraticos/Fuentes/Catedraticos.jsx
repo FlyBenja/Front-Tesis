@@ -20,7 +20,6 @@ const CatedraticosAdmin = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-
     const fetchUserProfile = async () => {
       try {
         const userProfile = await getProfile(token);
@@ -31,7 +30,6 @@ const CatedraticosAdmin = () => {
         console.error('Error al obtener el perfil del usuario:', error);
       }
     };
-
     const fetchCatedraticos = async (sede_id) => {
       try {
         const catedraticosData = await TodosCatedraticos(sede_id);
@@ -103,8 +101,8 @@ const CatedraticosAdmin = () => {
   );
 
   return (
-    <div className="catedraticos-admin-container">
-      <h2>Administración de Catedráticos</h2>
+    <div className="container my-4">
+      <h2 className="text-start mb-4">Administración de Catedráticos</h2> {/* Clase text-start */}
       <input
         type="text"
         className="form-control mb-4"
@@ -114,57 +112,61 @@ const CatedraticosAdmin = () => {
       />
 
       {catedraticos.length === 0 ? (
-        <div className="no-catedraticos-container">
+        <div className="text-center">
           <h4>No existen catedráticos subidos</h4>
           <button
             className="btn btn-primary mt-3"
-            onClick={() => navigate('/admin/SubirExcelCatedratico')}
+            onClick={() => navigate('/admin/SubirExcelCatedraticos')}
           >
             Subir Catedráticos
           </button>
         </div>
       ) : (
         <>
-          <div className="catedraticos-list-container">
-            <div className="catedraticos-list">
-              {filteredCatedraticos.map((catedratico) => (
-                <div key={catedratico.id} className="catedratico-item">
-                  {catedratico.img ? (
-                    <img src={catedratico.img} alt="Avatar" className="avatar" />
-                  ) : (
-                    <div className="avatar-placeholder">
-                      {getInitial(catedratico.nombre)}
+          <div className="card mb-4">
+            <div className="card-body">
+              <div className="list-group">
+                {filteredCatedraticos.map((catedratico) => (
+                  <div key={catedratico.id} className="list-group-item d-flex align-items-center justify-content-between">
+                    <div className="d-flex align-items-center">
+                      {catedratico.img ? (
+                        <img src={catedratico.img} alt="Avatar" className="rounded-circle me-3" style={{ width: '50px', height: '50px' }} />
+                      ) : (
+                        <div className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', fontSize: '20px' }}>
+                          {getInitial(catedratico.nombre)}
+                        </div>
+                      )}
+                      <p className="mb-0">{catedratico.nombre}</p>
                     </div>
-                  )}
-                  <p>{catedratico.nombre}</p>
-                  <div className="actions">
-                    <button
-                      className={`toggle-btn ${catedratico.habilitado ? 'on' : 'off'}`}
-                      onClick={() => toggleCatedratico(catedratico.id, catedratico.habilitado)}
-                    >
-                      {catedratico.habilitado ? 'ON' : 'OFF'}
-                    </button>
-                    <button
-                      className="delete-btn"
-                      onClick={() => confirmEliminarCatedratico(catedratico.id)}
-                    >
-                      Eliminar
-                    </button>
+                    <div>
+                      <button
+                        className={`btn btn-${catedratico.habilitado ? 'success' : 'danger'} me-2`}
+                        onClick={() => toggleCatedratico(catedratico.id, catedratico.habilitado)}
+                      >
+                        {catedratico.habilitado ? 'ON' : 'OFF'}
+                      </button>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => confirmEliminarCatedratico(catedratico.id)}
+                      >
+                        Eliminar
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-          <div className="btn-agregar-catedratico d-flex m-0 justify-content-around">
+          <div className="d-flex justify-content-around">
             <button
-              className="btn btn-primary agregar-btn m-0"
+              className="btn btn-primary"
               onClick={() => setShowAgregaModal(true)}
             >
               Agregar Catedrático
             </button>
             <button
-              className="btn btn-primary agregar-btn m-0"
-              onClick={() => navigate('/admin/SubirExcelCatedratico')}
+              className="btn btn-primary"
+              onClick={() => navigate('/admin/SubirExcelCatedraticos')}
             >
               Subir Catedrático
             </button>

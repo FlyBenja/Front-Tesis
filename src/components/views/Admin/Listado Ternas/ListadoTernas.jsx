@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './ListadoTernas.css';
 import ModalConfirmacion from '../../../Modals/Fuentes/ModalConfirmacion'; // Asegúrate de importar el modal
 import AlertError from '../../../Modals/Fuentes/AlertError'; // Importamos AlertError
 import AlertSuccess from '../../../Modals/Fuentes/AlertSuccess'; // Importamos AlertSuccess
@@ -20,6 +19,12 @@ const ListadoTernas = () => {
         },
         {
             id: 3,
+            presidente: 'Pablo Hernández',
+            secretario: 'Claudia López',
+            vocal: 'Miguel Jiménez'
+        },
+        {
+            id: 4,
             presidente: 'Pablo Hernández',
             secretario: 'Claudia López',
             vocal: 'Miguel Jiménez'
@@ -56,35 +61,43 @@ const ListadoTernas = () => {
     };
 
     return (
-        <div className="list-ternas-admin-container">
-            {ternas.map((terna) => (
-                <div key={terna.id} className="card shadow mb-4 terna-card">
-                    <div className="card-header bg-primary text-white">
-                        <h4>Terna {terna.id}</h4>
-                    </div>
-                    <div className="card-body">
-                        <ul className="list-group list-group-flush">
-                            <li className="list-group-item">
-                                <strong>Presidente: </strong> {terna.presidente}
-                            </li>
-                            <li className="list-group-item">
-                                <strong>Secretario: </strong> {terna.secretario}
-                            </li>
-                            <li className="list-group-item">
-                                <strong>Vocal: </strong> {terna.vocal}
-                            </li>
-                        </ul>
-                        <div className="text-center mt-3">
-                            <button 
-                                className="btn btn-danger"
-                                onClick={() => confirmEliminarTerna(terna)} // Abrir el modal al hacer clic
-                            >
-                                Eliminar
-                            </button>
+        <div className="container my-4">
+            <h2 className="mb-4">Listado de Ternas Creadas</h2>
+            <div className="row">
+                {ternas.map((terna) => (
+                    <div key={terna.id} className="col-md-4 mb-4">
+                        <div className="card shadow h-100 text-center">
+                            <div className="card-header bg-primary text-white">
+                                <h4>Terna {terna.id}</h4>
+                            </div>
+                            <div className="card-body d-flex flex-column justify-content-center">
+                                <ul className="list-group list-group-flush mb-3">
+                                    <li className="list-group-item">
+                                        <strong>Presidente:</strong> 
+                                        <p>{terna.presidente}</p>
+                                    </li>
+                                    <li className="list-group-item">
+                                        <strong>Secretario:</strong> 
+                                        <p>{terna.secretario}</p>
+                                    </li>
+                                    <li className="list-group-item">
+                                        <strong>Vocal:</strong> 
+                                        <p>{terna.vocal}</p>
+                                    </li>
+                                </ul>
+                                <div className="mt-auto">
+                                    <button 
+                                        className="btn btn-danger"
+                                        onClick={() => confirmEliminarTerna(terna)} // Abrir el modal al hacer clic
+                                    >
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
 
             {/* Modal de confirmación */}
             {selectedTerna && (

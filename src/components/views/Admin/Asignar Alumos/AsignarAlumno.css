@@ -1,73 +1,30 @@
-/* Añadir animación de giro */
-.spin-animation {
-  animation: spin 3s ease-in-out;
+/* Estilos para el componente AsignarAlumno */
+
+/* Personaliza la lista de alumnos */
+.AsignarAlumno .list-group-item {
+    transition: background-color 0.3s ease; /* Añade una transición suave */
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(1080deg); /* 3 giros completos */
-  }
+/* Fondo amarillo al resaltar un alumno */
+.AsignarAlumno .bg-warning {
+    background-color: #ffc107 !important; /* Color amarillo Bootstrap */
 }
 
-#asignarAlumAdminComponent .asignar-alum-admin-container {
-  padding-top: 20px;
+/* Fondo verde cuando se selecciona un alumno */
+.AsignarAlumno .bg-success {
+    background-color: #28a745 !important; /* Color verde Bootstrap */
+    color: white; /* Texto en blanco para contraste */
 }
 
-#asignarAlumAdminComponent .alumnos-list {
-  max-height: 70vh;
-  overflow-y: auto;
+/* Personalización de la terna asignada */
+.AsignarAlumno .card-body {
+    border-radius: 5px;
 }
 
-#asignarAlumAdminComponent .ruleta-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-}
-
-#asignarAlumAdminComponent .ruleta-display {
-  width: 150px;
-  height: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-  border: 2px solid #ccc;
-  background-color: #f8f9fa;
-}
-
-#asignarAlumAdminComponent .dropzone {
-  min-height: 100px;
-  border: 2px dashed #ccc;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-}
-
-#asignarAlumAdminComponent .alumno-cuadro {
-  background-color: #e9ecef;
-}
-
-#asignarAlumAdminComponent .text-muted {
-  font-size: 1rem;
-}
-
-@media (max-width: 576px) {  
-  .asignar-ternas-container {
-    position: relative; /* Establece la referencia para la posición absoluta del botón */
-    padding-bottom: 60px; /* Añade espacio en la parte inferior para el botón */
-  }
-
-  .btn-upload { /* Asumiendo que .btn-upload es tu botón de 'Subir Ternas' */
-    bottom: 3px; /* Ajusta esta propiedad para bajar el botón unos 7px */
-    border-radius: 50%; /* Cambia esto para hacer el botón completamente circular */
-    padding: 10px; /* Ajusta el padding para mantener el contenido centrado en un botón circular */
-  }
-
-  .wrapper {
-    height: 110vh !important; /* Ajusta la altura para que el contenido se ajuste a la pantalla */
-}
+/* Estilo para el botón de quitar terna */
+.AsignarAlumno .btn-danger {
+    background-color: #dc3545 !important; /* Botón rojo de Bootstrap */
+    border: none;
+    padding: 5px 10px;
 }
 
