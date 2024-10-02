@@ -26,6 +26,7 @@
 
 /* Contenedor para los filtros y la barra de búsqueda */
 .filters-container {
+    gap: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -34,18 +35,24 @@
 
 /* Ajuste de tamaño para la barra de búsqueda */
 .filters-container input.form-control {
-    width: 500px;
     border-radius: 20px;
     border: 1px solid #007bff;
-    padding: 10px;
+    width: 50%; 
 }
+.filters-container .select-container {
+    width: 50%; 
 
+}
 /* Contenedor para los filtros */
 .filters-container .form-select {
-    margin-left: 8px;
-    max-width: 120px;
     border-radius: 20px;
     border: 1px solid #007bff;
+}
+.filters-container .select-year {
+    width: 40%;
+}
+.filters-container .select-course {
+    width: 60%;
 }
 
 /* Espaciado entre los contenedores de estudiantes y timeline */
@@ -92,7 +99,7 @@
 
 /* Contenedor para Estudiante */
 .estudiante-container {
-    flex-basis: 40%;
+    flex-basis: 45%;
     padding: 10px 20px;
     border: 1px solid #007bff;
     border-radius: 8px;
@@ -176,7 +183,6 @@ button.subir-estudiantes {
 
 /* Contenedor para la lista de estudiantes */
 .no-students-container {
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -184,7 +190,6 @@ button.subir-estudiantes {
     text-align: center;
 }
 
-/* Estilo para pantallas medianas o pequeñas (tablets y móviles) */
 @media (max-width: 991px) {
     .content-area {
         gap: 20px;
@@ -193,7 +198,6 @@ button.subir-estudiantes {
         height: 100vh;
         overflow: hidden;
     }
-
     .student-list-container {
         flex-basis: 60%; /* Aumentar el ancho */
         margin-bottom: 20px;
@@ -213,23 +217,54 @@ button.subir-estudiantes {
         overflow: hidden;
     }
 
-    /* Alinear y centrar la búsqueda y los filtros */
+    .estudiantes-admin {
+        margin-top: 30px;
+    }
+    .filters-container input.form-control {
+        width: 100%; 
+    }
+
+    .filters-container .select-container {
+        width: 100%; 
+    }
+
+    .filters-container .form-select {
+        width: 100%; 
+    }
+
+    .filters-container .select-year {
+        width: 30%; 
+    }
+
+    .filters-container .select-course {
+        width: 70%;
+    }
+}
+
+
+@media (max-width: 701px) {
     .filters-container {
         display: flex;
         flex-direction: column;
         align-items: center; /* Centramos ambos elementos */
         gap: 10px; /* Espacio entre la búsqueda y los filtros */
     }
+    option {
+        font-size: 17px;
+     }
+}
 
-    .filters-container input.form-control {
-        width: 80%; /* Hacer la búsqueda del mismo ancho que el contenedor de estudiantes */
+@media (max-width: 415px) {
+    .select-container {
+        flex-direction: column;
+        gap: 10px; /* Espacio entre la búsqueda y los filtros */
+    }
+    .filters-container .select-year {
+        width: 100%; 
     }
 
-    .filters-container .form-select {
-        width: 60%; /* Hacer los filtros del mismo ancho que el contenedor de estudiantes */
+    .filters-container .select-course {
+        width: 100%;
     }
-
-    .estudiantes-admin {
-        margin-top: 30px;
-    }
+    
 }

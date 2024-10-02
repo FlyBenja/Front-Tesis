@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import '../Estilos/CambiaContra.css';
 import AlertSuccess from './AlertSuccess'; // Importa el componente de alerta de éxito
 import AlertError from '../../Modals/Fuentes/AlertError'; // Importa el componente de alerta de error
+import { updatePassword } from '../../Service/General/ActualizaPassword'; // Asegúrate de que la ruta es correcta
 
 const CambiaContra = ({ show, onHide }) => {
     const [currentPassword, setCurrentPassword] = useState('');
@@ -20,19 +21,24 @@ const CambiaContra = ({ show, onHide }) => {
         }
     }, [show]);
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
 
         if (newPassword !== repeatPassword) {
-            AlertError({ message: "Nueva Contraseña y Repetir Contraseña no son iguales" }); // Error si las contraseñas no coinciden
+            AlertError({ message: "Nueva Contraseña y Repetir Contraseña no son iguales" });
         } else if (currentPassword === newPassword) {
-            AlertError({ message: "Nueva Contraseña no puede ser igual a tu Contraseña Actual" }); // Error si la nueva es igual a la actual
+            AlertError({ message: "Nueva Contraseña no puede ser igual a tu Contraseña Actual" });
         } else {
-            AlertSuccess({ message: "Contraseña Cambiada" }); // Alerta de éxito si todo está correcto
-            setCurrentPassword('');
-            setNewPassword('');
-            setRepeatPassword('');
-            onHide(); // Cierra el modal
+            try {
+                const data = await updatePassword(currentPassword, newPassword);
+                AlertSuccess({ message: "Contraseña Cambiada Exitosamente" });
+                setCurrentPassword('');
+                setNewPassword('');
+                setRepeatPassword('');
+                onHide(); // Cierra el modal
+            } catch (error) {
+                AlertError({ message: error.message });
+            }
         }
     };
 

@@ -39,7 +39,7 @@
 
 .sidebar ul li p {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .logout-btn {
-  position: absolute;
+  position:absolute;
   bottom: 20px;
   left: 22%;
   background-color: #007bff;
@@ -58,10 +58,39 @@
   border-radius: 5px;
   display: flex;
   align-items: center;
-  gap: 10px; 
+  gap: 10px;
   transition: background-color 0.3s ease;
 }
 
 .logout-btn:hover {
   background-color: #0056b3;
+}
+
+.active-link li {
+  background-color: #1e90ff; /* Cambia este color al azul que prefieras */
+  color: #ffffff;
+}
+
+.active-link li svg {
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .sidebar-logo img {
+    width: 120px;
+  }
+
+  .sidebar ul li p {
+    font-size: 1rem;
+  }
+
+  .logout-btn {
+    left: 10%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 150px;
+  }
 }

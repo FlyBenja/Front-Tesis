@@ -17,10 +17,28 @@
 }
 
 .Perfil .imageContainer {
-    width: 150px;
-    height: 150px;
+    width: 150px; /* Tamaño original del contenedor */
+    height: 150px; /* Tamaño original del contenedor */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Previene que la imagen sobresalga */
+}
+
+.Perfil .imageContainer img {
+    width: 150px; /* Nuevo tamaño para la imagen */
+    height: 150px; /* Nuevo tamaño para la imagen */
+    border-radius: 50%; /* Mantiene la imagen redonda */
+    object-fit: cover; /* Asegura que la imagen cubra el espacio asignado sin distorsión */
 }
 
 .Perfil .editIcon {
     cursor: pointer;
+    position: absolute; /* Posición relativa al contenedor de la imagen */
+    bottom: -10px; /* Ajustar según sea necesario */
+    right: 0;
+    background: #000; /* Fondo oscuro para el icono de edición */
+    color: #fff; /* Icono color blanco */
+    padding: 5px;
+    border-radius: 50%;
 }

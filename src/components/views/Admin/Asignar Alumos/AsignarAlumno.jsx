@@ -144,7 +144,7 @@ const AsignarAlumno = () => {
       {/* Título */}
       <div className="row mb-4">
         <div className="col-12">
-          <h2 className="text-left">Asignar Alumno a Terna</h2>
+          <h2 className="text-left mt-4">Asignar Alumno a Terna</h2>
         </div>
       </div>
 

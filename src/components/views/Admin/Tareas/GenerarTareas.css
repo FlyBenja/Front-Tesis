@@ -1,12 +1,30 @@
+.titulo-tareas {
+    font-family: 'Arial', sans-serif; /* Cambia la fuente según prefieras */
+    font-size: 36px; /* Tamaño de la fuente */
+    color: #4a5568; /* Color del texto */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Sombra ligera para mejor contraste */
+    font-weight: bold; /* Hace que el texto sea negrita */
+  }  
+
 @media (max-width: 768px) {
     .list-group-item {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    .list-group-item .badge,
+    .list-group-item .d-flex {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center;
+    }
+
     .list-group-item button {
         margin-top: 10px;
-        width: 100%; /* Asegura visibilidad y accesibilidad */
+        width: 95%; /* Asegura visibilidad y accesibilidad */
+        margin-right: 8px;
+    }
+
+    .bg-success {
+        width: 95%; /* Asegura visibilidad y accesibilidad */
     }
 }

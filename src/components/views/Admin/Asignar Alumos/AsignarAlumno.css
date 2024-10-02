@@ -1,5 +1,3 @@
-/* Estilos para el componente AsignarAlumno */
-
 /* Personaliza la lista de alumnos */
 .AsignarAlumno .list-group-item {
     transition: background-color 0.3s ease; /* Añade una transición suave */

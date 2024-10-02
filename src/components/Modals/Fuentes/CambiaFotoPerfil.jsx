@@ -1,31 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AlertSuccess from './AlertSuccess'; // Importa el componente de alerta de éxito
+import AlertError from './AlertError'; // Asegúrate de tener este componente para manejar errores
+import { updateProfilePhoto } from '../../Service/General/ActualizaFotoPerfil'; // Importa la función para actualizar la foto
 
-const CambiaFotoPerfil = ({ show, onHide, onSaveImage }) => {
+const CambiaFotoPerfil = ({ show, onHide, onImageUpdate }) => {
+    const [file, setFile] = useState(null);
     const [tempImage, setTempImage] = useState(null);
 
     const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
+        const selectedFile = event.target.files[0];
+        if (selectedFile) {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setTempImage(reader.result); // Establece la imagen seleccionada temporalmente
             };
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(selectedFile);
+            setFile(selectedFile); // Guarda el archivo para enviar
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (tempImage) {
-            onSaveImage(tempImage); // Llama a la función que se pasa desde `Perfil`
-            AlertSuccess({ message: "Foto de perfil cambiada" }); // Muestra la alerta de éxito
-            onHide(); // Cierra el modal
+        if (file) {
+            try {
+                await updateProfilePhoto(file);
+                AlertSuccess({ message: "Foto de perfil actualizada exitosamente" });
+                onImageUpdate(); // Llama a la función de actualización
+                onHide(); // Cierra el modal
+            } catch (error) {
+                AlertError({ message: error.message }); // Maneja errores en la actualización
+            }
         }
     };
+
+    // Efecto para limpiar el estado cada vez que se abre el modal
+    useEffect(() => {
+        if (show) {
+            setFile(null);
+            setTempImage(null); // Limpia la vista previa de la imagen
+        }
+    }, [show]);
 
     return (
         <Modal show={show} onHide={onHide} centered>
@@ -40,6 +57,7 @@ const CambiaFotoPerfil = ({ show, onHide, onSaveImage }) => {
                             type="file" 
                             accept="image/*" 
                             onChange={handleImageChange} 
+                            value="" // Este valor se asegura de que el input file esté limpio
                         />
                         {tempImage && (
                             <div className="image-preview mt-3">

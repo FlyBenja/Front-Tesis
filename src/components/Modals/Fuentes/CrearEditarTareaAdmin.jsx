@@ -1,38 +1,101 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import '../Estilos/CrearEditarTareaAdmin.css';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import AlertSuccess from './AlertSuccess'; // Importa la alerta de éxito
 import AlertError from './AlertError'; // Importa la alerta de error
+import { getProfile } from '../../Service/Apis-Admin/PerfilUsuario'; // Importa el servicio de perfil
+import { getCursosPorSede } from '../../Service/Apis-Admin/CursosAsignados'; // Importa el servicio de cursos por sede
+import { getTaskTypes } from '../../Service/Apis-Admin/typetaks'; // Importa el servicio de tipos de tareas
+import { createTask } from '../../Service/Apis-Admin/CreateTask'; // Importa el servicio de creación de tareas
 
-const CrearEditarTareaAdmin = ({ task, onSave, onClose, editMode }) => {
-    const [formData, setFormData] = useState(task || {});
+const CrearEditarTareaAdmin = ({ onClose, editMode }) => {
+    const [cursos, setCursos] = useState([]);
+    const [taskTypes, setTaskTypes] = useState([]);
+    const [formData, setFormData] = useState({});
+    const [loading, setLoading] = useState(true);
 
-    const handleChange = e => {
+    useEffect(() => {
+        const fetchProfileAndCursos = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    AlertError({ message: 'Token no encontrado. Inicia sesión de nuevo.' });
+                    return;
+                }
+
+                const profileData = await getProfile(token);
+                if (profileData && profileData.sede) {
+                    const cursosData = await getCursosPorSede(profileData.sede, token);
+                    setCursos(cursosData);
+
+                    const typesData = await getTaskTypes(token);
+                    setTaskTypes(typesData);
+                } else {
+                    AlertError({ message: 'No se encontró la sede en el perfil del usuario.' });
+                }
+            } catch (error) {
+                AlertError({ message: `Error al obtener los datos: ${error.message}` });
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProfileAndCursos();
+    }, []);
+
+    const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validar que todos los campos requeridos estén completos
-        const { course, title, description, points, startDate, endDate } = formData;
-        if (!course || !title || !description || !points || !startDate || !endDate) {
-            AlertError({ message: "No puedes crear la tarea con campos vacíos" }); // Muestra error si hay campos vacíos
+        const { course, title, description, points, startDate, endDate, taskType } = formData;
+
+        if (!course || !title || !description || !points || !startDate || !endDate || !taskType) {
+            AlertError({ message: 'No puedes crear la tarea con campos vacíos' });
             return;
         }
 
-        // Validar que la fecha de inicio no sea mayor que la fecha final
         if (new Date(startDate) > new Date(endDate)) {
-            AlertError({ message: "Fecha inicial no puede ser mayor a Fecha Final" }); // Muestra error si la fecha inicial es mayor
+            AlertError({ message: 'Fecha inicial no puede ser mayor a Fecha Final' });
             return;
         }
 
-        onSave(formData); // Guarda la tarea
-        AlertSuccess({ message: editMode ? "Tarea actualizada exitosamente" : "Tarea creada exitosamente" }); // Muestra la alerta de éxito
-        onClose(); // Cierra el modal
+        try {
+            const token = localStorage.getItem('token');
+            const profileData = await getProfile(token);
+            if (!profileData.sede) {
+                AlertError({ message: 'Información de sede no disponible.' });
+                return;
+            }
+
+            const taskData = {
+                course_id: course,
+                sede_id: profileData.sede,
+                typeTask_id: taskType,
+                title: title,
+                description: description,
+                points: points,
+                taskStart: startDate,
+                endTask: endDate
+            };
+
+            const response = await createTask(taskData, token);
+            AlertSuccess({ message: response.message });
+            onClose(); // Cierra el modal después de la creación exitosa
+        } catch (error) {
+            console.error('Error al crear la tarea:', error);
+            AlertError({ message: 'Error al crear la tarea. Intente de nuevo.' });
+        }
     };
+
+    if (loading) {
+        return <div>Cargando datos...</div>;
+    }
 
     return (
         <Modal show={true} onHide={onClose} centered>
@@ -40,39 +103,111 @@ const CrearEditarTareaAdmin = ({ task, onSave, onClose, editMode }) => {
                 <Modal.Title>{editMode ? 'Editar Tarea' : 'Crear Nueva Tarea'}</Modal.Title>
             </Modal.Header>
             <Form onSubmit={handleSubmit}>
-                <Modal.Body>
-                    <Form.Group>
-                        <Form.Label>Curso</Form.Label>
-                        <Form.Control as="select" name="course" value={formData.course || ''} onChange={handleChange}>
-                            <option value="">Seleccione un curso</option>
-                            <option value="Curso 1">Curso 1</option>
-                            <option value="Curso 2">Curso 2</option>
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Título</Form.Label>
-                        <Form.Control type="text" name="title" value={formData.title || ''} onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Descripción</Form.Label>
-                        <Form.Control as="textarea" name="description" value={formData.description || ''} onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Valor de la tarea</Form.Label>
-                        <Form.Control type="number" name="points" value={formData.points || ''} onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Inicio</Form.Label>
-                        <Form.Control type="date" name="startDate" value={formData.startDate || ''} onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Fecha de entrega</Form.Label>
-                        <Form.Control type="date" name="endDate" value={formData.endDate || ''} onChange={handleChange} />
-                    </Form.Group>
+                <Modal.Body className="py-0">
+                    <Row>
+                        <Col md={6}>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Curso</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    name="course"
+                                    value={formData.course || ''}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">Seleccione un curso</option>
+                                    {cursos.map((curso) => (
+                                        <option key={curso.course_id} value={curso.course_id}>
+                                            {curso.Course.courseName}
+                                        </option>
+                                    ))}
+                                </Form.Control>
+                            </Form.Group>
+                        </Col>
+                        <Col md={6}>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Tipo de Tarea</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    name="taskType"
+                                    value={formData.taskType || ''}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">Seleccione el tipo de tarea</option>
+                                    {taskTypes.map((type) => (
+                                        <option key={type.typeTask_id} value={type.typeTask_id}>
+                                            {type.name}
+                                        </option>
+                                    ))}
+                                </Form.Control>
+                            </Form.Group>
+                        </Col>
+                        <Col md={6}>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Título</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="title"
+                                    value={formData.title || ''}
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col md={6}>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Valor de la tarea</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    name="points"
+                                    value={formData.points || ''}
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={12}>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Descripción</Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    name="description"
+                                    value={formData.description || ''}
+                                    onChange={handleChange}
+                                    rows={3} // Controla la altura del área de texto
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={6}>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Fecha de Inicio</Form.Label>
+                                <Form.Control
+                                    type="date"
+                                    name="startDate"
+                                    value={formData.startDate || ''}
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col md={6}>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Fecha de entrega</Form.Label>
+                                <Form.Control
+                                    type="date"
+                                    name="endDate"
+                                    value={formData.endDate || ''}
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={onClose}>Cerrar</Button>
-                    <Button variant="primary" type="submit">{editMode ? 'Guardar Cambios' : 'Crear Tarea'}</Button>
+                    <Button variant="primary" type="submit">
+                        {editMode ? 'Guardar Cambios' : 'Crear Tarea'}
+                    </Button>
                 </Modal.Footer>
             </Form>
         </Modal>

@@ -4,14 +4,12 @@ import { PiStudentBold } from "react-icons/pi";
 import { FaHome, FaChalkboardTeacher } from "react-icons/fa";
 import { BsListTask } from "react-icons/bs";
 import { IoPersonAddSharp } from "react-icons/io5";
-import { IoIosSchool } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import logo from "../../../assets/imgs/logo3.png";
 
 const Sidebar = ({ showSidebar, toggleSidebar }) => {
-  // Función para cerrar el sidebar en pantallas pequeñas
   const handleLinkClick = () => {
     if (window.innerWidth <= 768) {
       toggleSidebar();
@@ -24,61 +22,101 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
         <img className="logo" src={logo} alt="Logo" />
       </div>
       <ul>
-        <Link className="link-sidebar" to="/admin" onClick={handleLinkClick}>
+        <NavLink
+          to="/admin"
+          className={({ isActive }) => isActive ? "link-sidebar active-link" : "link-sidebar"}
+          onClick={handleLinkClick}
+          end
+        >
           <li>
             <FaHome size={30} />
             <p>Inicio</p>
           </li>
-        </Link>
-        <Link className="link-sidebar" to="/admin/estudiantes" onClick={handleLinkClick}>
+        </NavLink>
+        <NavLink
+          to="/admin/estudiantes"
+          className={({ isActive }) => isActive ? "link-sidebar active-link" : "link-sidebar"}
+          onClick={handleLinkClick}
+          end
+        >
           <li>
             <PiStudentBold size={30} />
             <p>Estudiantes</p>
           </li>
-        </Link>
-        <Link className="link-sidebar" to="/admin/catedraticos" onClick={handleLinkClick}>
+        </NavLink>
+        <NavLink
+          to="/admin/catedraticos"
+          className={({ isActive }) => isActive ? "link-sidebar active-link" : "link-sidebar"}
+          onClick={handleLinkClick}
+          end
+        >
           <li>
             <FaChalkboardTeacher size={30} />
             <p>Catedráticos</p>
           </li>
-        </Link>
-        <Link className="link-sidebar" to="/admin/listadoternas" onClick={handleLinkClick}>
+        </NavLink>
+        <NavLink
+          to="/admin/listadoternas"
+          className={({ isActive }) => isActive ? "link-sidebar active-link" : "link-sidebar"}
+          onClick={handleLinkClick}
+          end
+        >
           <li>
             <BsListTask size={30} />
             <p>Listado Ternas</p>
           </li>
-        </Link>
-        <Link className="link-sidebar" to="/admin/tareas" onClick={handleLinkClick}>
+        </NavLink>
+        <NavLink
+          to="/admin/tareas"
+          className={({ isActive }) => isActive ? "link-sidebar active-link" : "link-sidebar"}
+          onClick={handleLinkClick}
+          end
+        >
           <li>
             <BsListTask size={30} />
-            <p>Tareas</p>
+            <p>Crear Tareas</p>
           </li>
-        </Link>
-        <Link className="link-sidebar" to="/admin/asignarternas" onClick={handleLinkClick}>
+        </NavLink>
+        <NavLink
+          to="/admin/asignarternas"
+          className={({ isActive }) => isActive ? "link-sidebar active-link" : "link-sidebar"}
+          onClick={handleLinkClick}
+          end
+        >
           <li>
             <IoPersonAddSharp size={30} />
-            <p>Asignar Ternas</p>
+            <p>Crear Ternas</p>
           </li>
-        </Link>
-        <Link className="link-sidebar" to="/admin/asignaralumos" onClick={handleLinkClick}>
+        </NavLink>
+        <NavLink
+          to="/admin/asignaralumos"
+          className={({ isActive }) => isActive ? "link-sidebar active-link" : "link-sidebar"}
+          onClick={handleLinkClick}
+          end
+        >
           <li>
             <IoPersonAddSharp size={30} />
             <p>Asignar Alumnos</p>
           </li>
-        </Link>
-        <Link className="link-sidebar" to="/admin/profile" onClick={handleLinkClick}>
+        </NavLink>
+        <NavLink
+          to="/admin/profile"
+          className={({ isActive }) => isActive ? "link-sidebar active-link" : "link-sidebar"}
+          onClick={handleLinkClick}
+          end
+        >
           <li>
             <CgProfile size={30} />
             <p>Perfil</p>
           </li>
-        </Link>
+        </NavLink>
       </ul>
-      <Link className="link-sidebar" to="/" onClick={handleLinkClick}>
+      <NavLink to="/" className={({ isActive }) => isActive ? "link-sidebar active-link" : "link-sidebar"} onClick={handleLinkClick}>
         <button className="logout-btn">
           <BiLogOut size={30} />
           <p className="mb-0 p-2">Cerrar Sesión</p>
         </button>
-      </Link>
+      </NavLink>
     </div>
   );
 };

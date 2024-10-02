@@ -124,7 +124,7 @@ const CatedraticosAdmin = () => {
       ) : (
         <>
           <div className="card mb-4">
-            <div className="card-body">
+            <div className="card-body" style={{padding: '0px'}} >
               <div className="list-group">
                 {filteredCatedraticos.map((catedratico) => (
                   <div key={catedratico.id} className="list-group-item d-flex align-items-center justify-content-between">
