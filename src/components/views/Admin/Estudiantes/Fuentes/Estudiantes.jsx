@@ -193,7 +193,7 @@ const Estudiantes = () => {
             <option key="default-course">Seleccione un curso</option> {/* Clave única para la opción por defecto */}
             {cursos.map((curso) => (
               <option key={curso.course_id} value={curso.course_id}>
-                {curso.Course.courseName}
+                {curso.courseName}
               </option>
             ))}
           </select>
@@ -253,14 +253,27 @@ const Estudiantes = () => {
                     </div>
                   ))}
                 </div>
+                
                 <button
                   className="btn btn-primary timeline-btn"
-                  onClick={() =>
-                    navigate('/admin/tarealum', { state: { student: selectedStudent } })
-                  }
+                  onClick={() => {
+                    // Crear una nueva instancia del estudiante seleccionado para modificar
+                    const studentWithSede = {
+                      ...selectedStudent,
+                      sede: userData.sede,  // Asumiendo que userData contiene la información de la sede
+                    };
+
+                    // Navegar con el nuevo objeto que incluye la sede
+                    navigate('/admin/tarealum', {
+                      state: {
+                        student: studentWithSede
+                      }
+                    });
+                  }}
                 >
                   Visualizar Tareas
                 </button>
+
               </div>
             )}
           </>

@@ -4,17 +4,30 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import AlertSuccess from './AlertSuccess'; // Importa la alerta de éxito
-import AlertError from './AlertError'; // Importa la alerta de error
-import { getProfile } from '../../Service/Apis-Admin/PerfilUsuario'; // Importa el servicio de perfil
-import { getCursosPorSede } from '../../Service/Apis-Admin/CursosAsignados'; // Importa el servicio de cursos por sede
-import { getTaskTypes } from '../../Service/Apis-Admin/typetaks'; // Importa el servicio de tipos de tareas
-import { createTask } from '../../Service/Apis-Admin/CreateTask'; // Importa el servicio de creación de tareas
+import AlertSuccess from '../../Modals/Fuentes/AlertSuccess';
+import AlertError from '../../Modals/Fuentes/AlertError';
+import { getProfile } from '../../Service/Apis-Admin/PerfilUsuario';
+import { getCursosPorSede } from '../../Service/Apis-Admin/CursosAsignados';
+import { getTaskTypes } from '../../Service/Apis-Admin/typetaks';
+import { createTask } from '../../Service/Apis-Admin/CreateTask';
+import { updateTask } from '../../Service/Apis-Admin/UpdateTask';
 
-const CrearEditarTareaAdmin = ({ onClose, editMode }) => {
+const formatDate = (dateString) => {
+    return dateString ? new Date(dateString).toISOString().slice(0, 10) : '';
+};
+
+const CrearEditarTareaAdmin = ({ onClose, editMode, task, onSave }) => {
     const [cursos, setCursos] = useState([]);
     const [taskTypes, setTaskTypes] = useState([]);
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState({
+        course: '',
+        taskType: '',
+        title: '',
+        description: '',
+        note: '',
+        startDate: '',
+        endDate: ''
+    });
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -33,6 +46,18 @@ const CrearEditarTareaAdmin = ({ onClose, editMode }) => {
 
                     const typesData = await getTaskTypes(token);
                     setTaskTypes(typesData);
+
+                    if (editMode) {
+                        setFormData({
+                            course: task?.course_id || '',
+                            taskType: task?.typeTask_id || '',
+                            title: task?.title || '',
+                            description: task?.description || '',
+                            note: task?.note || '',
+                            startDate: formatDate(task?.taskStart),
+                            endDate: formatDate(task?.endTask)
+                        });
+                    }
                 } else {
                     AlertError({ message: 'No se encontró la sede en el perfil del usuario.' });
                 }
@@ -44,7 +69,7 @@ const CrearEditarTareaAdmin = ({ onClose, editMode }) => {
         };
 
         fetchProfileAndCursos();
-    }, []);
+    }, [editMode, task]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -52,44 +77,43 @@ const CrearEditarTareaAdmin = ({ onClose, editMode }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const { course, title, description, points, startDate, endDate, taskType } = formData;
-
-        if (!course || !title || !description || !points || !startDate || !endDate || !taskType) {
+        const { course, title, description, note, startDate, endDate, taskType } = formData;
+        if (!course || !title || !description || !note || !startDate || !endDate || !taskType) {
             AlertError({ message: 'No puedes crear la tarea con campos vacíos' });
             return;
         }
 
-        if (new Date(startDate) > new Date(endDate)) {
-            AlertError({ message: 'Fecha inicial no puede ser mayor a Fecha Final' });
+        const token = localStorage.getItem('token');
+        const profileData = await getProfile(token);
+        if (!profileData || !profileData.sede) {
+            AlertError({ message: 'Información de sede no disponible. Por favor, intente de nuevo.' });
             return;
         }
 
+        const taskData = {
+            course_id: course,
+            sede_id: profileData.sede,
+            typeTask_id: taskType,
+            title: title,
+            description: description,
+            note: note,
+            taskStart: startDate,
+            endTask: endDate
+        };
+
         try {
-            const token = localStorage.getItem('token');
-            const profileData = await getProfile(token);
-            if (!profileData.sede) {
-                AlertError({ message: 'Información de sede no disponible.' });
-                return;
+            if (editMode) {
+                await updateTask(task.task_id, taskData, token);
+                AlertSuccess({ message: 'Tarea actualizada con éxito' });
+            } else {
+                await createTask(taskData, token);
+                AlertSuccess({ message: 'Tarea creada con éxito' });
             }
-
-            const taskData = {
-                course_id: course,
-                sede_id: profileData.sede,
-                typeTask_id: taskType,
-                title: title,
-                description: description,
-                points: points,
-                taskStart: startDate,
-                endTask: endDate
-            };
-
-            const response = await createTask(taskData, token);
-            AlertSuccess({ message: response.message });
-            onClose(); // Cierra el modal después de la creación exitosa
+            onSave();
+            onClose();
         } catch (error) {
-            console.error('Error al crear la tarea:', error);
-            AlertError({ message: 'Error al crear la tarea. Intente de nuevo.' });
+            console.error('Error al crear/editar la tarea:', error);
+            AlertError({ message: 'Error al crear/editar la tarea. Intente de nuevo.' });
         }
     };
 
@@ -111,13 +135,14 @@ const CrearEditarTareaAdmin = ({ onClose, editMode }) => {
                                 <Form.Control
                                     as="select"
                                     name="course"
-                                    value={formData.course || ''}
+                                    value={formData.course}
                                     onChange={handleChange}
+                                    disabled={editMode} // Desactivar en modo edición
                                 >
                                     <option value="">Seleccione un curso</option>
                                     {cursos.map((curso) => (
                                         <option key={curso.course_id} value={curso.course_id}>
-                                            {curso.Course.courseName}
+                                            {curso.courseName}
                                         </option>
                                     ))}
                                 </Form.Control>
@@ -129,8 +154,9 @@ const CrearEditarTareaAdmin = ({ onClose, editMode }) => {
                                 <Form.Control
                                     as="select"
                                     name="taskType"
-                                    value={formData.taskType || ''}
+                                    value={formData.taskType}
                                     onChange={handleChange}
+                                    disabled={editMode} // Desactivar en modo edición
                                 >
                                     <option value="">Seleccione el tipo de tarea</option>
                                     {taskTypes.map((type) => (
@@ -147,19 +173,20 @@ const CrearEditarTareaAdmin = ({ onClose, editMode }) => {
                                 <Form.Control
                                     type="text"
                                     name="title"
-                                    value={formData.title || ''}
+                                    value={formData.title}
                                     onChange={handleChange}
                                 />
                             </Form.Group>
                         </Col>
                         <Col md={6}>
                             <Form.Group className="mb-3">
-                                <Form.Label>Valor de la tarea</Form.Label>
+                                <Form.Label>Valor de la tarea (Nota)</Form.Label>
                                 <Form.Control
                                     type="number"
-                                    name="points"
-                                    value={formData.points || ''}
+                                    name="note"
+                                    value={formData.note}
                                     onChange={handleChange}
+                                    disabled={editMode} // Desactivar en modo edición
                                 />
                             </Form.Group>
                         </Col>
@@ -171,9 +198,9 @@ const CrearEditarTareaAdmin = ({ onClose, editMode }) => {
                                 <Form.Control
                                     as="textarea"
                                     name="description"
-                                    value={formData.description || ''}
+                                    value={formData.description}
                                     onChange={handleChange}
-                                    rows={3} // Controla la altura del área de texto
+                                    rows={3}
                                 />
                             </Form.Group>
                         </Col>
@@ -185,7 +212,7 @@ const CrearEditarTareaAdmin = ({ onClose, editMode }) => {
                                 <Form.Control
                                     type="date"
                                     name="startDate"
-                                    value={formData.startDate || ''}
+                                    value={formData.startDate}
                                     onChange={handleChange}
                                 />
                             </Form.Group>
@@ -196,7 +223,7 @@ const CrearEditarTareaAdmin = ({ onClose, editMode }) => {
                                 <Form.Control
                                     type="date"
                                     name="endDate"
-                                    value={formData.endDate || ''}
+                                    value={formData.endDate}
                                     onChange={handleChange}
                                 />
                             </Form.Group>

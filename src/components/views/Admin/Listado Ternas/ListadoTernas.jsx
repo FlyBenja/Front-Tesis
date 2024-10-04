@@ -1,63 +1,66 @@
-import React, { useState } from 'react';
-import ModalConfirmacion from '../../../Modals/Fuentes/ModalConfirmacion'; // Asegúrate de importar el modal
-import AlertError from '../../../Modals/Fuentes/AlertError'; // Importamos AlertError
-import AlertSuccess from '../../../Modals/Fuentes/AlertSuccess'; // Importamos AlertSuccess
+import React, { useState, useEffect } from 'react';
+import ModalConfirmacion from '../../../Modals/Fuentes/ModalConfirmacion';
+import AlertError from '../../../Modals/Fuentes/AlertError';
+import { getProfile } from '../../../Service/Apis-Admin/PerfilUsuario';
+import { getGroupsTernas } from '../../../Service/Apis-Admin/GroupsTernas';
+import { getInfoGroupTerna } from '../../../Service/Apis-Admin/InfoGrupTernas';
 
 const ListadoTernas = () => {
-    const initialTernas = [
-        {
-            id: 1,
-            presidente: 'Carlos Pérez',
-            secretario: 'María García',
-            vocal: 'Jorge Martínez'
-        },
-        {
-            id: 2,
-            presidente: 'Ana Fernández',
-            secretario: 'Luis Rodríguez',
-            vocal: 'Sofía Gómez'
-        },
-        {
-            id: 3,
-            presidente: 'Pablo Hernández',
-            secretario: 'Claudia López',
-            vocal: 'Miguel Jiménez'
-        },
-        {
-            id: 4,
-            presidente: 'Pablo Hernández',
-            secretario: 'Claudia López',
-            vocal: 'Miguel Jiménez'
-        }
-    ];
+    const [ternas, setTernas] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedTerna, setSelectedTerna] = useState(null);
+    const [userData, setUserData] = useState(null);
 
-    const [ternas, setTernas] = useState(initialTernas);
-    const [showModal, setShowModal] = useState(false); // Estado para mostrar el modal
-    const [selectedTerna, setSelectedTerna] = useState(null); // Estado para guardar la terna seleccionada
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    AlertError({ message: 'No se encontró el token. Por favor, inicia sesión.' });
+                    return;
+                }
+                const profileData = await getProfile(token);
+                if (profileData && profileData.sede) {
+                    setUserData(profileData);
+                    const currentYear = new Date().getFullYear();
+                    const groupsTernas = await getGroupsTernas(profileData.sede, currentYear);
+                    console.log('Grupos de Ternas:', groupsTernas);
+
+                    const ternaDetailsPromises = groupsTernas.map(terna => getInfoGroupTerna(terna.groupTerna_id));
+                    const ternaDetailsResults = await Promise.all(ternaDetailsPromises);
+
+                    const detailedTernas = ternaDetailsResults.map(details => {
+                        if (details.length > 0) {
+                            const sortedRoles = {
+                                presidente: details[0].users.find(user => user.rolTerna_id === 1)?.name || 'No asignado',
+                                secretario: details[0].users.find(user => user.rolTerna_id === 2)?.name || 'No asignado',
+                                vocal: details[0].users.find(user => user.rolTerna_id === 3)?.name || 'No asignado',
+                            };
+                            return { ...groupsTernas[details[0].groupTerna_id - 1], ...sortedRoles };
+                        } else {
+                            return { ...groupsTernas[details.groupTerna_id - 1], presidente: 'No asignado', secretario: 'No asignado', vocal: 'No asignado' };
+                        }
+                    });
+
+                    setTernas(detailedTernas);
+                    console.log('Detalles de todas las Ternas:', detailedTernas);
+                }
+            } catch (error) {
+                console.error('Error en la cadena de llamadas a la API:', error);
+                AlertError({ message: 'Error al recuperar los datos.' });
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleDelete = async (ternaId) => {
-        try {
-            // Simulamos la eliminación de la terna
-            const filteredTernas = ternas.filter(terna => terna.id !== ternaId);
-            setTernas(filteredTernas);
-            setShowModal(false); // Cerrar el modal después de eliminar
-
-            // Mostramos la alerta de éxito
-            AlertSuccess({
-                message: `La Terna ${ternaId} ha sido eliminada exitosamente.`
-            });
-        } catch (error) {
-            // En caso de error, mostramos la alerta de error
-            AlertError({
-                message: `Ocurrió un error al eliminar la Terna ${ternaId}. Inténtalo de nuevo.`
-            });
-            setShowModal(false); // Cerrar el modal de todas formas
-        }
+        // Lógica para eliminar la terna
     };
 
     const confirmEliminarTerna = (terna) => {
-        setSelectedTerna(terna); // Guardar la terna seleccionada
-        setShowModal(true); // Mostrar el modal de confirmación
+        setSelectedTerna(terna);
+        setShowModal(true);
     };
 
     return (
@@ -65,10 +68,10 @@ const ListadoTernas = () => {
             <h2 className="mb-4">Listado de Ternas Creadas</h2>
             <div className="row">
                 {ternas.map((terna) => (
-                    <div key={terna.id} className="col-md-4 mb-4">
+                    <div key={terna.groupTerna_id} className="col-md-4 mb-4">
                         <div className="card shadow h-100 text-center">
                             <div className="card-header bg-primary text-white">
-                                <h4>Terna {terna.id}</h4>
+                                <h4>Terna {terna.groupTerna_id}</h4>
                             </div>
                             <div className="card-body d-flex flex-column justify-content-center">
                                 <ul className="list-group list-group-flush mb-3">
@@ -88,7 +91,7 @@ const ListadoTernas = () => {
                                 <div className="mt-auto">
                                     <button 
                                         className="btn btn-danger"
-                                        onClick={() => confirmEliminarTerna(terna)} // Abrir el modal al hacer clic
+                                        onClick={() => confirmEliminarTerna(terna)}
                                     >
                                         Eliminar
                                     </button>
@@ -99,13 +102,12 @@ const ListadoTernas = () => {
                 ))}
             </div>
 
-            {/* Modal de confirmación */}
             {selectedTerna && (
                 <ModalConfirmacion
                     isOpen={showModal}
-                    onConfirm={() => handleDelete(selectedTerna.id)} // Confirmar eliminación
-                    onCancel={() => setShowModal(false)} // Cancelar eliminación
-                    nombre={`Terna ${selectedTerna.id}`}  // Mostrar el ID de la terna en el modal
+                    onConfirm={() => handleDelete(selectedTerna.groupTerna_id)}
+                    onCancel={() => setShowModal(false)}
+                    nombre={`Terna ${selectedTerna.groupTerna_id}`}
                     pagina="Terna"
                 />
             )}

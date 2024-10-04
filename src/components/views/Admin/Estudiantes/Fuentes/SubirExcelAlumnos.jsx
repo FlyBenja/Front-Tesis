@@ -91,7 +91,7 @@ const SubirExcelAlumnos = () => {
           <option value="">Seleccione un curso</option>
           {cursos.map(curso => (
             <option key={curso.course_id} value={curso.course_id}>
-              {curso.Course.courseName}
+              {curso.courseName}
             </option>
           ))}
         </select>

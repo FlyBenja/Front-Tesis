@@ -5,6 +5,7 @@ import '../Estilos/TareaAlumnoIndiv.css';
 import AlertSuccess from '../../../../Modals/Fuentes/AlertSuccess';
 import AlertError from '../../../../Modals/Fuentes/AlertError';
 import CalificacionModal from '../../../../Modals/Fuentes/CalificacionModal';  // Importa el nuevo modal
+import { enviarComentario } from '../../../../Service/Apis-Admin/EnvComent';  // Importa la función para enviar comentarios
 
 const TareaAlumnoIndiv = () => {
   const location = useLocation();
@@ -34,14 +35,32 @@ const TareaAlumnoIndiv = () => {
     return points > 0 ? 'badge badge-success' : 'd-none';
   };
 
-  const handleCommentSubmit = () => {
+  const handleCommentSubmit = async () => {
     const commentText = document.getElementById('comment').value.trim();
-    if (commentText) {
-      AlertSuccess({ message: "Comentario enviado con éxito!" });
-    } else {
+    if (!commentText) {
       AlertError({ message: "Error: El comentario no puede estar vacío." });
+      return;
     }
-  };
+  
+    const comentarioData = {
+      user_id: student.user_id,  // Asegúrate de que 'user_id' esté disponible en el objeto 'student'
+      description: commentText,
+      course_id: student.course_id,  // Asegúrate de que 'course_id' esté disponible
+      task_id: student.task_id  // Asegúrate de que 'task_id' esté disponible
+    };
+    
+    // Se asume que 'token' se obtiene de alguna manera (localStorage, context, etc.)
+    const token = localStorage.getItem('token'); // O manejarlo más seguro desde context o Redux
+  
+    try {
+      const response = await enviarComentario(comentarioData, token);
+      AlertSuccess({ message: "Comentario enviado con éxito!" });
+      document.getElementById('comment').value = '';  // Limpiar el campo después del envío exitoso
+    } catch (error) {
+      console.error('Error enviando comentario:', error);
+      AlertError({ message: "Error al enviar el comentario." });
+    }
+  };  
 
   const handleCalificarClick = () => {
     setShowCalificacionModal(true);  // Mostrar el modal cuando se hace clic en "Calificar"
@@ -58,7 +77,7 @@ const TareaAlumnoIndiv = () => {
           <button className="btn btn-icon" onClick={() => navigate(-1)}>
             <FaArrowLeft /> Regresar
           </button>
-          <span>Listado de tareas de {student?.nombre || 'estudiante'}</span>
+          <span>Información Tarea {student?.task_id} de Estudiante {student?.userName || 'estudiante'}</span>
         </div>
         <div className="card-body card-body-custom">
           <ul className="list-group list-group-custom">

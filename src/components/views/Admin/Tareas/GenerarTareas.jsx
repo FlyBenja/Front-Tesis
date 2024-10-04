@@ -3,7 +3,7 @@ import CrearEditarTareaAdmin from '../../../Modals/Fuentes/CrearEditarTareaAdmin
 import './GenerarTareas.css';
 import { getProfile } from '../../../Service/Apis-Admin/PerfilUsuario';
 import { getCursosPorSede } from '../../../Service/Apis-Admin/CursosAsignados';
-import { getTasksByCourseAndSede } from '../../../Service/Apis-Admin/ListTask';
+import { getTasksByCourseAndSede } from '../../../Service/Apis-Admin/ListTaskSedeCurso';
 import AlertError from '../../../Modals/Fuentes/AlertError';
 
 const GenerarTareas = () => {
@@ -13,6 +13,50 @@ const GenerarTareas = () => {
     const [userData, setUserData] = useState(null);
     const [cursos, setCursos] = useState([]);
     const [selectedCurso, setSelectedCurso] = useState('');
+    const [isFirstLoad, setIsFirstLoad] = useState(true); // Estado para controlar si es la primera carga
+
+    const fetchTasks = async () => {
+        if (!selectedCurso || !userData || !userData.sede) {
+            setTasks([]);  // Limpiar tareas si no hay curso seleccionado o datos de usuario/sede
+            if (!isFirstLoad) {
+                AlertError({ message: 'Selecciona un curso para ver las tareas.' });
+            }
+            return;
+        }
+    
+        try {
+            const year = new Date().getFullYear(); // Obtiene el año actual
+            const tasksData = await getTasksByCourseAndSede(selectedCurso, userData.sede, year);
+            
+            if (tasksData.length === 0) {  // Verifica si no hay tareas
+                setTasks([]);
+                if (!isFirstLoad) {  // Solo mostrar alerta si no es la primera carga
+                    AlertError({ message: 'No hay tareas para el curso seleccionado.' });
+                }
+                return;
+            }
+    
+            // Ordenar y formatear las tareas como antes
+            const tareasOrdenadas = tasksData
+                .map(task => ({
+                    ...task,
+                    startDate: formatDate(task.taskStart),
+                    endDate: formatDate(task.endTask)
+                }))
+                .sort((a, b) => {
+                    if (a.typeTask_id === 1 && b.typeTask_id !== 1) return -1;
+                    if (a.typeTask_id === 2 && b.typeTask_id !== 2) return 1;
+                    return 0;
+                });
+    
+            setTasks(tareasOrdenadas);
+        } catch (error) {
+            console.error('Error al recuperar las tareas:', error);
+            AlertError({ message: 'Error al recuperar las tareas.' });
+        } finally {
+            setIsFirstLoad(false); // Cambiar a false después de la primera carga
+        }
+    };    
 
     useEffect(() => {
         const fetchProfileAndCursos = async () => {
@@ -44,22 +88,7 @@ const GenerarTareas = () => {
     }, []);
 
     useEffect(() => {
-        if (selectedCurso && userData && userData.sede) {
-            const fetchTasks = async () => {
-                try {
-                    const tasksData = await getTasksByCourseAndSede(selectedCurso, userData.sede);
-                    setTasks(tasksData.map(task => ({
-                        ...task,
-                        startDate: formatDate(task.taskStart),
-                        endDate: formatDate(task.endTask)
-                    })));
-                } catch (error) {
-                    console.error('Error al recuperar las tareas:', error);
-                    AlertError({ message: 'Error al recuperar las tareas.' });
-                }
-            };
-            fetchTasks();
-        }
+        fetchTasks();
     }, [selectedCurso, userData]);
 
     const openModal = (task = {}) => {
@@ -67,10 +96,9 @@ const GenerarTareas = () => {
         setModalOpen(true);
     };
 
-    const saveTask = (task) => {
-        const updatedTasks = task.id ? tasks.map(t => t.id === task.id ? task : t) : [...tasks, { ...task, id: tasks.length + 1 }];
-        setTasks(updatedTasks);
+    const saveTask = () => {
         setModalOpen(false);
+        fetchTasks(); // Recargar las tareas después de guardar
     };
 
     const formatDate = (dateString) => {
@@ -83,9 +111,10 @@ const GenerarTareas = () => {
             console.error("Fecha recibida no válida:", dateString);
             return 'Fecha no válida';
         }
+        date.setMinutes(date.getMinutes() + date.getTimezoneOffset()); // Ajustar a zona horaria local
         const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-        return date.toLocaleDateString('es-ES', options);
-    };
+        return date.toLocaleDateString('es-ES', options).replace(/-/g, '/');
+    };    
 
     if (cursos.length === 0) {
         return (
@@ -105,7 +134,7 @@ const GenerarTareas = () => {
                     <select className="form-select w-100 w-md-auto" value={selectedCurso} onChange={(e) => setSelectedCurso(e.target.value)}>
                         <option value="">Seleccione un curso</option>
                         {cursos.map(curso => (
-                            <option key={curso.course_id} value={curso.course_id}>{curso.Course.courseName}</option>
+                            <option key={curso.course_id} value={curso.course_id}>{curso.courseName}</option>
                         ))}
                     </select>
                 </div>
@@ -122,7 +151,7 @@ const GenerarTareas = () => {
                                         <small className="me-2">
                                             {task.startDate} - {task.endDate}
                                         </small>
-                                        <span className="badge bg-success me-2">{task.points} Pts</span>
+                                        <span className="badge bg-success me-2">{task.note} Pts</span>
                                         <button className="btn btn-outline-warning btn-sm" onClick={() => openModal(task)}>
                                             <i className="fas fa-pencil-alt"></i>
                                         </button>
@@ -137,7 +166,7 @@ const GenerarTareas = () => {
                         task={currentTask}
                         onSave={saveTask}
                         onClose={() => setModalOpen(false)}
-                        editMode={Boolean(currentTask.id)}
+                        editMode={Boolean(currentTask.task_id)}
                     />
                 )}
             </div>

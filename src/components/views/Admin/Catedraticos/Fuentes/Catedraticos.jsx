@@ -24,15 +24,16 @@ const CatedraticosAdmin = () => {
       try {
         const userProfile = await getProfile(token);
         setSedeId(userProfile.sede);
-        fetchCatedraticos(userProfile.sede);
+        const currentYear = new Date().getFullYear(); // Obtiene el año actual
+        fetchCatedraticos(userProfile.sede, currentYear);
       } catch (error) {
         AlertError({ message: 'Error al obtener el perfil del usuario' });
         console.error('Error al obtener el perfil del usuario:', error);
       }
     };
-    const fetchCatedraticos = async (sede_id) => {
+    const fetchCatedraticos = async (sede_id, year) => {
       try {
-        const catedraticosData = await TodosCatedraticos(sede_id);
+        const catedraticosData = await TodosCatedraticos(sede_id, year);
         setCatedraticos(
           catedraticosData.map((catedratico) => ({
             id: catedratico.user_id,
@@ -53,7 +54,7 @@ const CatedraticosAdmin = () => {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-
+  
   const toggleCatedratico = async (id, habilitadoActual) => {
     try {
       const data = await toggleCatedraticoStatus(id, habilitadoActual);

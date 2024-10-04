@@ -210,7 +210,7 @@ const AsignarAlumno = () => {
             <div className="card-header bg-primary text-white text-center">
               <h3>Alumnos</h3>
             </div>
-            <ul className="list-group list-group-flush" style={{ maxHeight: '431px', overflowY: 'auto' }}>
+            <ul className="list-group list-group-flush" style={{ maxHeight: '400px', overflowY: 'auto' }}>
               {alumnos.map((alumno) => (
                 <li
                   key={alumno.id}

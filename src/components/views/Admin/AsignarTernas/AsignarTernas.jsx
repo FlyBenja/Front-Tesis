@@ -1,25 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AsignarTernas.css';
-import AlertSuccess from '../../../Modals/Fuentes/AlertSuccess';  // Importamos AlertSuccess
-import AlertError from '../../../Modals/Fuentes/AlertError';      // Importamos AlertError
+import AlertSuccess from '../../../Modals/Fuentes/AlertSuccess';
+import AlertError from '../../../Modals/Fuentes/AlertError';
+import { getActiveTernas } from '../../../Service/Apis-Admin/ListTernaActive';
+import { getProfile } from '../../../Service/Apis-Admin/PerfilUsuario';
+import { creaTernas } from '../../../Service/Apis-Admin/CreaTernas';
 
 const AsignarTernas = () => {
-    const initialCatedraticos = [
-        { id: 1, nombre: 'Carlos Pérez' },
-        { id: 2, nombre: 'María García' },
-        { id: 3, nombre: 'Jorge Martínez' },
-        { id: 4, nombre: 'Ana Fernández' },
-        { id: 5, nombre: 'Luis Rodríguez' },
-        { id: 6, nombre: 'Sofía Gómez' },
-        { id: 7, nombre: 'Pablo Hernández' },
-        { id: 8, nombre: 'Claudia López' },
-        { id: 9, nombre: 'Miguel Jiménez' },
-        { id: 10, nombre: 'Patricia Torres' }
-    ];
-
-    const [catedraticos, setCatedraticos] = useState(initialCatedraticos);
+    const [catedraticos, setCatedraticos] = useState([]);
     const [terna, setTerna] = useState({ id: 2, nombre: 'Crear Ternas', catedraticos: [] });
-    const [isUploading, setIsUploading] = useState(false);  // Estado para controlar el bloqueo del botón
+    const [isUploading, setIsUploading] = useState(false);
+    const [sede, setSede] = useState(null);
+    const [initialLoadEmpty, setInitialLoadEmpty] = useState(false);
+    const [apiError, setApiError] = useState(false);
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
+    const currentYear = new Date().getFullYear();
+
+    useEffect(() => {
+        const fetchProfileAndTernas = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    AlertError({ message: 'No se encontró el token. Por favor, inicia sesión.' });
+                    return;
+                }
+                const profileData = await getProfile(token);
+                if (profileData && profileData.sede) {
+                    setSede(profileData.sede);
+                    const activeTernas = await getActiveTernas(profileData.sede, currentYear);
+                    if (activeTernas && activeTernas.length > 0) {
+                        const updatedCatedraticos = activeTernas.map(terna => ({
+                            id: terna.user_id,
+                            nombre: terna.userName,
+                            typeTask_id: terna.typeTask_id
+                        }));
+                        setCatedraticos(updatedCatedraticos);
+                        setInitialLoadEmpty(false);
+                        setApiError(false);
+                    } else {
+                        setCatedraticos([]);
+                        setInitialLoadEmpty(true);
+                        setApiError(true);
+                    }
+                } else {
+                    setApiError(true);
+                    AlertError({ message: 'No se encontró la sede en los datos del perfil.' });
+                }
+            } catch (error) {
+                console.error('Error al recuperar las ternas activas:', error);
+                setApiError(true);
+                AlertError({ message: "No se pudo recuperar los Catedráticos Activos" });
+            }
+        };
+
+        fetchProfileAndTernas();
+    }, [currentYear, refreshTrigger]);
 
     const onDragStart = (e, catedratico) => {
         e.dataTransfer.setData("catedraticoId", catedratico.id);
@@ -27,7 +62,7 @@ const AsignarTernas = () => {
 
     const onDrop = (e) => {
         const catedraticoId = e.dataTransfer.getData("catedraticoId");
-        const catedratico = catedraticos.find((cat) => cat.id === parseInt(catedraticoId));
+        const catedratico = catedraticos.find(cat => cat.id === parseInt(catedraticoId));
         if (catedratico && terna.catedraticos.length < 3) {
             setTerna(prevTerna => ({
                 ...prevTerna,
@@ -53,20 +88,47 @@ const AsignarTernas = () => {
         return roles[terna.catedraticos.length] || "";
     };
 
-    const handleUploadTerna = () => {
+    const handleUploadTerna = async () => {
         if (terna.catedraticos.length === 3) {
-            AlertSuccess({ message: "Ternas Subidos Exitosamente" });
-            // Limpiar la terna actual y actualizar el estado de catedráticos disponibles
-            setTerna(prevTerna => ({ ...prevTerna, catedraticos: [] }));
-            setCatedraticos(prevCatedraticos => [
-                ...prevCatedraticos,
-                ...terna.catedraticos
-            ]);
+            const token = localStorage.getItem('token');
+            if (!token) {
+                AlertError({ message: 'No se encontró el token de autenticación.' });
+                return;
+            }
+
+            const ternaData = terna.catedraticos.map((catedratico, index) => ({
+                user_id: catedratico.id,
+                sede_id: sede,
+                year: currentYear,
+                rolTerna_id: index + 1  // 1: Presidente, 2: Secretario, 3: Vocal
+            }));
+
+            try {
+                setIsUploading(true);
+                await creaTernas(ternaData, token);
+                setIsUploading(false);
+                AlertSuccess({ message: "Ternas subidas exitosamente." });
+                setTerna(prevTerna => ({ ...prevTerna, catedraticos: [] }));
+                setCatedraticos(prevCatedraticos => [...prevCatedraticos, ...terna.catedraticos]);
+                setRefreshTrigger(refreshTrigger + 1);  // Incrementa para refrescar la lista de catedráticos
+            } catch (error) {
+                console.error('Error al subir la terna:', error);
+                AlertError({ message: "Error al subir la terna." });
+                setIsUploading(false);
+            }
         } else {
             AlertError({ message: "Complete las 3 posiciones para subir" });
         }
     };
 
+    if (apiError) {
+        return (
+            <div className="d-flex flex-column justify-content-center align-items-center" style={{ height: '80vh', textAlign: 'center' }}>
+                <p className="fw-bold fs-4" style={{ color: '#333' }}>No hay Catedráticos Activos.</p>
+                <p className="fw-bold fs-4" style={{ color: '#333' }}>Favor de Activar Catedráticos para utilizar la Página.</p>
+            </div>
+        );
+    }
 
     return (
         <div className="asignar-ternas-admin">
@@ -80,7 +142,6 @@ const AsignarTernas = () => {
                             <div className="card-header bg-primary text-white text-center">
                                 <h3>Catedráticos Disponibles</h3>
                             </div>
-                            {/* Lista de catedráticos con altura fija y scroll */}
                             <ul className="list-group list-group-flush" style={{ height: '375px', overflowY: 'auto' }}>
                                 {catedraticos.map(catedratico => (
                                     <li
@@ -96,7 +157,6 @@ const AsignarTernas = () => {
                             </ul>
                         </div>
                     </div>
-
                     <div className="col-md-8">
                         <div className="card shadow mb-4">
                             <div className="card-header bg-success text-white text-center">
@@ -121,7 +181,7 @@ const AsignarTernas = () => {
                                 <button
                                     className="btn btn-primary w-100"
                                     onClick={handleUploadTerna}
-                                    disabled={isUploading || terna.catedraticos.length < 3}  // Bloquear el botón si está subiendo o si faltan catedráticos
+                                    disabled={isUploading || terna.catedraticos.length < 3}
                                 >
                                     Subir Terna
                                 </button>

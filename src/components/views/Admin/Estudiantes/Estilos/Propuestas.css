@@ -3,7 +3,7 @@
     border-radius: 0.25rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: height 0.3s ease; /* Añadimos una transición suave */
-    height: 640px; /* Altura por defecto en pantallas grandes */
+    height: 600px; /* Altura por defecto en pantallas grandes */
 }
 
 .propuestas-alum-container .card-header-custom {
